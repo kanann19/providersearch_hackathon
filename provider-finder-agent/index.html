@@ -41,6 +41,8 @@
   .bot { background: var(--card); border: 1px solid var(--line); border-radius: 16px 16px 16px 4px; padding: 14px 16px; box-shadow: var(--shadow); }
   .bot p { margin: 0 0 8px; } .bot p:last-child { margin: 0; }
   .bot ul { margin: 4px 0 8px; padding-left: 20px; }
+  .verified { margin-top: 10px; font-size: 13px; color: var(--good); background: var(--good-bg); border-radius: 8px; padding: 6px 10px; display: inline-block; }
+  .verified.warn { color: var(--warn); background: var(--warn-bg); }
   .steps { margin-top: 10px; font-size: 13px; color: var(--muted); }
   .steps summary { cursor: pointer; }
   .steps ol { margin: 6px 0 0; padding-left: 20px; }
@@ -64,6 +66,22 @@
   .typing { color: var(--muted); font-size: 14px; }
   .dots::after { content: ""; animation: dots 1.2s steps(4) infinite; }
   @keyframes dots { 0% { content: ""; } 25% { content: "."; } 50% { content: ".."; } 75% { content: "..."; } }
+  .live { border-style: dashed; }
+  .live-h { font-weight: 600; margin-bottom: 6px; }
+  .live-l { list-style: none; margin: 0; padding: 0; font-size: 14px; color: var(--muted); }
+  .live-l li { padding: 3px 0; animation: fade .3s ease; }
+  .live-l li::before { content: "✓ "; color: var(--good); font-weight: 700; }
+  @keyframes fade { from { opacity: 0; transform: translateY(3px); } to { opacity: 1; transform: none; } }
+  .cmp { margin-top: 12px; }
+  .cmp-h { font-size: 14px; margin-bottom: 6px; }
+  .cmp-s { overflow-x: auto; border: 1px solid var(--line); border-radius: 12px; }
+  .cmp table { border-collapse: collapse; width: 100%; min-width: 640px; font-size: 13.5px; }
+  .cmp th { text-align: left; font-weight: 600; color: var(--muted); font-size: 12px; padding: 8px 10px; border-bottom: 1px solid var(--line); white-space: nowrap; }
+  .cmp td { padding: 9px 10px; border-bottom: 1px solid var(--line); vertical-align: top; }
+  .cmp tr:last-child td { border-bottom: 0; }
+  .cmp tr.top td { background: var(--brand-soft); }
+  .cmp .sc { color: var(--brand); letter-spacing: 1px; white-space: nowrap; }
+  .cmp .q { font-style: italic; min-width: 180px; }
   .dock { position: fixed; left: 0; right: 0; bottom: 0; background: linear-gradient(transparent, var(--bg) 28%); padding: 22px 16px 14px; }
   .dock-in { max-width: 880px; margin: 0 auto; background: var(--card); border: 1px solid var(--line); border-radius: 18px; box-shadow: var(--shadow);
              display: flex; align-items: flex-end; gap: 8px; padding: 8px; }
@@ -160,10 +178,32 @@ function cardHtml(c) {
     <div class="out"></div></div>`;
 }
 
+const dots = (n) => "●".repeat(n) + "○".repeat(5 - n);
+function compareHtml(c) {
+  const rows = c.rows.map(r => `<tr class="${r.rank === 1 ? "top" : ""}">
+    <td>${r.rank}</td>
+    <td><b>${esc(r.name)}</b><div class="meta">${esc(r.city)}${r.next ? " · next " + esc(fmtDate(r.next)) : ""}</div></td>
+    <td class="sc" title="${r.wait} of 5">${dots(r.wait)}</td>
+    <td class="sc" title="${r.phone} of 5">${dots(r.phone)}</td>
+    <td class="sc" title="${r.listening} of 5">${dots(r.listening)}</td>
+    <td class="q">“${esc(r.quote)}”</td>
+    <td>${esc(r.why)}</td></tr>`).join("");
+  return `<div class="cmp"><div class="cmp-h">Side by side · ranked for: <b>${esc(c.priority)}</b></div>
+    <div class="cmp-s"><table><thead><tr><th>#</th><th>Doctor</th><th>Short wait</th><th>Easy to reach</th><th>Listens well</th><th>Patients say</th><th>Why</th></tr></thead><tbody>${rows}</tbody></table></div>
+    <div class="meta" style="margin-top:6px">Scores 1 to 5 from sample reviews (5 is best, 3 means the reviews don't say). Every quote was checked against the real review text.</div></div>`;
+}
+
 function addBot(r) {
   const d = document.createElement("div"); d.className = "bot";
   let html = md(r.answer || "");
+  if (r.comparison && r.comparison.rows && r.comparison.rows.length) html += compareHtml(r.comparison);
   if (r.candidates && r.candidates.length) html += `<div class="cards">${r.candidates.map(cardHtml).join("")}</div>`;
+  if (r.checks && r.checks.verified === true) {
+    const q = r.checks.quotes_matched;
+    html += `<div class="verified">✓ Checked: every doctor name is in the database${q ? `, and ${q} patient quote${q > 1 ? "s" : ""} matched real reviews` : ""}</div>`;
+  } else if (r.checks && r.checks.verified === false) {
+    html += `<div class="verified warn">⚠ Some details could not be verified. Please double-check.</div>`;
+  }
   if (r.steps && r.steps.length) html += `<details class="steps"><summary>How I found this (${r.steps.length} steps)</summary><ol>${r.steps.map(s => `<li><code>${esc(s)}</code></li>`).join("")}</ol></details>`;
   d.innerHTML = html;
   d.querySelectorAll(".pcard").forEach(card => {
@@ -185,11 +225,27 @@ async function send() {
   const text = box.value.trim(); if (!text) return;
   box.value = ""; autosize(); $("hero").style.display = "none";
   addMe(text);
-  const t = document.createElement("div"); t.className = "bot typing"; t.innerHTML = 'Searching providers<span class="dots"></span>'; feed.appendChild(t); t.scrollIntoView({ block: "end" });
+  const t = document.createElement("div"); t.className = "bot live";
+  t.innerHTML = '<div class="live-h">Agent is working<span class="dots"></span></div><ul class="live-l"></ul>';
+  feed.appendChild(t); t.scrollIntoView({ block: "end" });
+  const addLive = (s) => { const li = document.createElement("li"); li.textContent = s; t.querySelector(".live-l").appendChild(li); t.scrollIntoView({ block: "end" }); };
+  addLive("Reading your request");
   $("send").disabled = true;
   try {
-    const r = await fetch("/api/chat", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ session, message: text }) }).then(x => x.json());
-    t.remove(); addBot(r);
+    // The server sends one JSON line per step, then a final line with the answer.
+    const resp = await fetch("/api/chat_stream", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ session, message: text }) });
+    const reader = resp.body.getReader(), dec = new TextDecoder(); let buf = "", final = null;
+    while (true) {
+      const { value, done } = await reader.read(); if (done) break;
+      buf += dec.decode(value, { stream: true });
+      let i;
+      while ((i = buf.indexOf("\n")) >= 0) {
+        const line = buf.slice(0, i).trim(); buf = buf.slice(i + 1); if (!line) continue;
+        const ev = JSON.parse(line);
+        if (ev.type === "step") addLive(ev.text); else if (ev.type === "final") final = ev.data;
+      }
+    }
+    t.remove(); addBot(final || { answer: "Sorry, something went wrong. Please try again.", steps: [], candidates: [] });
   } catch (e) { t.remove(); addBot({ answer: "Sorry, something went wrong. Please try again.", steps: [], candidates: [] }); }
   $("send").disabled = false; box.focus();
 }

@@ -22,13 +22,17 @@ the result, and decides what to do next:
 | `get_reviews` | Patient reviews, which Muse reads and summarizes (wait time, phone access, listening) |
 | `get_community_mentions` | Sample community-group posts about a provider |
 | `find_alternatives` | If a provider is full, finds similar ones who are accepting |
+| `compare_providers` | Muse scores the top picks side by side (short wait, easy to reach, listens well) from reviews. The tool refuses any row whose quote is not word for word in that doctor's reviews. |
 | `draft_contact` | Writes a call script, text, or email. It never sends anything. |
 
 If nothing matches, Muse widens the distance or drops a filter and says what changed.
 
 **Safety checks (plain code, not AI):**
-- Every doctor name in the final answer must have come from a tool result. If not, the
-  agent is told to rewrite it, and a warning is shown if it still fails.
+- Every doctor name in the final answer must have come from a tool result.
+- Every "patients say" quote must appear word for word in a real review or community
+  post that a tool returned (`checks.py`). If a check fails, the agent is told to rewrite
+  its answer once, and a warning is shown if it still fails. This idea comes from Meta's
+  workshop: the agent can't claim something unless code confirms it.
 - Turn cap on the agent loop; a friendly message if the model can't be reached.
 - Every run is saved to `runs/` so what the agent did can be inspected.
 
@@ -37,8 +41,9 @@ If nothing matches, Muse widens the distance or drops a filter and says what cha
 1. Install Python 3.9+.
 2. `pip install -r requirements.txt`
 3. Copy `.env.example` to `.env` and paste your Meta Model API key (get one at dev.meta.ai).
-4. `python app.py`, then open http://localhost:5000
-5. Voice input works in Chrome and Edge.
+4. `python check_key.py` to test your key on its own.
+5. `python app.py`, then open http://localhost:5000
+6. Voice input works in Chrome and Edge.
 
 Test the tools without any API key: `python test_tools.py`
 
@@ -48,6 +53,8 @@ Test the tools without any API key: `python test_tools.py`
 - `index.html`: the page (text box, mic, result cards)
 - `agent.py`: the Muse agent loop, system prompt, and safety checks
 - `tools.py`: the six tools the agent can call
+- `checks.py`: plain-code checks on the answer (doctor names and quotes)
+- `check_key.py`: tests your API key and tool calling before you run the app
 - `providers.json` / `providers.csv`: the sample provider data
 - `mock_model.py`: a fake model used only to test the loop offline. It is not used in the demo.
 
