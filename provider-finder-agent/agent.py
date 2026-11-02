@@ -1,0 +1,280 @@
+"""agent.py: the brain of the app, in plain words.
+
+What happens when someone asks for a doctor:
+  1. We send the request to Muse, plus a list of tools it is allowed to use.
+  2. Muse picks a tool (for example: search providers). Our code runs it and
+     sends the result back to Muse.
+  3. Muse looks at the result, then picks the next tool or writes the final answer.
+     This back-and-forth is called the "agent loop".
+  4. Before showing the answer, checks.py confirms every doctor name and every
+     quote is real (it came from a tool).
+
+Muse does the thinking. Our code does the exact work and the checking.
+"""
+import json
+import os
+import time
+from datetime import date
+
+import checks
+import tools as T
+
+HERE = os.path.dirname(os.path.abspath(__file__))
+MODEL = os.getenv("MODEL_NAME", "muse-spark-1.3")
+MAX_TURNS = 8           # stop the loop after this many model calls
+RUN_LOG_DIR = os.path.join(HERE, "runs")
+
+
+def load_env():
+    """Read MODEL_API_KEY from a .env file so you never paste it into code."""
+    path = os.path.join(HERE, ".env")
+    if os.path.exists(path):
+        for line in open(path, encoding="utf-8"):
+            line = line.strip()
+            if line and not line.startswith("#") and "=" in line:
+                k, v = line.split("=", 1)
+                os.environ.setdefault(k.strip(), v.strip().strip('"').strip("'"))
+
+
+load_env()
+
+
+def get_client():
+    if os.getenv("MOCK_MODEL") == "1":          # only for offline testing
+        from mock_model import MockClient
+        return MockClient()
+    key = os.getenv("MODEL_API_KEY")
+    if not key:
+        raise RuntimeError("MODEL_API_KEY is missing. Put it in the .env file.")
+    from openai import OpenAI                    # Meta's API works with this library
+    return OpenAI(base_url=os.getenv("MODEL_API_BASE_URL") or "https://api.meta.ai/v1",
+                  api_key=key, max_retries=4, timeout=180)
+
+
+SYSTEM = """You are a provider-finder assistant. You help people find a doctor or clinic
+from a SAMPLE database, using the tools you are given. Today is {today}.
+
+Rules:
+- You find providers. You NEVER diagnose, never name a condition, never give medical advice.
+  If the person describes an emergency, tell them to call 911 and stop.
+- Use only facts returned by tools. Never invent a doctor, date, phone number, or review.
+- Ask for missing details only if you truly need them: you need at least a type of doctor
+  (or a focus like "sinus problems") and a city. Insurance is the plan name only
+  (like "Aetna PPO"). Never ask for a member ID. Ask ONE short question at a time.
+- Match what the person needs to a doctor's "focus" list. Use the focus filter for
+  specifics like adenoids, sinus, PCOS, asthma, ADHD.
+- If nothing matches, widen the distance or drop one filter, and say what you changed.
+- If a doctor is not accepting new patients, use find_alternatives and say so.
+- For your top 2-3 picks, check_availability and read reviews and community mentions.
+  Summarize what patients say in one plain line (wait time, phone access, listening).
+  Say when a mention comes from a (sample) community group.
+- When you say what patients say, include ONE short exact quote in double quotes, copied
+  word for word from a review or community post a tool returned. Never reword inside quotes.
+- Rank by what the person said matters (soonest, closest, reviews). Say WHY in one line.
+- Only draft a call script / text / email if asked. You never send anything.
+- Keep answers short and plain. No long paragraphs. Use the exact doctor names from tools.
+- Dates and reviews are sample data. Mention that once, briefly, if relevant."""
+
+TOOL_DEFS = [
+    {"type": "function", "function": {
+        "name": "search_providers",
+        "description": "Find providers matching filters. Empty filters are ignored. Sorted by soonest appointment.",
+        "parameters": {"type": "object", "properties": {
+            "specialty": {"type": "string", "description": "e.g. Pediatrics, Primary Care, ENT, OB-GYN, Endocrinology, Orthopedics, Dermatology, Cardiology, Neurology, Physical Therapy, Sports Medicine, Gastroenterology, Pulmonology"},
+            "focus": {"type": "string", "description": "Sub-specialty keyword, e.g. sinus, adenoids, PCOS, asthma, ADHD, eczema, knee"},
+            "city": {"type": "string", "description": "City the person is near, e.g. Issaquah"},
+            "max_miles": {"type": "number", "description": "Max distance in miles from the city"},
+            "insurance": {"type": "string", "description": "Plan name, e.g. Aetna PPO, Premera, Cigna, Regence, UnitedHealthcare, Apple Health"},
+            "gender": {"type": "string", "enum": ["female", "male"]},
+            "kids": {"type": "boolean", "description": "true if the patient is a child"},
+            "telehealth": {"type": "boolean"},
+            "language": {"type": "string"},
+            "accepting_new": {"type": "boolean", "description": "default true"}}}}},
+    {"type": "function", "function": {
+        "name": "check_availability",
+        "description": "Next open appointment dates for one provider.",
+        "parameters": {"type": "object", "properties": {
+            "provider_id": {"type": "string"},
+            "before_date": {"type": "string", "description": "YYYY-MM-DD, optional"}},
+            "required": ["provider_id"]}}},
+    {"type": "function", "function": {
+        "name": "get_reviews",
+        "description": "Patient reviews for one provider.",
+        "parameters": {"type": "object", "properties": {"provider_id": {"type": "string"}},
+                       "required": ["provider_id"]}}},
+    {"type": "function", "function": {
+        "name": "get_community_mentions",
+        "description": "Sample community-group posts that mention one provider.",
+        "parameters": {"type": "object", "properties": {"provider_id": {"type": "string"}},
+                       "required": ["provider_id"]}}},
+    {"type": "function", "function": {
+        "name": "find_alternatives",
+        "description": "Similar providers who ARE accepting new patients, for a provider who is full.",
+        "parameters": {"type": "object", "properties": {
+            "provider_id": {"type": "string"},
+            "insurance": {"type": "string"},
+            "max_miles": {"type": "number"}},
+            "required": ["provider_id"]}}},
+    {"type": "function", "function": {
+        "name": "draft_contact",
+        "description": "Write a draft call script, text, or email for one provider. Does not send anything.",
+        "parameters": {"type": "object", "properties": {
+            "provider_id": {"type": "string"},
+            "channel": {"type": "string", "enum": ["call", "text", "email"]},
+            "reason": {"type": "string"}},
+            "required": ["provider_id"]}}},
+]
+
+
+def run_tool(name, args):
+    """Run one tool safely. Bad input becomes an error the model can read and fix."""
+    fn = T.TOOLS.get(name)
+    if not fn:
+        return {"error": f"unknown tool {name}"}
+    try:
+        result = fn(**args)
+    except Exception as e:                      # let Muse see the problem and retry
+        return {"error": f"{type(e).__name__}: {e}"}
+    if isinstance(result, list):
+        result = result[:8]                     # keep what Muse reads small
+    return result
+
+
+def describe(name, args, result):
+    """One plain line for the 'what the agent did' list on screen."""
+    shown = ", ".join(f"{k}={v}" for k, v in args.items() if v not in (None, "", False))
+    if isinstance(result, list):
+        return f"{name}({shown}) -> {len(result)} found"
+    if isinstance(result, dict) and "error" in result:
+        return f"{name}({shown}) -> error"
+    return f"{name}({shown})"
+
+
+def card(p_short):
+    """Full details for a result card on screen."""
+    p = T._get(p_short["id"])
+    return {"id": p["id"], "name": p["name"], "specialty": p["specialty"], "focus": p["focus"],
+            "city": p["city"], "miles_away": p_short.get("miles_away"), "gender": p["gender"],
+            "next_available": p["next_available"], "accepting_new": p["accepting_new"],
+            "insurance": p["insurance"], "languages": p["languages"],
+            "telehealth": p["telehealth"], "treats_kids": p["treats_kids"], "phone": p["phone"]}
+
+
+def _call_model(client, kwargs):
+    """Call Muse. If the API rejects reasoning_effort, try once without it."""
+    try:
+        return client.chat.completions.create(**kwargs)
+    except Exception as e:
+        if "reasoning" in str(e).lower() and "reasoning_effort" in kwargs:
+            kwargs.pop("reasoning_effort")
+            os.environ["REASONING_EFFORT"] = ""      # remember: don't send it again
+            return client.chat.completions.create(**kwargs)
+        raise
+
+
+def ask(history, user_text):
+    """Run the agent for one user message. `history` is a list kept per visitor."""
+    client = get_client()
+    messages = [{"role": "developer", "content": SYSTEM.format(today=date.today().isoformat())}]
+    messages += history
+    messages.append({"role": "user", "content": user_text})
+    steps, candidates = [], []
+    seen_names, seen_texts = set(), []       # what the tools really returned
+    retried = False
+    verified, quotes_checked = None, 0
+    log = {"time": time.strftime("%Y-%m-%d %H:%M:%S"), "user": user_text, "turns": []}
+    answer = ""
+
+    # The agent loop: ask Muse, run the tools it picks, repeat until it gives a final answer.
+    # MAX_TURNS stops it from looping forever.
+    for turn in range(MAX_TURNS):
+        if turn == MAX_TURNS - 1:
+            messages.append({"role": "developer", "content": "Last step. Give your final answer now, using what you have."})
+        kwargs = dict(model=MODEL, messages=messages, tools=TOOL_DEFS, max_completion_tokens=1500)
+        effort = os.getenv("REASONING_EFFORT", "low")
+        if effort:
+            kwargs["reasoning_effort"] = effort
+        try:
+            resp = _call_model(client, kwargs)
+        except Exception as e:
+            log["error"] = str(e)
+            _save(log)
+            return {"answer": "Sorry, I couldn't reach the model just now. Please try again.",
+                    "steps": steps, "candidates": candidates, "error": str(e)}
+        msg = resp.choices[0].message
+        calls = getattr(msg, "tool_calls", None) or []
+
+        if not calls:                            # Muse wrote a final answer
+            answer = (msg.content or "").strip()
+            bad_names = checks.unknown_names(answer, seen_names)
+            quotes = checks.extract_quotes(answer)
+            bad_quotes = [q for q in quotes if not checks.quote_in_sources(q, seen_texts)]
+            quotes_checked = len(quotes) - len(bad_quotes)
+            log["turns"].append({"final": answer, "unknown_names": bad_names, "bad_quotes": bad_quotes})
+            if (bad_names or bad_quotes) and not retried:     # one correction round
+                retried = True
+                problems = []
+                if bad_names:
+                    problems.append(f"{', '.join(bad_names)} did not come from a tool")
+                if bad_quotes:
+                    problems.append("these quotes did not match any review a tool returned: "
+                                    + "; ".join(bad_quotes))
+                messages.append({"role": "assistant", "content": answer})
+                messages.append({"role": "developer", "content":
+                                 "Your answer had problems: " + ". ".join(problems) +
+                                 ". Rewrite it using only doctors the tools returned, and quote "
+                                 "reviews word for word (or leave the quote out)."})
+                continue
+            verified = not (bad_names or bad_quotes)
+            if not verified:
+                answer += "\n\n(Note: some details could not be verified. Please double-check.)"
+            break
+
+        # Muse asked for tools: keep its message, then run each tool
+        messages.append({"role": "assistant", "content": msg.content or "", "tool_calls": [
+            {"id": c.id, "type": "function",
+             "function": {"name": c.function.name, "arguments": c.function.arguments}} for c in calls]})
+        for c in calls:
+            try:
+                args = json.loads(c.function.arguments or "{}")
+            except json.JSONDecodeError:
+                args = {}
+            result = run_tool(c.function.name, args)
+            steps.append(describe(c.function.name, args, result))
+            log["turns"].append({"tool": c.function.name, "args": args, "result_size": len(json.dumps(result))})
+            if isinstance(result, list):
+                for r in result:
+                    seen_names.add(r["name"])
+                if c.function.name in ("search_providers", "find_alternatives") and result:
+                    candidates = [card(r) for r in result[:5]]
+            elif isinstance(result, dict):
+                if result.get("name"):
+                    seen_names.add(result["name"])
+                if result.get("to"):
+                    seen_names.add(result["to"])
+                seen_texts += [t for t in result.get("reviews", []) if isinstance(t, str)]
+                seen_texts += [p.get("text", "") for p in result.get("posts", []) if isinstance(p, dict)]
+            messages.append({"role": "tool", "tool_call_id": c.id, "content": json.dumps(result)})
+    else:
+        answer = "I ran out of steps. Try a simpler request, like a doctor type and a city."
+
+    # Remember only the plain conversation so follow-up questions work
+    history.append({"role": "user", "content": user_text})
+    history.append({"role": "assistant", "content": answer})
+    del history[:-12]
+    log["answer"] = answer
+    log["verified"] = verified
+    _save(log)
+    return {"answer": answer, "steps": steps, "candidates": candidates,
+            "checks": {"verified": verified, "quotes_matched": quotes_checked}}
+
+
+def _save(log):
+    """Save a record of every run, so we can show and debug what the agent did."""
+    try:
+        os.makedirs(RUN_LOG_DIR, exist_ok=True)
+        name = time.strftime("%Y%m%d-%H%M%S") + ".json"
+        with open(os.path.join(RUN_LOG_DIR, name), "w", encoding="utf-8") as f:
+            json.dump(log, f, indent=1)
+    except OSError:
+        pass

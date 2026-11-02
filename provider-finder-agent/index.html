@@ -1,0 +1,219 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CareScout</title>
+<style>
+  :root {
+    --bg: #f4f7f6; --card: #ffffff; --ink: #14201e; --muted: #5b6b68; --line: #dce5e2;
+    --brand: #0f766e; --brand-ink: #ffffff; --brand-soft: #dff3ef;
+    --good: #166534; --good-bg: #dcfce7; --warn: #92400e; --warn-bg: #fef3c7;
+    --bad: #991b1b; --bad-bg: #fee2e2; --shadow: 0 1px 2px rgba(20,32,30,.06), 0 4px 14px rgba(20,32,30,.06);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #0e1615; --card: #16211f; --ink: #e8f0ee; --muted: #9db0ac; --line: #263633;
+      --brand: #2dd4bf; --brand-ink: #06201c; --brand-soft: #123530;
+      --good: #86efac; --good-bg: #123a22; --warn: #fcd34d; --warn-bg: #3b2f0b;
+      --bad: #fca5a5; --bad-bg: #431818; --shadow: none;
+    }
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; }
+  body { background: var(--bg); color: var(--ink); font: 16px/1.5 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; }
+  .wrap { max-width: 880px; margin: 0 auto; padding: 0 16px 120px; }
+  header { padding: 22px 0 10px; display: flex; align-items: center; gap: 12px; }
+  .logo { width: 38px; height: 38px; border-radius: 11px; background: var(--brand); color: var(--brand-ink);
+          display: grid; place-items: center; font-weight: 800; font-size: 20px; }
+  h1 { font-size: 22px; margin: 0; letter-spacing: -.01em; }
+  .tag { color: var(--muted); font-size: 14px; margin: 0; }
+  .notice { background: var(--warn-bg); color: var(--warn); border-radius: 10px; padding: 9px 12px; font-size: 13.5px; margin: 6px 0 18px; }
+  .hero { margin: 22px 0 18px; }
+  .hero h2 { font-size: 26px; line-height: 1.2; margin: 0 0 6px; letter-spacing: -.02em; }
+  .hero p { margin: 0; color: var(--muted); }
+  .chips { display: flex; flex-wrap: wrap; gap: 8px; margin: 14px 0 0; }
+  .chip { border: 1px solid var(--line); background: var(--card); color: var(--ink); border-radius: 999px;
+          padding: 7px 13px; font-size: 14px; cursor: pointer; font-family: inherit; }
+  .chip:hover { border-color: var(--brand); color: var(--brand); }
+  #feed { display: flex; flex-direction: column; gap: 16px; margin-top: 8px; }
+  .me { align-self: flex-end; background: var(--brand); color: var(--brand-ink); padding: 10px 14px; border-radius: 16px 16px 4px 16px; max-width: 85%; }
+  .bot { background: var(--card); border: 1px solid var(--line); border-radius: 16px 16px 16px 4px; padding: 14px 16px; box-shadow: var(--shadow); }
+  .bot p { margin: 0 0 8px; } .bot p:last-child { margin: 0; }
+  .bot ul { margin: 4px 0 8px; padding-left: 20px; }
+  .steps { margin-top: 10px; font-size: 13px; color: var(--muted); }
+  .steps summary { cursor: pointer; }
+  .steps ol { margin: 6px 0 0; padding-left: 20px; }
+  .steps code { font: 12px ui-monospace, Menlo, Consolas, monospace; word-break: break-word; }
+  .cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 12px; margin-top: 12px; }
+  .pcard { border: 1px solid var(--line); border-radius: 14px; padding: 13px; background: var(--card); display: flex; flex-direction: column; gap: 7px; }
+  .pcard h3 { margin: 0; font-size: 16px; }
+  .row { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
+  .meta { color: var(--muted); font-size: 13.5px; }
+  .pill { font-size: 12px; padding: 2px 9px; border-radius: 999px; background: var(--brand-soft); color: var(--brand); }
+  .pill.good { background: var(--good-bg); color: var(--good); }
+  .pill.bad { background: var(--bad-bg); color: var(--bad); }
+  .pill.plain { background: transparent; border: 1px solid var(--line); color: var(--muted); }
+  .dates b { font-weight: 600; }
+  .actions { display: flex; gap: 6px; margin-top: auto; padding-top: 4px; }
+  .btn { border: 1px solid var(--line); background: transparent; color: var(--ink); border-radius: 9px; padding: 6px 10px; font-size: 13px; cursor: pointer; font-family: inherit; }
+  .btn:hover { border-color: var(--brand); color: var(--brand); }
+  .draft { margin-top: 8px; background: var(--brand-soft); border-radius: 10px; padding: 10px 12px; font-size: 14px; white-space: pre-wrap; }
+  .draft small { display: block; color: var(--muted); margin-top: 6px; }
+  .draft a { color: var(--brand); }
+  .typing { color: var(--muted); font-size: 14px; }
+  .dots::after { content: ""; animation: dots 1.2s steps(4) infinite; }
+  @keyframes dots { 0% { content: ""; } 25% { content: "."; } 50% { content: ".."; } 75% { content: "..."; } }
+  .dock { position: fixed; left: 0; right: 0; bottom: 0; background: linear-gradient(transparent, var(--bg) 28%); padding: 22px 16px 14px; }
+  .dock-in { max-width: 880px; margin: 0 auto; background: var(--card); border: 1px solid var(--line); border-radius: 18px; box-shadow: var(--shadow);
+             display: flex; align-items: flex-end; gap: 8px; padding: 8px; }
+  textarea { flex: 1; border: 0; outline: 0; resize: none; background: transparent; color: var(--ink); font: inherit; padding: 8px 8px; max-height: 120px; }
+  .icon { width: 44px; height: 44px; border-radius: 12px; border: 0; cursor: pointer; display: grid; place-items: center; font-size: 19px; font-family: inherit; }
+  .mic { background: var(--brand-soft); color: var(--brand); }
+  .mic.on { background: var(--bad); color: #fff; animation: pulse 1.2s infinite; }
+  @keyframes pulse { 50% { opacity: .65; } }
+  .send { background: var(--brand); color: var(--brand-ink); }
+  .opts { max-width: 880px; margin: 8px auto 0; display: flex; justify-content: space-between; font-size: 12.5px; color: var(--muted); padding: 0 6px; gap: 10px; flex-wrap: wrap; }
+  label { cursor: pointer; }
+  :focus-visible { outline: 2px solid var(--brand); outline-offset: 2px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="logo">C</div>
+    <div><h1>CareScout</h1><p class="tag">Find the right provider by voice or text</p></div>
+  </header>
+  <div class="notice"><b>Sample data. Not medical advice.</b> This tool only finds providers. For an emergency, call 911. We never ask for your member ID.</div>
+
+  <section class="hero" id="hero">
+    <h2>Tell me who you're looking for.</h2>
+    <p>Say or type the type of doctor, your city, your insurance plan, and what matters to you. I'll check coverage, openings, and what patients say.</p>
+    <div class="chips" id="chips"></div>
+  </section>
+
+  <div id="feed" aria-live="polite"></div>
+</div>
+
+<div class="dock">
+  <div class="dock-in">
+    <button class="icon mic" id="mic" title="Speak" aria-label="Speak your request">🎤</button>
+    <textarea id="box" rows="1" placeholder="Example: Female pediatrician near Issaquah, Premera, this week"></textarea>
+    <button class="icon send" id="send" title="Send" aria-label="Send">➤</button>
+  </div>
+  <div class="opts">
+    <label><input type="checkbox" id="speak"> Read answers aloud</label>
+    <span id="status"></span>
+  </div>
+</div>
+
+<script>
+const $ = (id) => document.getElementById(id);
+const feed = $("feed"), box = $("box");
+let session = null;
+try { session = sessionStorage.getItem("cs") } catch (e) {}
+if (!session) { session = (crypto.randomUUID ? crypto.randomUUID() : String(Math.random()).slice(2)); try { sessionStorage.setItem("cs", session) } catch (e) {} }
+
+const EXAMPLES = [
+  "Female pediatrician near Issaquah, Premera, this week",
+  "Sinus specialist near Bellevue, Aetna PPO",
+  "Adenoid specialist for my 5-year-old near Kirkland, Cigna",
+  "PCOS specialist near Seattle, Regence",
+  "My pediatrician is full. Who else near Bellevue takes Premera?"
+];
+EXAMPLES.forEach(t => {
+  const b = document.createElement("button"); b.className = "chip"; b.textContent = t;
+  b.onclick = () => { box.value = t; send(); }; $("chips").appendChild(b);
+});
+
+function esc(s) { return String(s).replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c])); }
+function md(text) {                       // tiny, safe formatter: escape first, then add bold/lists
+  const lines = esc(text).split("\n"); let html = "", inList = false;
+  for (const raw of lines) {
+    const line = raw.replace(/\*\*(.+?)\*\*/g, "<b>$1</b>");
+    if (/^\s*([-*]|\d+\.)\s+/.test(raw)) { if (!inList) { html += "<ul>"; inList = true; } html += "<li>" + line.replace(/^\s*([-*]|\d+\.)\s+/, "") + "</li>"; }
+    else { if (inList) { html += "</ul>"; inList = false; } if (line.trim()) html += "<p>" + line + "</p>"; }
+  }
+  return html + (inList ? "</ul>" : "");
+}
+const fmtDate = (d) => new Date(d + "T00:00:00").toLocaleDateString(undefined, { month: "short", day: "numeric" });
+
+function addMe(text) { const d = document.createElement("div"); d.className = "me"; d.textContent = text; feed.appendChild(d); d.scrollIntoView({ block: "end" }); }
+
+function cardHtml(c) {
+  const dist = c.miles_away != null ? ` · ${c.miles_away} mi` : "";
+  const dates = c.next_available.slice(0, 3).map(fmtDate).join(", ");
+  return `<div class="pcard" data-id="${esc(c.id)}">
+    <div class="row"><h3>${esc(c.name)}</h3>
+      <span class="pill ${c.accepting_new ? "good" : "bad"}">${c.accepting_new ? "Accepting new patients" : "Not accepting"}</span></div>
+    <div class="meta">${esc(c.specialty)} · ${esc(c.city)}${dist}</div>
+    <div class="row">${c.focus.map(f => `<span class="pill">${esc(f)}</span>`).join("")}</div>
+    <div class="dates meta">Next openings: <b>${esc(dates)}</b></div>
+    <div class="row">${c.insurance.map(i => `<span class="pill plain">${esc(i)}</span>`).join("")}</div>
+    <div class="meta">${c.telehealth ? "Telehealth · " : ""}${c.treats_kids ? "Sees children · " : ""}${esc(c.languages.join(", "))}</div>
+    <div class="meta">📞 ${esc(c.phone)}</div>
+    <div class="actions">
+      <button class="btn" data-ch="call">Call script</button>
+      <button class="btn" data-ch="text">Text</button>
+      <button class="btn" data-ch="email">Email</button>
+    </div>
+    <div class="out"></div></div>`;
+}
+
+function addBot(r) {
+  const d = document.createElement("div"); d.className = "bot";
+  let html = md(r.answer || "");
+  if (r.candidates && r.candidates.length) html += `<div class="cards">${r.candidates.map(cardHtml).join("")}</div>`;
+  if (r.steps && r.steps.length) html += `<details class="steps"><summary>How I found this (${r.steps.length} steps)</summary><ol>${r.steps.map(s => `<li><code>${esc(s)}</code></li>`).join("")}</ol></details>`;
+  d.innerHTML = html;
+  d.querySelectorAll(".pcard").forEach(card => {
+    card.querySelectorAll("button[data-ch]").forEach(b => b.onclick = async () => {
+      const res = await fetch("/api/draft", { method: "POST", headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ id: card.dataset.id, channel: b.dataset.ch }) }).then(x => x.json());
+      const out = card.querySelector(".out");
+      out.innerHTML = `<div class="draft">${esc(res.draft || res.error || "")}<small>${esc(res.note || "")} <a href="#" class="cp">Copy</a></small></div>`;
+      out.querySelector(".cp").onclick = (e) => { e.preventDefault(); navigator.clipboard && navigator.clipboard.writeText(res.draft); e.target.textContent = "Copied"; };
+    });
+  });
+  feed.appendChild(d); d.scrollIntoView({ block: "end" });
+  if ($("speak").checked && "speechSynthesis" in window && r.answer) {
+    speechSynthesis.cancel(); speechSynthesis.speak(new SpeechSynthesisUtterance(r.answer.replace(/[*#]/g, "")));
+  }
+}
+
+async function send() {
+  const text = box.value.trim(); if (!text) return;
+  box.value = ""; autosize(); $("hero").style.display = "none";
+  addMe(text);
+  const t = document.createElement("div"); t.className = "bot typing"; t.innerHTML = 'Searching providers<span class="dots"></span>'; feed.appendChild(t); t.scrollIntoView({ block: "end" });
+  $("send").disabled = true;
+  try {
+    const r = await fetch("/api/chat", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ session, message: text }) }).then(x => x.json());
+    t.remove(); addBot(r);
+  } catch (e) { t.remove(); addBot({ answer: "Sorry, something went wrong. Please try again.", steps: [], candidates: [] }); }
+  $("send").disabled = false; box.focus();
+}
+$("send").onclick = send;
+box.addEventListener("keydown", e => { if (e.key === "Enter" && !e.shiftKey) { e.preventDefault(); send(); } });
+function autosize() { box.style.height = "auto"; box.style.height = Math.min(box.scrollHeight, 120) + "px"; }
+box.addEventListener("input", autosize);
+
+// Voice input (browser speech recognition; works in Chrome and Edge)
+const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
+const mic = $("mic");
+if (!SR) { mic.style.display = "none"; $("status").textContent = "Voice needs Chrome or Edge. You can still type."; }
+else {
+  const rec = new SR(); rec.lang = "en-US"; rec.interimResults = true; rec.continuous = false;
+  let listening = false;
+  rec.onresult = (e) => { box.value = Array.from(e.results).map(r => r[0].transcript).join(" "); autosize(); };
+  rec.onend = () => { listening = false; mic.classList.remove("on"); $("status").textContent = ""; if (box.value.trim()) send(); };
+  rec.onerror = () => { listening = false; mic.classList.remove("on"); $("status").textContent = "Couldn't hear you. Check mic permission."; };
+  mic.onclick = () => {
+    if (listening) { rec.stop(); return; }
+    speechSynthesis && speechSynthesis.cancel(); box.value = ""; listening = true;
+    mic.classList.add("on"); $("status").textContent = "Listening…"; try { rec.start(); } catch (e) {}
+  };
+}
+</script>
+</body>
+</html>

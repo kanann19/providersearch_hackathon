@@ -1,0 +1,4755 @@
+[
+ {
+  "id": "p01",
+  "name": "Dr. Maya Lee",
+  "gender": "female",
+  "specialty": "Pediatrics",
+  "treats_kids": true,
+  "city": "Seattle",
+  "phone": "(206) 555-0101",
+  "telehealth": true,
+  "languages": [
+   "English",
+   "Korean"
+  ],
+  "insurance": [
+   "Aetna PPO",
+   "Cigna",
+   "Premera"
+  ],
+  "accepting_new": true,
+  "next_available": [
+   "2026-10-29",
+   "2026-11-02",
+   "2026-11-05"
+  ],
+  "reviews": [
+   "Patient and gentle with my toddler.",
+   "Phone line is busy, use the portal.",
+   "Never rushed us."
+  ],
+  "community_posts": [
+   {
+    "source": "Sample parent group",
+    "text": "Dr. Lee was great when my son had a fever that would not go away. Same-week visit."
+   }
+  ],
+  "focus": [
+   "newborn care",
+   "asthma and allergies",
+   "ADHD"
+  ]
+ },
+ {
+  "id": "p02",
+  "name": "Dr. Arjun Rao",
+  "gender": "male",
+  "specialty": "Pediatrics",
+  "treats_kids": true,
+  "city": "Bellevue",
+  "phone": "(206) 555-0102",
+  "telehealth": false,
+  "languages": [
+   "English",
+   "Hindi"
+  ],
+  "insurance": [
+   "Premera",
+   "Regence"
+  ],
+  "accepting_new": false,
+  "next_available": [
+   "2026-12-10"
+  ],
+  "reviews": [
+   "Great with kids but the waitlist is long.",
+   "Front desk is rushed."
+  ],
+  "community_posts": [
+   {
+    "source": "Sample parent group",
+    "text": "Love Dr. Rao but he stopped taking new patients last spring."
+   }
+  ],
+  "focus": [
+   "ADHD",
+   "teen health",
+   "ear infections"
+  ]
+ },
+ {
+  "id": "p03",
+  "name": "Dr. Emily Carter",
+  "gender": "female",
+  "specialty": "Pediatrics",
+  "treats_kids": true,
+  "city": "Kirkland",
+  "phone": "(206) 555-0103",
+  "telehealth": true,
+  "languages": [
+   "English",
+   "Spanish"
+  ],
+  "insurance": [
+   "Aetna PPO",
+   "UnitedHealthcare"
+  ],
+  "accepting_new": true,
+  "next_available": [
+   "2026-10-28",
+   "2026-10-30"
+  ],
+  "reviews": [
+   "Quick to see us and clear instructions.",
+   "Short visits, a bit rushed."
+  ],
+  "community_posts": [
+   {
+    "source": "Sample parent group",
+    "text": "Dr. Carter fit us in for a rash the same week. Parents in our group recommend her."
+   }
+  ],
+  "focus": [
+   "ear infections",
+   "development and autism screening",
+   "eczema"
+  ]
+ },
+ {
+  "id": "p04",
+  "name": "Dr. Samuel Okafor",
+  "gender": "male",
+  "specialty": "Pediatrics",
+  "treats_kids": true,
+  "city": "Seattle",
+  "phone": "(206) 555-0104",
+  "telehealth": false,
+  "languages": [
+   "English"
+  ],
+  "insurance": [
+   "Aetna PPO",
+   "Cigna"
+  ],
+  "accepting_new": true,
+  "next_available": [
+   "2026-11-18"
+  ],
+  "reviews": [
+   "Very thorough with my daughter.",
+   "Waited 45 minutes in the lobby."
+  ],
+  "community_posts": [
+   {
+    "source": "Sample parent group",
+    "text": "Dr. Okafor is careful but plan on a long wait."
+   }
+  ],
+  "focus": [
+   "eczema",
+   "growth and nutrition",
+   "newborn care"
+  ]
+ },
+ {
+  "id": "p05",
+  "name": "Dr. Priya Nair",
+  "gender": "female",
+  "specialty": "Primary Care",
+  "treats_kids": false,
+  "city": "Redmond",
+  "phone": "(206) 555-0105",
+  "telehealth": true,
+  "languages": [
+   "English",
+   "Hindi",
+   "Malayalam"
+  ],
+  "insurance": [
+   "Aetna PPO",
+   "Regence",
+   "UnitedHealthcare"
+  ],
+  "accepting_new": true,
+  "next_available": [
+   "2026-10-30",
+   "2026-11-03"
+  ],
+  "reviews": [
+   "Kind and never rushed.",
+   "Easy to get same-week appointments.",
+   "Billing was confusing."
+  ],
+  "community_posts": [
+   {
+    "source": "Sample parent group",
+    "text": "Dr. Nair answers portal messages fast, good for busy parents."
+   }
+  ],
+  "focus": [
+   "diabetes care",
+   "high blood pressure",
+   "preventive care"
+  ]
+ },
+ {
+  "id": "p06",
+  "name": "Dr. Daniel Brooks",
+  "gender": "male",
+  "specialty": "Primary Care",
+  "treats_kids": false,
+  "city": "Seattle",
+  "phone": "(206) 555-0106",
+  "telehealth": false,
+  "languages": [
+   "English"
+  ],
+  "insurance": [
+   "Cigna",
+   "Premera"
+  ],
+  "accepting_new": false,
+  "next_available": [
+   "2027-01-12"
+  ],
+  "reviews": [
+   "Wonderful doctor but not taking new patients.",
+   "Hard to book."
+  ],
+  "community_posts": [
+   {
+    "source": "Sample parent group",
+    "text": "He knows my family well but his panel is full."
+   }
+  ],
+  "focus": [
+   "preventive care",
+   "weight management",
+   "thyroid"
+  ]
+ },
+ {
+  "id": "p07",
+  "name": "Dr. Hannah Kim",
+  "gender": "female",
+  "specialty": "Dermatology",
+  "treats_kids": true,
+  "city": "Bellevue",
+  "phone": "(206) 555-0107",
+  "telehealth": true,
+  "languages": [
+   "English",
+   "Korean"
+  ],
+  "insurance": [
+   "Aetna PPO",
+   "Premera",
+   "Cigna"
+  ],
+  "accepting_new": true,
+  "next_available": [
+   "2026-12-02"
+  ],
+  "reviews": [
+   "Cleared my skin rash after other doctors failed.",
+   "Long wait for the first visit."
+  ],
+  "community_posts": [
+   {
+    "source": "Sample parent group",
+    "text": "Dr. Kim is great for kids with eczema, but the first visit takes weeks."
+   }
+  ],
+  "focus": [
+   "eczema",
+   "acne",
+   "psoriasis"
+  ]
+ },
+ {
+  "id": "p08",
+  "name": "Dr. Victor Alvarez",
+  "gender": "male",
+  "specialty": "Dermatology",
+  "treats_kids": false,
+  "city": "Seattle",
+  "phone": "(206) 555-0108",
+  "telehealth": false,
+  "languages": [
+   "English",
+   "Spanish"
+  ],
+  "insurance": [
+   "Regence",
+   "UnitedHealthcare"
+  ],
+  "accepting_new": true,
+  "next_available": [
+   "2026-11-15",
+   "2026-11-20"
+  ],
+  "reviews": [
+   "Fast skin check and clear results.",
+   "Seemed distracted."
+  ],
+  "community_posts": [],
+  "focus": [
+   "psoriasis",
+   "skin cancer checks",
+   "hair loss"
+  ]
+ },
+ {
+  "id": "p09",
+  "name": "Dr. Rachel Stein",
+  "gender": "female",
+  "specialty": "Cardiology",
+  "treats_kids": false,
+  "city": "Seattle",
+  "phone": "(206) 555-0109",
+  "telehealth": true,
+  "languages": [
+   "English"
+  ],
+  "insurance": [
+   "Aetna PPO",
+   "Cigna",
+   "Regence"
+  ],
+  "accepting_new": true,
+  "next_available": [
+   "2026-11-22"
+  ],
+  "reviews": [
+   "Calm and clear about my test results.",
+   "Office runs late most days."
+  ],
+  "community_posts": [],
+  "focus": [
+   "heart rhythm",
+   "high blood pressure",
+   "cholesterol"
+  ]
+ },
+ {
+  "id": "p10",
+  "name": "Dr. Kevin Zhao",
+  "gender": "male",
+  "specialty": "Cardiology",
+  "treats_kids": false,
+  "city": "Bellevue",
+  "phone": "(206) 555-0110",
+  "telehealth": false,
+  "languages": [
+   "English",
+   "Mandarin"
+  ],
+  "insurance": [
+   "Premera",
+   "UnitedHealthcare"
+  ],
+  "accepting_new": false,
+  "next_available": [
+   "2026-12-18"
+  ],
+  "reviews": [
+   "Excellent but booked out for weeks.",
+   "Phone line is always busy."
+  ],
+  "community_posts": [],
+  "focus": [
+   "cholesterol",
+   "heart failure",
+   "chest pain evaluation"
+  ]
+ },
+ {
+  "id": "p11",
+  "name": "Dr. Laura Mitchell",
+  "gender": "female",
+  "specialty": "Neurology",
+  "treats_kids": false,
+  "city": "Seattle",
+  "phone": "(206) 555-0111",
+  "telehealth": true,
+  "languages": [
+   "English"
+  ],
+  "insurance": [
+   "Aetna PPO",
+   "Premera"
+  ],
+  "accepting_new": true,
+  "next_available": [
+   "2026-12-05"
+  ],
+  "reviews": [
+   "Finally helped with my migraines.",
+   "Slow to return messages."
+  ],
+  "community_posts": [],
+  "focus": [
+   "migraines",
+   "epilepsy",
+   "memory"
+  ]
+ },
+ {
+  "id": "p12",
+  "name": "Dr. Omar Hassan",
+  "gender": "male",
+  "specialty": "Neurology",
+  "treats_kids": false,
+  "city": "Kirkland",
+  "phone": "(206) 555-0112",
+  "telehealth": false,
+  "languages": [
+   "English",
+   "Arabic"
+  ],
+  "insurance": [
+   "Cigna",
+   "Regence",
+   "UnitedHealthcare"
+  ],
+  "accepting_new": true,
+  "next_available": [
+   "2026-11-27"
+  ],
+  "reviews": [
+   "Listened for a full hour at the first visit.",
+   "Parking is bad."
+  ],
+  "community_posts": [],
+  "focus": [
+   "memory",
+   "nerve pain",
+   "sleep disorders"
+  ]
+ },
+ {
+  "id": "p13",
+  "name": "Dr. Grace Thompson",
+  "gender": "female",
+  "specialty": "Physical Therapy",
+  "treats_kids": true,
+  "city": "Seattle",
+  "phone": "(206) 555-0113",
+  "telehealth": false,
+  "languages": [
+   "English"
+  ],
+  "insurance": [
+   "Aetna PPO",
+   "Cigna",
+   "Premera",
+   "Regence"
+  ],
+  "accepting_new": true,
+  "next_available": [
+   "2026-10-29",
+   "2026-10-31"
+  ],
+  "reviews": [
+   "Got me running again after my knee injury.",
+   "Appointments are easy to get."
+  ],
+  "community_posts": [
+   {
+    "source": "Sample parent group",
+    "text": "Grace helped my teen after a sports injury. Easy scheduling."
+   }
+  ],
+  "focus": [
+   "back pain",
+   "post-surgery rehab",
+   "sports injury"
+  ]
+ },
+ {
+  "id": "p14",
+  "name": "Dr. Tomas Novak",
+  "gender": "male",
+  "specialty": "Physical Therapy",
+  "treats_kids": false,
+  "city": "Issaquah",
+  "phone": "(206) 555-0114",
+  "telehealth": false,
+  "languages": [
+   "English",
+   "Czech"
+  ],
+  "insurance": [
+   "Premera",
+   "UnitedHealthcare"
+  ],
+  "accepting_new": true,
+  "next_available": [
+   "2026-11-01"
+  ],
+  "reviews": [
+   "Friendly and hands-on.",
+   "Wish there were more evening slots."
+  ],
+  "community_posts": [],
+  "focus": [
+   "sports injury",
+   "pelvic floor",
+   "balance"
+  ]
+ },
+ {
+  "id": "p15",
+  "name": "Dr. Anita Desai",
+  "gender": "female",
+  "specialty": "Gastroenterology",
+  "treats_kids": false,
+  "city": "Bellevue",
+  "phone": "(206) 555-0115",
+  "telehealth": true,
+  "languages": [
+   "English",
+   "Hindi",
+   "Gujarati"
+  ],
+  "insurance": [
+   "Aetna PPO",
+   "Regence"
+  ],
+  "accepting_new": true,
+  "next_available": [
+   "2026-12-14"
+  ],
+  "reviews": [
+   "Made a scary procedure feel easy.",
+   "Waited months to get in."
+  ],
+  "community_posts": [],
+  "focus": [
+   "acid reflux",
+   "IBS",
+   "celiac disease"
+  ]
+ },
+ {
+  "id": "p16",
+  "name": "Dr. Sofia Marino",
+  "gender": "female",
+  "specialty": "Pediatrics",
+  "treats_kids": true,
+  "city": "Issaquah",
+  "phone": "(206) 555-0116",
+  "telehealth": true,
+  "languages": [
+   "English",
+   "Italian"
+  ],
+  "insurance": [
+   "Premera",
+   "Regence",
+   "Aetna PPO"
+  ],
+  "accepting_new": true,
+  "next_available": [
+   "2026-10-28",
+   "2026-11-04"
+  ],
+  "reviews": [
+   "Warm with kids and very organized.",
+   "Appointments start on time.",
+   "Pricey out of pocket."
+  ],
+  "community_posts": [
+   {
+    "source": "Sample parent group",
+    "text": "Dr. Marino is our favorite in Issaquah. Newborn visits are very smooth."
+   }
+  ],
+  "focus": [
+   "newborn care",
+   "asthma and allergies",
+   "ADHD"
+  ]
+ },
+ {
+  "id": "p17",
+  "name": "Dr. Ben Foster",
+  "gender": "male",
+  "specialty": "Primary Care",
+  "treats_kids": false,
+  "city": "Kirkland",
+  "phone": "(206) 555-0117",
+  "telehealth": false,
+  "languages": [
+   "English"
+  ],
+  "insurance": [
+   "Cigna",
+   "Aetna PPO",
+   "Premera"
+  ],
+  "accepting_new": true,
+  "next_available": [
+   "2026-11-04"
+  ],
+  "reviews": [
+   "Easy to talk to and practical.",
+   "Phone tag with the front desk."
+  ],
+  "community_posts": [],
+  "focus": [
+   "thyroid",
+   "senior care",
+   "women's health"
+  ]
+ },
+ {
+  "id": "p18",
+  "name": "Dr. Nina Petrov",
+  "gender": "female",
+  "specialty": "Endocrinology",
+  "treats_kids": false,
+  "city": "Redmond",
+  "phone": "(206) 555-0118",
+  "telehealth": true,
+  "languages": [
+   "English",
+   "Russian"
+  ],
+  "insurance": [
+   "Aetna PPO",
+   "Premera",
+   "Cigna"
+  ],
+  "accepting_new": true,
+  "next_available": [
+   "2026-12-08"
+  ],
+  "reviews": [
+   "Helped me understand my thyroid results.",
+   "Visits feel rushed."
+  ],
+  "community_posts": [],
+  "focus": [
+   "PCOS",
+   "thyroid",
+   "diabetes"
+  ]
+ },
+ {
+  "id": "p19",
+  "name": "Dr. Marcus Reed",
+  "gender": "male",
+  "specialty": "Pulmonology",
+  "treats_kids": false,
+  "city": "Seattle",
+  "phone": "(206) 555-0119",
+  "telehealth": false,
+  "languages": [
+   "English"
+  ],
+  "insurance": [
+   "Regence",
+   "Premera",
+   "UnitedHealthcare"
+  ],
+  "accepting_new": true,
+  "next_available": [
+   "2026-11-12"
+  ],
+  "reviews": [
+   "My breathing is much better.",
+   "Test results took a week."
+  ],
+  "community_posts": [],
+  "focus": [
+   "asthma",
+   "COPD"
+  ]
+ },
+ {
+  "id": "p20",
+  "name": "Dr. Yusuf Ramirez",
+  "gender": "male",
+  "specialty": "Pediatrics",
+  "treats_kids": true,
+  "city": "Shoreline",
+  "phone": "(425) 555-0120",
+  "telehealth": false,
+  "languages": [
+   "English",
+   "Arabic",
+   "Russian"
+  ],
+  "insurance": [
+   "Premera",
+   "UnitedHealthcare"
+  ],
+  "accepting_new": false,
+  "next_available": [
+   "2027-02-18"
+  ],
+  "reviews": [
+   "Never made me feel rushed.",
+   "Seen right on time.",
+   "Phone line is always busy.",
+   "Patient and gentle with my child."
+  ],
+  "community_posts": [],
+  "focus": [
+   "ADHD",
+   "teen health",
+   "ear infections"
+  ]
+ },
+ {
+  "id": "p21",
+  "name": "Dr. Tanya Vega",
+  "gender": "female",
+  "specialty": "Pediatrics",
+  "treats_kids": true,
+  "city": "Issaquah",
+  "phone": "(425) 555-0121",
+  "telehealth": true,
+  "languages": [
+   "English"
+  ],
+  "insurance": [
+   "Aetna PPO",
+   "Regence",
+   "Premera"
+  ],
+  "accepting_new": true,
+  "next_available": [
+   "2026-10-29",
+   "2026-10-30",
+   "2026-11-13"
+  ],
+  "reviews": [
+   "Listened carefully and answered every question.",
+   "Seen right on time.",
+   "Hard to reach the front desk.",
+   "Great with my kids."
+  ],
+  "community_posts": [],
+  "focus": [
+   "ear infections",
+   "development and autism screening",
+   "eczema"
+  ]
+ },
+ {
+  "id": "p22",
+  "name": "Dr. Luis Abbott",
+  "gender": "male",
+  "specialty": "Pediatrics",
+  "treats_kids": true,
+  "city": "Kirkland",
+  "phone": "(206) 555-0122",
+  "telehealth": true,
+  "languages": [
+   "English",
+   "Korean",
+   "Spanish"
+  ],
+  "insurance": [
+   "Regence",
+   "Premera",
+   "Aetna PPO"
+  ],
+  "accepting_new": true,
+  "next_available": [
+   "2026-11-02",
+   "2026-11-03",
+   "2026-11-12"
+  ],
+  "reviews": [
+   "Explained things in plain words.",
+   "Seen right on time.",
+   "Portal messages answered fast.",
+   "Patient and gentle with my child."
+  ],
+  "community_posts": [],
+  "focus": [
+   "eczema",
+   "growth and nutrition",
+   "newborn care"
+  ]
+ },
+ {
+  "id": "p23",
+  "name": "Dr. Gabriel Alvarado",
+  "gender": "male",
+  "specialty": "Pediatrics",
+  "treats_kids": true,
+  "city": "Redmond",
+  "phone": "(425) 555-0123",
+  "telehealth": false,
+  "languages": [
+   "English"
+  ],
+  "insurance": [
+   "Aetna PPO",
+   "UnitedHealthcare"
+  ],
+  "accepting_new": true,
+  "next_available": [
+   "2026-11-23",
+   "2026-11-29",
+   "2026-12-05"
+  ],
+  "reviews": [
+   "Listened carefully and answered every question.",
+   "Short wait, clean office.",
+   "Front desk is helpful and picks up.",
+   "Great with my kids."
+  ],
+  "community_posts": [
+   {
+    "source": "Sample moms group",
+    "text": "We go to Dr. Gabriel Alvarado in Redmond. Easy to get in and he listens."
+   }
+  ],
+  "focus": [
+   "newborn care",
+   "asthma and allergies",
+   "ADHD"
+  ]
+ },
+ {
+  "id": "p24",
+  "name": "Dr. Leah Castillo",
+  "gender": "female",
+  "specialty": "Pediatrics",
+  "treats_kids": true,
+  "city": "Seattle",
+  "phone": "(206) 555-0124",
+  "telehealth": false,
+  "languages": [
+   "English",
+   "Spanish",
+   "Mandarin"
+  ],
+  "insurance": [
+   "Cigna",
+   "Apple Health",
+   "Regence"
+  ],
+  "accepting_new": true,
+  "next_available": [
+   "2026-10-31",
+   "2026-11-04",
+   "2026-11-12"
+  ],
+  "reviews": [
+   "Never made me feel rushed.",
+   "Short wait, clean office.",
+   "Phone line is always busy.",
+   "Patient and gentle with my child."
+  ],
+  "community_posts": [],
+  "focus": [
+   "ADHD",
+   "teen health",
+   "ear infections"
+  ]
+ },
+ {
+  "id": "p25",
+  "name": "Dr. Parisa Nakamura",
+  "gender": "female",
+  "specialty": "Pediatrics",
+  "treats_kids": true,
+  "city": "Issaquah",
+  "phone": "(425) 555-0125",
+  "telehealth": false,
+  "languages": [
+   "English",
+   "Mandarin",
+   "Korean"
+  ],
+  "insurance": [
+   "Regence",
+   "Premera",
+   "UnitedHealthcare"
+  ],
+  "accepting_new": true,
+  "next_available": [
+   "2026-11-22",
+   "2026-11-23",
+   "2026-12-12"
+  ],
+  "reviews": [
+   "Listened carefully and answered every question.",
+   "Waited 40 minutes in the lobby.",
+   "Portal messages answered fast.",
+   "Great with my kids."
+  ],
+  "community_posts": [],
+  "focus": [
+   "ear infections",
+   "development and autism screening",
+   "eczema"
+  ]
+ },
+ {
+  "id": "p26",
+  "name": "Dr. Luis Vega",
+  "gender": "male",
+  "specialty": "Pediatrics",
+  "treats_kids": true,
+  "city": "Lynnwood",
+  "phone": "(206) 555-0126",
+  "telehealth": false,
+  "languages": [
+   "English"
+  ],
+  "insurance": [
+   "Cigna",
+   "Aetna PPO",
+   "Premera"
+  ],
+  "accepting_new": false,
+  "next_available": [
+   "2027-01-16"
+  ],
+  "reviews": [
+   "Visit felt rushed.",
+   "Seen right on time.",
+   "Front desk is helpful and picks up."
+  ],
+  "community_posts": [],
+  "focus": [
+   "eczema",
+   "growth and nutrition",
+   "newborn care"
+  ]
+ },
+ {
+  "id": "p27",
+  "name": "Dr. Bethany Nakamura",
+  "gender": "female",
+  "specialty": "Pediatrics",
+  "treats_kids": true,
+  "city": "Kent",
+  "phone": "(425) 555-0127",
+  "telehealth": true,
+  "languages": [
+   "English"
+  ],
+  "insurance": [
+   "Aetna PPO",
+   "Cigna",
+   "Premera",
+   "Regence"
+  ],
+  "accepting_new": true,
+  "next_available": [
+   "2026-11-07",
+   "2026-11-12",
+   "2026-11-13"
+  ],
+  "reviews": [
+   "Visit felt rushed.",
+   "Short wait, clean office.",
+   "Portal messages answered fast."
+  ],
+  "community_posts": [
+   {
+    "source": "Sample neighborhood group",
+    "text": "We go to Dr. Bethany Nakamura in Kent. Fine, but visits feel quick."
+   }
+  ],
+  "focus": [
+   "newborn care",
+   "asthma and allergies",
+   "ADHD"
+  ]
+ },
+ {
+  "id": "p28",
+  "name": "Dr. Quinn Wong",
+  "gender": "female",
+  "specialty": "Pediatrics",
+  "treats_kids": true,
+  "city": "Issaquah",
+  "phone": "(206) 555-0128",
+  "telehealth": true,
+  "languages": [
+   "English"
+  ],
+  "insurance": [
+   "Apple Health",
+   "Premera",
+   "Aetna PPO"
+  ],
+  "accepting_new": true,
+  "next_available": [
+   "2026-11-02",
+   "2026-11-06",
+   "2026-11-09"
+  ],
+  "reviews": [
+   "Explained things in plain words.",
+   "Short wait, clean office.",
+   "Phone line is always busy.",
+   "Great with my kids."
+  ],
+  "community_posts": [
+   {
+    "source": "Sample neighborhood group",
+    "text": "We go to Dr. Quinn Wong in Issaquah. Easy to get in and she listens."
+   }
+  ],
+  "focus": [
+   "ADHD",
+   "teen health",
+   "ear infections"
+  ]
+ },
+ {
+  "id": "p29",
+  "name": "Dr. Sanjay Volkov",
+  "gender": "male",
+  "specialty": "Pediatrics",
+  "treats_kids": true,
+  "city": "Issaquah",
+  "phone": "(425) 555-0129",
+  "telehealth": false,
+  "languages": [
+   "English"
+  ],
+  "insurance": [
+   "Premera",
+   "UnitedHealthcare",
+   "Aetna PPO"
+  ],
+  "accepting_new": true,
+  "next_available": [
+   "2026-10-29",
+   "2026-10-31",
+   "2026-11-11"
+  ],
+  "reviews": [
+   "Explained things in plain words.",
+   "Waited 40 minutes in the lobby.",
+   "Front desk is helpful and picks up.",
+   "Great with my kids."
+  ],
+  "community_posts": [
+   {
+    "source": "Sample moms group",
+    "text": "We go to Dr. Sanjay Volkov in Issaquah. Plan on a wait, but he listens."
+   }
+  ],
+  "focus": [
+   "ear infections",
+   "development and autism screening",
+   "eczema"
+  ]
+ },
+ {
+  "id": "p30",
+  "name": "Dr. Wei Farooq",
+  "gender": "male",
+  "specialty": "Pediatrics",
+  "treats_kids": true,
+  "city": "Redmond",
+  "phone": "(206) 555-0130",
+  "telehealth": false,
+  "languages": [
+   "English",
+   "Punjabi"
+  ],
+  "insurance": [
+   "Aetna PPO",
+   "Cigna"
+  ],
+  "accepting_new": true,
+  "next_available": [
+   "2026-10-28",
+   "2026-11-01",
+   "2026-11-02"
+  ],
+  "reviews": [
+   "Never made me feel rushed.",
+   "Seen right on time.",
+   "Portal messages answered fast.",
+   "Great with my kids."
+  ],
+  "community_posts": [
+   {
+    "source": "Sample neighborhood group",
+    "text": "We go to Dr. Wei Farooq in Redmond. Easy to get in and he listens."
+   }
+  ],
+  "focus": [
+   "eczema",
+   "growth and nutrition",
+   "newborn care"
+  ]
+ },
+ {
+  "id": "p31",
+  "name": "Dr. Sanjay Ito",
+  "gender": "male",
+  "specialty": "Pediatrics",
+  "treats_kids": true,
+  "city": "Seattle",
+  "phone": "(206) 555-0131",
+  "telehealth": true,
+  "languages": [
+   "English"
+  ],
+  "insurance": [
+   "Regence",
+   "UnitedHealthcare",
+   "Apple Health",
+   "Cigna"
+  ],
+  "accepting_new": true,
+  "next_available": [
+   "2026-10-30",
+   "2026-10-31",
+   "2026-11-02"
+  ],
+  "reviews": [
+   "Listened carefully and answered every question.",
+   "Short wait, clean office.",
+   "Portal messages answered fast.",
+   "Patient and gentle with my child."
+  ],
+  "community_posts": [
+   {
+    "source": "Sample neighborhood group",
+    "text": "We go to Dr. Sanjay Ito in Seattle. Easy to get in and he listens."
+   }
+  ],
+  "focus": [
+   "newborn care",
+   "asthma and allergies",
+   "ADHD"
+  ]
+ },
+ {
+  "id": "p32",
+  "name": "Dr. Parisa Khan",
+  "gender": "female",
+  "specialty": "Pediatrics",
+  "treats_kids": true,
+  "city": "Kirkland",
+  "phone": "(206) 555-0132",
+  "telehealth": true,
+  "languages": [
+   "English",
+   "Amharic",
+   "Arabic"
+  ],
+  "insurance": [
+   "Aetna PPO",
+   "Cigna"
+  ],
+  "accepting_new": true,
+  "next_available": [
+   "2026-11-18",
+   "2026-12-06",
+   "2026-12-18"
+  ],
+  "reviews": [
+   "Short visit, hard to ask questions.",
+   "Short wait, clean office.",
+   "Portal messages answered fast."
+  ],
+  "community_posts": [
+   {
+    "source": "Sample neighborhood group",
+    "text": "We go to Dr. Parisa Khan in Kirkland. Fine, but visits feel quick."
+   }
+  ],
+  "focus": [
+   "ADHD",
+   "teen health",
+   "ear infections"
+  ]
+ },
+ {
+  "id": "p33",
+  "name": "Dr. Nadia Khan",
+  "gender": "female",
+  "specialty": "Pediatrics",
+  "treats_kids": true,
+  "city": "Renton",
+  "phone": "(425) 555-0133",
+  "telehealth": false,
+  "languages": [
+   "English",
+   "Tagalog",
+   "Hindi"
+  ],
+  "insurance": [
+   "Cigna",
+   "UnitedHealthcare"
+  ],
+  "accepting_new": true,
+  "next_available": [
+   "2026-10-29",
+   "2026-11-13",
+   "2026-11-14"
+  ],
+  "reviews": [
+   "Explained things in plain words.",
+   "Long wait past my appointment time.",
+   "Front desk is helpful and picks up.",
+   "Great with my kids."
+  ],
+  "community_posts": [],
+  "focus": [
+   "ear infections",
+   "development and autism screening",
+   "eczema"
+  ]
+ },
+ {
+  "id": "p34",
+  "name": "Dr. Yuki Fischer",
+  "gender": "female",
+  "specialty": "Pediatrics",
+  "treats_kids": true,
+  "city": "Renton",
+  "phone": "(425) 555-0134",
+  "telehealth": false,
+  "languages": [
+   "English",
+   "Russian"
+  ],
+  "insurance": [
+   "Regence",
+   "UnitedHealthcare",
+   "Apple Health"
+  ],
+  "accepting_new": true,
+  "next_available": [
+   "2026-11-30",
+   "2026-12-11",
+   "2026-12-15"
+  ],
+  "reviews": [
+   "Explained things in plain words.",
+   "Waited 40 minutes in the lobby.",
+   "Front desk is helpful and picks up.",
+   "Great with my kids."
+  ],
+  "community_posts": [
+   {
+    "source": "Sample moms group",
+    "text": "We go to Dr. Yuki Fischer in Renton. Plan on a wait, but she listens."
+   }
+  ],
+  "focus": [
+   "eczema",
+   "growth and nutrition",
+   "newborn care"
+  ]
+ },
+ {
+  "id": "p35",
+  "name": "Dr. Wendy Evans",
+  "gender": "female",
+  "specialty": "Pediatrics",
+  "treats_kids": true,
+  "city": "Lynnwood",
+  "phone": "(206) 555-0135",
+  "telehealth": false,
+  "languages": [
+   "English",
+   "Tagalog"
+  ],
+  "insurance": [
+   "Apple Health",
+   "Aetna PPO",
+   "UnitedHealthcare",
+   "Premera"
+  ],
+  "accepting_new": true,
+  "next_available": [
+   "2026-10-28",
+   "2026-11-12",
+   "2026-11-15"
+  ],
+  "reviews": [
+   "Explained things in plain words.",
+   "Short wait, clean office.",
+   "Hard to reach the front desk.",
+   "Patient and gentle with my child."
+  ],
+  "community_posts": [
+   {
+    "source": "Sample moms group",
+    "text": "We go to Dr. Wendy Evans in Lynnwood. Easy to get in and she listens."
+   }
+  ],
+  "focus": [
+   "newborn care",
+   "asthma and allergies",
+   "ADHD"
+  ]
+ },
+ {
+  "id": "p36",
+  "name": "Dr. Tanya Castillo",
+  "gender": "female",
+  "specialty": "Pediatrics",
+  "treats_kids": true,
+  "city": "Issaquah",
+  "phone": "(425) 555-0136",
+  "telehealth": false,
+  "languages": [
+   "English",
+   "Hindi"
+  ],
+  "insurance": [
+   "Apple Health",
+   "Aetna PPO",
+   "Premera"
+  ],
+  "accepting_new": true,
+  "next_available": [
+   "2026-11-06",
+   "2026-11-08",
+   "2026-11-12"
+  ],
+  "reviews": [
+   "Listened carefully and answered every question.",
+   "Seen right on time.",
+   "Portal messages answered fast.",
+   "Great with my kids.",
+   "Billing was confusing."
+  ],
+  "community_posts": [
+   {
+    "source": "Sample parent group",
+    "text": "We go to Dr. Tanya Castillo in Issaquah. Easy to get in and she listens."
+   }
+  ],
+  "focus": [
+   "ADHD",
+   "teen health",
+   "ear infections"
+  ]
+ },
+ {
+  "id": "p37",
+  "name": "Dr. Parisa Cho",
+  "gender": "female",
+  "specialty": "Pediatrics",
+  "treats_kids": true,
+  "city": "Seattle",
+  "phone": "(206) 555-0137",
+  "telehealth": false,
+  "languages": [
+   "English",
+   "Punjabi"
+  ],
+  "insurance": [
+   "Premera",
+   "Regence",
+   "UnitedHealthcare",
+   "Cigna"
+  ],
+  "accepting_new": false,
+  "next_available": [
+   "2027-01-22"
+  ],
+  "reviews": [
+   "Short visit, hard to ask questions.",
+   "Waited 40 minutes in the lobby.",
+   "Portal messages answered fast."
+  ],
+  "community_posts": [],
+  "focus": [
+   "ear infections",
+   "development and autism screening",
+   "eczema"
+  ]
+ },
+ {
+  "id": "p38",
+  "name": "Dr. Zane Gomez",
+  "gender": "male",
+  "specialty": "Pediatrics",
+  "treats_kids": true,
+  "city": "Bellevue",
+  "phone": "(206) 555-0138",
+  "telehealth": true,
+  "languages": [
+   "English"
+  ],
+  "insurance": [
+   "Regence",
+   "Cigna",
+   "UnitedHealthcare",
+   "Aetna PPO"
+  ],
+  "accepting_new": false,
+  "next_available": [
+   "2027-01-17"
+  ],
+  "reviews": [
+   "Explained things in plain words.",
+   "Seen right on time.",
+   "Front desk is helpful and picks up.",
+   "Patient and gentle with my child.",
+   "Billing was confusing."
+  ],
+  "community_posts": [
+   {
+    "source": "Sample parent group",
+    "text": "We go to Dr. Zane Gomez in Bellevue. Easy to get in and he listens. Not taking new patients anymore though."
+   }
+  ],
+  "focus": [
+   "eczema",
+   "growth and nutrition",
+   "newborn care"
+  ]
+ },
+ {
+  "id": "p39",
+  "name": "Dr. Quinn Nguyen",
+  "gender": "female",
+  "specialty": "Pediatrics",
+  "treats_kids": true,
+  "city": "Bellevue",
+  "phone": "(425) 555-0139",
+  "telehealth": false,
+  "languages": [
+   "English",
+   "Tagalog"
+  ],
+  "insurance": [
+   "Cigna",
+   "Aetna PPO"
+  ],
+  "accepting_new": false,
+  "next_available": [
+   "2027-01-15"
+  ],
+  "reviews": [
+   "Visit felt rushed.",
+   "Long wait past my appointment time.",
+   "Hard to reach the front desk."
+  ],
+  "community_posts": [
+   {
+    "source": "Sample parent group",
+    "text": "We go to Dr. Quinn Nguyen in Bellevue. Fine, but visits feel quick. Not taking new patients anymore though."
+   }
+  ],
+  "focus": [
+   "newborn care",
+   "asthma and allergies",
+   "ADHD"
+  ]
+ },
+ {
+  "id": "p40",
+  "name": "Dr. Hiro Zhou",
+  "gender": "male",
+  "specialty": "Pediatrics",
+  "treats_kids": true,
+  "city": "Issaquah",
+  "phone": "(206) 555-0140",
+  "telehealth": false,
+  "languages": [
+   "English"
+  ],
+  "insurance": [
+   "Aetna PPO",
+   "Regence"
+  ],
+  "accepting_new": true,
+  "next_available": [
+   "2026-11-24",
+   "2026-11-25",
+   "2026-11-28"
+  ],
+  "reviews": [
+   "Listened carefully and answered every question.",
+   "Short wait, clean office.",
+   "Portal messages answered fast.",
+   "Great with my kids."
+  ],
+  "community_posts": [],
+  "focus": [
+   "ADHD",
+   "teen health",
+   "ear infections"
+  ]
+ },
+ {
+  "id": "p41",
+  "name": "Dr. Quinn Haddad",
+  "gender": "female",
+  "specialty": "Pediatrics",
+  "treats_kids": true,
+  "city": "Redmond",
+  "phone": "(206) 555-0141",
+  "telehealth": true,
+  "languages": [
+   "English"
+  ],
+  "insurance": [
+   "Cigna",
+   "Regence",
+   "Apple Health"
+  ],
+  "accepting_new": true,
+  "next_available": [
+   "2026-11-04",
+   "2026-11-13",
+   "2026-11-15"
+  ],
+  "reviews": [
+   "Listened carefully and answered every question.",
+   "Waited 40 minutes in the lobby.",
+   "Front desk is helpful and picks up.",
+   "Patient and gentle with my child."
+  ],
+  "community_posts": [
+   {
+    "source": "Sample neighborhood group",
+    "text": "We go to Dr. Quinn Haddad in Redmond. Plan on a wait, but she listens."
+   }
+  ],
+  "focus": [
+   "ear infections",
+   "development and autism screening",
+   "eczema"
+  ]
+ },
+ {
+  "id": "p42",
+  "name": "Dr. Aisha Abbott",
+  "gender": "female",
+  "specialty": "Pediatrics",
+  "treats_kids": true,
+  "city": "Seattle",
+  "phone": "(206) 555-0142",
+  "telehealth": true,
+  "languages": [
+   "English"
+  ],
+  "insurance": [
+   "Regence",
+   "Apple Health",
+   "Cigna"
+  ],
+  "accepting_new": true,
+  "next_available": [
+   "2026-11-29",
+   "2026-12-03",
+   "2026-12-06"
+  ],
+  "reviews": [
+   "Explained things in plain words.",
+   "Seen right on time.",
+   "Portal messages answered fast.",
+   "Patient and gentle with my child."
+  ],
+  "community_posts": [],
+  "focus": [
+   "eczema",
+   "growth and nutrition",
+   "newborn care"
+  ]
+ },
+ {
+  "id": "p43",
+  "name": "Dr. Adrian Jackson",
+  "gender": "male",
+  "specialty": "Pediatrics",
+  "treats_kids": true,
+  "city": "Seattle",
+  "phone": "(206) 555-0143",
+  "telehealth": true,
+  "languages": [
+   "English"
+  ],
+  "insurance": [
+   "UnitedHealthcare",
+   "Apple Health",
+   "Regence",
+   "Aetna PPO"
+  ],
+  "accepting_new": true,
+  "next_available": [
+   "2026-11-19",
+   "2026-11-26",
+   "2026-12-14"
+  ],
+  "reviews": [
+   "Explained things in plain words.",
+   "Seen right on time.",
+   "Phone line is always busy.",
+   "Great with my kids."
+  ],
+  "community_posts": [
+   {
+    "source": "Sample parent group",
+    "text": "We go to Dr. Adrian Jackson in Seattle. Easy to get in and he listens."
+   }
+  ],
+  "focus": [
+   "newborn care",
+   "asthma and allergies",
+   "ADHD"
+  ]
+ },
+ {
+  "id": "p44",
+  "name": "Dr. Owen Kapoor",
+  "gender": "male",
+  "specialty": "Pediatrics",
+  "treats_kids": true,
+  "city": "Bellevue",
+  "phone": "(206) 555-0144",
+  "telehealth": false,
+  "languages": [
+   "English"
+  ],
+  "insurance": [
+   "Cigna",
+   "Apple Health",
+   "Aetna PPO"
+  ],
+  "accepting_new": true,
+  "next_available": [
+   "2026-11-10",
+   "2026-11-13",
+   "2026-11-14"
+  ],
+  "reviews": [
+   "Visit felt rushed.",
+   "Seen right on time.",
+   "Phone line is always busy."
+  ],
+  "community_posts": [],
+  "focus": [
+   "ADHD",
+   "teen health",
+   "ear infections"
+  ]
+ },
+ {
+  "id": "p45",
+  "name": "Dr. Nikhil Takahashi",
+  "gender": "male",
+  "specialty": "Pediatrics",
+  "treats_kids": true,
+  "city": "Seattle",
+  "phone": "(425) 555-0145",
+  "telehealth": false,
+  "languages": [
+   "English"
+  ],
+  "insurance": [
+   "Apple Health",
+   "Regence"
+  ],
+  "accepting_new": false,
+  "next_available": [
+   "2027-02-20"
+  ],
+  "reviews": [
+   "Never made me feel rushed.",
+   "Seen right on time.",
+   "Portal messages answered fast.",
+   "Great with my kids."
+  ],
+  "community_posts": [
+   {
+    "source": "Sample parent group",
+    "text": "We go to Dr. Nikhil Takahashi in Seattle. Easy to get in and he listens. Not taking new patients anymore though."
+   }
+  ],
+  "focus": [
+   "ear infections",
+   "development and autism screening",
+   "eczema"
+  ]
+ },
+ {
+  "id": "p46",
+  "name": "Dr. Sanjay Lopez",
+  "gender": "male",
+  "specialty": "Pediatrics",
+  "treats_kids": true,
+  "city": "Mercer Island",
+  "phone": "(206) 555-0146",
+  "telehealth": false,
+  "languages": [
+   "English"
+  ],
+  "insurance": [
+   "Apple Health",
+   "Regence",
+   "Aetna PPO"
+  ],
+  "accepting_new": true,
+  "next_available": [
+   "2026-10-29",
+   "2026-11-01",
+   "2026-11-14"
+  ],
+  "reviews": [
+   "Listened carefully and answered every question.",
+   "Short wait, clean office.",
+   "Portal messages answered fast.",
+   "Great with my kids."
+  ],
+  "community_posts": [
+   {
+    "source": "Sample neighborhood group",
+    "text": "We go to Dr. Sanjay Lopez in Mercer Island. Easy to get in and he listens."
+   }
+  ],
+  "focus": [
+   "eczema",
+   "growth and nutrition",
+   "newborn care"
+  ]
+ },
+ {
+  "id": "p47",
+  "name": "Dr. Paul Ellis",
+  "gender": "male",
+  "specialty": "Pediatrics",
+  "treats_kids": true,
+  "city": "Seattle",
+  "phone": "(206) 555-0147",
+  "telehealth": true,
+  "languages": [
+   "English",
+   "Amharic"
+  ],
+  "insurance": [
+   "UnitedHealthcare",
+   "Apple Health",
+   "Regence"
+  ],
+  "accepting_new": true,
+  "next_available": [
+   "2026-11-21",
+   "2026-12-01",
+   "2026-12-19"
+  ],
+  "reviews": [
+   "Visit felt rushed.",
+   "Short wait, clean office.",
+   "Phone line is always busy."
+  ],
+  "community_posts": [],
+  "focus": [
+   "newborn care",
+   "asthma and allergies",
+   "ADHD"
+  ]
+ },
+ {
+  "id": "p48",
+  "name": "Dr. Hiro Quincy",
+  "gender": "male",
+  "specialty": "Pediatrics",
+  "treats_kids": true,
+  "city": "Renton",
+  "phone": "(425) 555-0148",
+  "telehealth": true,
+  "languages": [
+   "English"
+  ],
+  "insurance": [
+   "Cigna",
+   "Apple Health",
+   "UnitedHealthcare",
+   "Regence"
+  ],
+  "accepting_new": true,
+  "next_available": [
+   "2026-10-28",
+   "2026-11-08",
+   "2026-11-12"
+  ],
+  "reviews": [
+   "Listened carefully and answered every question.",
+   "Short wait, clean office.",
+   "Portal messages answered fast.",
+   "Great with my kids."
+  ],
+  "community_posts": [],
+  "focus": [
+   "ADHD",
+   "teen health",
+   "ear infections"
+  ]
+ },
+ {
+  "id": "p49",
+  "name": "Dr. Carlos Ortiz",
+  "gender": "male",
+  "specialty": "Pediatrics",
+  "treats_kids": true,
+  "city": "Lynnwood",
+  "phone": "(425) 555-0149",
+  "telehealth": false,
+  "languages": [
+   "English"
+  ],
+  "insurance": [
+   "Aetna PPO",
+   "Cigna"
+  ],
+  "accepting_new": false,
+  "next_available": [
+   "2027-01-20"
+  ],
+  "reviews": [
+   "Explained things in plain words.",
+   "Seen right on time.",
+   "Phone line is always busy.",
+   "Great with my kids.",
+   "Billing was confusing."
+  ],
+  "community_posts": [
+   {
+    "source": "Sample moms group",
+    "text": "We go to Dr. Carlos Ortiz in Lynnwood. Easy to get in and he listens. Not taking new patients anymore though."
+   }
+  ],
+  "focus": [
+   "ear infections",
+   "development and autism screening",
+   "eczema"
+  ]
+ },
+ {
+  "id": "p50",
+  "name": "Dr. Kavya Xu",
+  "gender": "female",
+  "specialty": "Primary Care",
+  "treats_kids": false,
+  "city": "Redmond",
+  "phone": "(206) 555-0150",
+  "telehealth": false,
+  "languages": [
+   "English",
+   "Amharic"
+  ],
+  "insurance": [
+   "Aetna PPO",
+   "UnitedHealthcare",
+   "Apple Health"
+  ],
+  "accepting_new": true,
+  "next_available": [
+   "2026-10-30",
+   "2026-11-04",
+   "2026-11-14"
+  ],
+  "reviews": [
+   "Explained things in plain words.",
+   "Waited 40 minutes in the lobby.",
+   "Portal messages answered fast."
+  ],
+  "community_posts": [
+   {
+    "source": "Sample moms group",
+    "text": "We go to Dr. Kavya Xu in Redmond. Plan on a wait, but she listens."
+   }
+  ],
+  "focus": [
+   "women's health",
+   "diabetes care",
+   "high blood pressure"
+  ]
+ },
+ {
+  "id": "p51",
+  "name": "Dr. Amara Yadav",
+  "gender": "female",
+  "specialty": "Primary Care",
+  "treats_kids": false,
+  "city": "Renton",
+  "phone": "(425) 555-0151",
+  "telehealth": true,
+  "languages": [
+   "English",
+   "Tagalog"
+  ],
+  "insurance": [
+   "Regence",
+   "Apple Health"
+  ],
+  "accepting_new": true,
+  "next_available": [
+   "2026-12-03",
+   "2026-12-10",
+   "2026-12-15"
+  ],
+  "reviews": [
+   "Never made me feel rushed.",
+   "Seen right on time.",
+   "Portal messages answered fast."
+  ],
+  "community_posts": [],
+  "focus": [
+   "high blood pressure",
+   "preventive care",
+   "weight management"
+  ]
+ },
+ {
+  "id": "p52",
+  "name": "Dr. Andre Yadav",
+  "gender": "male",
+  "specialty": "Primary Care",
+  "treats_kids": false,
+  "city": "Redmond",
+  "phone": "(206) 555-0152",
+  "telehealth": false,
+  "languages": [
+   "English",
+   "Spanish",
+   "Hindi"
+  ],
+  "insurance": [
+   "Apple Health",
+   "Regence"
+  ],
+  "accepting_new": true,
+  "next_available": [
+   "2026-10-30",
+   "2026-11-07",
+   "2026-11-08"
+  ],
+  "reviews": [
+   "Never made me feel rushed.",
+   "Seen right on time.",
+   "Front desk is helpful and picks up."
+  ],
+  "community_posts": [
+   {
+    "source": "Sample neighborhood group",
+    "text": "We go to Dr. Andre Yadav in Redmond. Easy to get in and he listens."
+   }
+  ],
+  "focus": [
+   "weight management",
+   "thyroid",
+   "senior care"
+  ]
+ },
+ {
+  "id": "p53",
+  "name": "Dr. Hana Osei",
+  "gender": "female",
+  "specialty": "Primary Care",
+  "treats_kids": false,
+  "city": "Lynnwood",
+  "phone": "(425) 555-0153",
+  "telehealth": false,
+  "languages": [
+   "English",
+   "Mandarin",
+   "Hindi"
+  ],
+  "insurance": [
+   "Premera",
+   "Aetna PPO",
+   "Cigna"
+  ],
+  "accepting_new": true,
+  "next_available": [
+   "2026-11-05",
+   "2026-11-08",
+   "2026-11-14"
+  ],
+  "reviews": [
+   "Visit felt rushed.",
+   "Short wait, clean office.",
+   "Portal messages answered fast."
+  ],
+  "community_posts": [],
+  "focus": [
+   "senior care",
+   "women's health",
+   "diabetes care"
+  ]
+ },
+ {
+  "id": "p54",
+  "name": "Dr. Ethan Wong",
+  "gender": "male",
+  "specialty": "Primary Care",
+  "treats_kids": false,
+  "city": "Redmond",
+  "phone": "(206) 555-0154",
+  "telehealth": false,
+  "languages": [
+   "English"
+  ],
+  "insurance": [
+   "UnitedHealthcare",
+   "Cigna"
+  ],
+  "accepting_new": true,
+  "next_available": [
+   "2026-10-30",
+   "2026-11-01",
+   "2026-11-05"
+  ],
+  "reviews": [
+   "Listened carefully and answered every question.",
+   "Long wait past my appointment time.",
+   "Portal messages answered fast."
+  ],
+  "community_posts": [
+   {
+    "source": "Sample neighborhood group",
+    "text": "We go to Dr. Ethan Wong in Redmond. Plan on a wait, but he listens."
+   }
+  ],
+  "focus": [
+   "diabetes care",
+   "high blood pressure",
+   "preventive care"
+  ]
+ },
+ {
+  "id": "p55",
+  "name": "Dr. Nikhil Khan",
+  "gender": "male",
+  "specialty": "Primary Care",
+  "treats_kids": false,
+  "city": "Seattle",
+  "phone": "(425) 555-0155",
+  "telehealth": false,
+  "languages": [
+   "English",
+   "Hindi"
+  ],
+  "insurance": [
+   "Cigna",
+   "Apple Health",
+   "UnitedHealthcare"
+  ],
+  "accepting_new": false,
+  "next_available": [
+   "2027-01-21"
+  ],
+  "reviews": [
+   "Short visit, hard to ask questions.",
+   "Seen right on time.",
+   "Phone line is always busy.",
+   "Billing was confusing."
+  ],
+  "community_posts": [
+   {
+    "source": "Sample moms group",
+    "text": "We go to Dr. Nikhil Khan in Seattle. Fine, but visits feel quick. Not taking new patients anymore though."
+   }
+  ],
+  "focus": [
+   "preventive care",
+   "weight management",
+   "thyroid"
+  ]
+ },
+ {
+  "id": "p56",
+  "name": "Dr. Brianna Khan",
+  "gender": "female",
+  "specialty": "Primary Care",
+  "treats_kids": false,
+  "city": "Kirkland",
+  "phone": "(206) 555-0156",
+  "telehealth": true,
+  "languages": [
+   "English"
+  ],
+  "insurance": [
+   "Cigna",
+   "Regence"
+  ],
+  "accepting_new": true,
+  "next_available": [
+   "2026-11-02",
+   "2026-11-06",
+   "2026-11-11"
+  ],
+  "reviews": [
+   "Listened carefully and answered every question.",
+   "Long wait past my appointment time.",
+   "Portal messages answered fast."
+  ],
+  "community_posts": [
+   {
+    "source": "Sample moms group",
+    "text": "We go to Dr. Brianna Khan in Kirkland. Plan on a wait, but she listens."
+   }
+  ],
+  "focus": [
+   "thyroid",
+   "senior care",
+   "women's health"
+  ]
+ },
+ {
+  "id": "p57",
+  "name": "Dr. Nikhil Osei",
+  "gender": "male",
+  "specialty": "Primary Care",
+  "treats_kids": false,
+  "city": "Everett",
+  "phone": "(206) 555-0157",
+  "telehealth": false,
+  "languages": [
+   "English",
+   "Spanish"
+  ],
+  "insurance": [
+   "Premera",
+   "Apple Health",
+   "UnitedHealthcare",
+   "Cigna"
+  ],
+  "accepting_new": true,
+  "next_available": [
+   "2026-12-02",
+   "2026-12-04",
+   "2026-12-18"
+  ],
+  "reviews": [
+   "Explained things in plain words.",
+   "Short wait, clean office.",
+   "Front desk is helpful and picks up."
+  ],
+  "community_posts": [
+   {
+    "source": "Sample parent group",
+    "text": "We go to Dr. Nikhil Osei in Everett. Easy to get in and he listens."
+   }
+  ],
+  "focus": [
+   "women's health",
+   "diabetes care",
+   "high blood pressure"
+  ]
+ },
+ {
+  "id": "p58",
+  "name": "Dr. Zara Mehta",
+  "gender": "female",
+  "specialty": "Primary Care",
+  "treats_kids": false,
+  "city": "Mercer Island",
+  "phone": "(206) 555-0158",
+  "telehealth": false,
+  "languages": [
+   "English"
+  ],
+  "insurance": [
+   "Cigna",
+   "UnitedHealthcare",
+   "Aetna PPO",
+   "Apple Health"
+  ],
+  "accepting_new": false,
+  "next_available": [
+   "2027-02-17"
+  ],
+  "reviews": [
+   "Visit felt rushed.",
+   "Seen right on time.",
+   "Hard to reach the front desk."
+  ],
+  "community_posts": [],
+  "focus": [
+   "high blood pressure",
+   "preventive care",
+   "weight management"
+  ]
+ },
+ {
+  "id": "p59",
+  "name": "Dr. Rafael Khan",
+  "gender": "male",
+  "specialty": "Primary Care",
+  "treats_kids": false,
+  "city": "Kent",
+  "phone": "(425) 555-0159",
+  "telehealth": false,
+  "languages": [
+   "English"
+  ],
+  "insurance": [
+   "Regence",
+   "UnitedHealthcare"
+  ],
+  "accepting_new": true,
+  "next_available": [
+   "2026-12-03",
+   "2026-12-10",
+   "2026-12-15"
+  ],
+  "reviews": [
+   "Short visit, hard to ask questions.",
+   "Short wait, clean office.",
+   "Front desk is helpful and picks up."
+  ],
+  "community_posts": [
+   {
+    "source": "Sample neighborhood group",
+    "text": "We go to Dr. Rafael Khan in Kent. Fine, but visits feel quick."
+   }
+  ],
+  "focus": [
+   "weight management",
+   "thyroid",
+   "senior care"
+  ]
+ },
+ {
+  "id": "p60",
+  "name": "Dr. Paul Cho",
+  "gender": "male",
+  "specialty": "Primary Care",
+  "treats_kids": false,
+  "city": "Redmond",
+  "phone": "(206) 555-0160",
+  "telehealth": false,
+  "languages": [
+   "English"
+  ],
+  "insurance": [
+   "Premera",
+   "Apple Health",
+   "Cigna",
+   "UnitedHealthcare"
+  ],
+  "accepting_new": true,
+  "next_available": [
+   "2026-11-23",
+   "2026-11-26",
+   "2026-12-11"
+  ],
+  "reviews": [
+   "Never made me feel rushed.",
+   "Short wait, clean office.",
+   "Portal messages answered fast."
+  ],
+  "community_posts": [
+   {
+    "source": "Sample neighborhood group",
+    "text": "We go to Dr. Paul Cho in Redmond. Easy to get in and he listens."
+   }
+  ],
+  "focus": [
+   "senior care",
+   "women's health",
+   "diabetes care"
+  ]
+ },
+ {
+  "id": "p61",
+  "name": "Dr. Adrian Quincy",
+  "gender": "male",
+  "specialty": "Primary Care",
+  "treats_kids": false,
+  "city": "Bellevue",
+  "phone": "(425) 555-0161",
+  "telehealth": true,
+  "languages": [
+   "English",
+   "Tagalog"
+  ],
+  "insurance": [
+   "Apple Health",
+   "Premera",
+   "Regence",
+   "UnitedHealthcare"
+  ],
+  "accepting_new": true,
+  "next_available": [
+   "2026-11-17",
+   "2026-11-23",
+   "2026-11-28"
+  ],
+  "reviews": [
+   "Listened carefully and answered every question.",
+   "Short wait, clean office.",
+   "Hard to reach the front desk."
+  ],
+  "community_posts": [
+   {
+    "source": "Sample moms group",
+    "text": "We go to Dr. Adrian Quincy in Bellevue. Easy to get in and he listens."
+   }
+  ],
+  "focus": [
+   "diabetes care",
+   "high blood pressure",
+   "preventive care"
+  ]
+ },
+ {
+  "id": "p62",
+  "name": "Dr. Camila Singh",
+  "gender": "female",
+  "specialty": "Primary Care",
+  "treats_kids": false,
+  "city": "Kirkland",
+  "phone": "(425) 555-0162",
+  "telehealth": false,
+  "languages": [
+   "English"
+  ],
+  "insurance": [
+   "Aetna PPO",
+   "Premera",
+   "Regence"
+  ],
+  "accepting_new": false,
+  "next_available": [
+   "2027-02-15"
+  ],
+  "reviews": [
+   "Never made me feel rushed.",
+   "Seen right on time.",
+   "Front desk is helpful and picks up."
+  ],
+  "community_posts": [
+   {
+    "source": "Sample neighborhood group",
+    "text": "We go to Dr. Camila Singh in Kirkland. Easy to get in and she listens. Not taking new patients anymore though."
+   }
+  ],
+  "focus": [
+   "preventive care",
+   "weight management",
+   "thyroid"
+  ]
+ },
+ {
+  "id": "p63",
+  "name": "Dr. Tanya Kapoor",
+  "gender": "female",
+  "specialty": "Primary Care",
+  "treats_kids": false,
+  "city": "Redmond",
+  "phone": "(206) 555-0163",
+  "telehealth": true,
+  "languages": [
+   "English",
+   "Mandarin"
+  ],
+  "insurance": [
+   "Aetna PPO",
+   "Cigna"
+  ],
+  "accepting_new": true,
+  "next_available": [
+   "2026-12-11",
+   "2026-12-18",
+   "2026-12-19"
+  ],
+  "reviews": [
+   "Listened carefully and answered every question.",
+   "Waited 40 minutes in the lobby.",
+   "Front desk is helpful and picks up."
+  ],
+  "community_posts": [
+   {
+    "source": "Sample neighborhood group",
+    "text": "We go to Dr. Tanya Kapoor in Redmond. Plan on a wait, but she listens."
+   }
+  ],
+  "focus": [
+   "thyroid",
+   "senior care",
+   "women's health"
+  ]
+ },
+ {
+  "id": "p64",
+  "name": "Dr. Bethany Alvarado",
+  "gender": "female",
+  "specialty": "Primary Care",
+  "treats_kids": false,
+  "city": "Mercer Island",
+  "phone": "(425) 555-0164",
+  "telehealth": false,
+  "languages": [
+   "English",
+   "Tagalog"
+  ],
+  "insurance": [
+   "Premera",
+   "Apple Health",
+   "Aetna PPO"
+  ],
+  "accepting_new": true,
+  "next_available": [
+   "2026-11-18",
+   "2026-12-01",
+   "2026-12-12"
+  ],
+  "reviews": [
+   "Short visit, hard to ask questions.",
+   "Seen right on time.",
+   "Front desk is helpful and picks up."
+  ],
+  "community_posts": [],
+  "focus": [
+   "women's health",
+   "diabetes care",
+   "high blood pressure"
+  ]
+ },
+ {
+  "id": "p65",
+  "name": "Dr. Rosa Wong",
+  "gender": "female",
+  "specialty": "Primary Care",
+  "treats_kids": false,
+  "city": "Redmond",
+  "phone": "(206) 555-0165",
+  "telehealth": false,
+  "languages": [
+   "English"
+  ],
+  "insurance": [
+   "Apple Health",
+   "Premera"
+  ],
+  "accepting_new": true,
+  "next_available": [
+   "2026-12-04",
+   "2026-12-07",
+   "2026-12-16"
+  ],
+  "reviews": [
+   "Never made me feel rushed.",
+   "Short wait, clean office.",
+   "Phone line is always busy."
+  ],
+  "community_posts": [],
+  "focus": [
+   "high blood pressure",
+   "preventive care",
+   "weight management"
+  ]
+ },
+ {
+  "id": "p66",
+  "name": "Dr. Kavya Dang",
+  "gender": "female",
+  "specialty": "Primary Care",
+  "treats_kids": false,
+  "city": "Lynnwood",
+  "phone": "(425) 555-0166",
+  "telehealth": false,
+  "languages": [
+   "English",
+   "Vietnamese",
+   "Arabic"
+  ],
+  "insurance": [
+   "Premera",
+   "UnitedHealthcare",
+   "Cigna"
+  ],
+  "accepting_new": true,
+  "next_available": [
+   "2026-11-08",
+   "2026-11-11",
+   "2026-11-15"
+  ],
+  "reviews": [
+   "Listened carefully and answered every question.",
+   "Seen right on time.",
+   "Hard to reach the front desk.",
+   "Billing was confusing."
+  ],
+  "community_posts": [],
+  "focus": [
+   "weight management",
+   "thyroid",
+   "senior care"
+  ]
+ },
+ {
+  "id": "p67",
+  "name": "Dr. Fatima Tran",
+  "gender": "female",
+  "specialty": "Primary Care",
+  "treats_kids": false,
+  "city": "Seattle",
+  "phone": "(206) 555-0167",
+  "telehealth": true,
+  "languages": [
+   "English",
+   "Tagalog"
+  ],
+  "insurance": [
+   "Cigna",
+   "Regence",
+   "Premera",
+   "UnitedHealthcare"
+  ],
+  "accepting_new": true,
+  "next_available": [
+   "2026-10-28",
+   "2026-11-03",
+   "2026-11-07"
+  ],
+  "reviews": [
+   "Never made me feel rushed.",
+   "Long wait past my appointment time.",
+   "Portal messages answered fast."
+  ],
+  "community_posts": [],
+  "focus": [
+   "senior care",
+   "women's health",
+   "diabetes care"
+  ]
+ },
+ {
+  "id": "p68",
+  "name": "Dr. Luis Iyer",
+  "gender": "male",
+  "specialty": "Primary Care",
+  "treats_kids": false,
+  "city": "Bellevue",
+  "phone": "(206) 555-0168",
+  "telehealth": true,
+  "languages": [
+   "English",
+   "Vietnamese",
+   "Amharic"
+  ],
+  "insurance": [
+   "Aetna PPO",
+   "Cigna"
+  ],
+  "accepting_new": true,
+  "next_available": [
+   "2026-11-06",
+   "2026-11-08",
+   "2026-11-11"
+  ],
+  "reviews": [
+   "Visit felt rushed.",
+   "Short wait, clean office.",
+   "Portal messages answered fast."
+  ],
+  "community_posts": [],
+  "focus": [
+   "diabetes care",
+   "high blood pressure",
+   "preventive care"
+  ]
+ },
+ {
+  "id": "p69",
+  "name": "Dr. Quinn Gupta",
+  "gender": "female",
+  "specialty": "Primary Care",
+  "treats_kids": false,
+  "city": "Seattle",
+  "phone": "(425) 555-0169",
+  "telehealth": false,
+  "languages": [
+   "English",
+   "Tagalog"
+  ],
+  "insurance": [
+   "UnitedHealthcare",
+   "Aetna PPO",
+   "Cigna"
+  ],
+  "accepting_new": false,
+  "next_available": [
+   "2027-02-17"
+  ],
+  "reviews": [
+   "Explained things in plain words.",
+   "Seen right on time.",
+   "Hard to reach the front desk."
+  ],
+  "community_posts": [],
+  "focus": [
+   "preventive care",
+   "weight management",
+   "thyroid"
+  ]
+ },
+ {
+  "id": "p70",
+  "name": "Dr. Kavya Evans",
+  "gender": "female",
+  "specialty": "Primary Care",
+  "treats_kids": false,
+  "city": "Issaquah",
+  "phone": "(425) 555-0170",
+  "telehealth": false,
+  "languages": [
+   "English"
+  ],
+  "insurance": [
+   "Apple Health",
+   "Regence",
+   "Aetna PPO"
+  ],
+  "accepting_new": true,
+  "next_available": [
+   "2026-10-28",
+   "2026-10-29",
+   "2026-11-04"
+  ],
+  "reviews": [
+   "Explained things in plain words.",
+   "Short wait, clean office.",
+   "Portal messages answered fast."
+  ],
+  "community_posts": [],
+  "focus": [
+   "thyroid",
+   "senior care",
+   "women's health"
+  ]
+ },
+ {
+  "id": "p71",
+  "name": "Dr. Isabel Vega",
+  "gender": "female",
+  "specialty": "Primary Care",
+  "treats_kids": false,
+  "city": "Bellevue",
+  "phone": "(206) 555-0171",
+  "telehealth": true,
+  "languages": [
+   "English",
+   "Amharic"
+  ],
+  "insurance": [
+   "Apple Health",
+   "Premera"
+  ],
+  "accepting_new": true,
+  "next_available": [
+   "2026-11-03",
+   "2026-11-04",
+   "2026-11-13"
+  ],
+  "reviews": [
+   "Short visit, hard to ask questions.",
+   "Seen right on time.",
+   "Front desk is helpful and picks up."
+  ],
+  "community_posts": [],
+  "focus": [
+   "women's health",
+   "diabetes care",
+   "high blood pressure"
+  ]
+ },
+ {
+  "id": "p72",
+  "name": "Dr. Victor Lindqvist",
+  "gender": "male",
+  "specialty": "Primary Care",
+  "treats_kids": false,
+  "city": "Issaquah",
+  "phone": "(425) 555-0172",
+  "telehealth": false,
+  "languages": [
+   "English"
+  ],
+  "insurance": [
+   "UnitedHealthcare",
+   "Aetna PPO",
+   "Regence"
+  ],
+  "accepting_new": true,
+  "next_available": [
+   "2026-11-08",
+   "2026-11-10",
+   "2026-11-14"
+  ],
+  "reviews": [
+   "Never made me feel rushed.",
+   "Waited 40 minutes in the lobby.",
+   "Phone line is always busy."
+  ],
+  "community_posts": [],
+  "focus": [
+   "high blood pressure",
+   "preventive care",
+   "weight management"
+  ]
+ },
+ {
+  "id": "p73",
+  "name": "Dr. Sanjay Khan",
+  "gender": "male",
+  "specialty": "Primary Care",
+  "treats_kids": false,
+  "city": "Mercer Island",
+  "phone": "(425) 555-0173",
+  "telehealth": false,
+  "languages": [
+   "English",
+   "Russian"
+  ],
+  "insurance": [
+   "Premera",
+   "Aetna PPO"
+  ],
+  "accepting_new": true,
+  "next_available": [
+   "2026-10-30",
+   "2026-11-07",
+   "2026-11-09"
+  ],
+  "reviews": [
+   "Never made me feel rushed.",
+   "Long wait past my appointment time.",
+   "Front desk is helpful and picks up.",
+   "Billing was confusing."
+  ],
+  "community_posts": [
+   {
+    "source": "Sample parent group",
+    "text": "We go to Dr. Sanjay Khan in Mercer Island. Plan on a wait, but he listens."
+   }
+  ],
+  "focus": [
+   "weight management",
+   "thyroid",
+   "senior care"
+  ]
+ },
+ {
+  "id": "p74",
+  "name": "Dr. Valerie Lopez",
+  "gender": "female",
+  "specialty": "Dermatology",
+  "treats_kids": false,
+  "city": "Everett",
+  "phone": "(425) 555-0174",
+  "telehealth": false,
+  "languages": [
+   "English"
+  ],
+  "insurance": [
+   "Premera",
+   "Cigna"
+  ],
+  "accepting_new": true,
+  "next_available": [
+   "2026-11-03",
+   "2026-11-08",
+   "2026-11-15"
+  ],
+  "reviews": [
+   "Listened carefully and answered every question.",
+   "Short wait, clean office.",
+   "Front desk is helpful and picks up."
+  ],
+  "community_posts": [],
+  "focus": [
+   "hair loss",
+   "rashes",
+   "eczema"
+  ]
+ },
+ {
+  "id": "p75",
+  "name": "Dr. Kiran Alvarado",
+  "gender": "male",
+  "specialty": "Dermatology",
+  "treats_kids": false,
+  "city": "Seattle",
+  "phone": "(425) 555-0175",
+  "telehealth": false,
+  "languages": [
+   "English"
+  ],
+  "insurance": [
+   "Apple Health",
+   "Regence",
+   "Cigna"
+  ],
+  "accepting_new": true,
+  "next_available": [
+   "2026-10-29",
+   "2026-11-03",
+   "2026-11-07"
+  ],
+  "reviews": [
+   "Listened carefully and answered every question.",
+   "Waited 40 minutes in the lobby.",
+   "Front desk is helpful and picks up."
+  ],
+  "community_posts": [],
+  "focus": [
+   "eczema",
+   "acne",
+   "psoriasis"
+  ]
+ },
+ {
+  "id": "p76",
+  "name": "Dr. Rafael Nakamura",
+  "gender": "male",
+  "specialty": "Dermatology",
+  "treats_kids": true,
+  "city": "Everett",
+  "phone": "(206) 555-0176",
+  "telehealth": false,
+  "languages": [
+   "English"
+  ],
+  "insurance": [
+   "Aetna PPO",
+   "Premera"
+  ],
+  "accepting_new": true,
+  "next_available": [
+   "2026-11-18",
+   "2026-12-03",
+   "2026-12-05"
+  ],
+  "reviews": [
+   "Explained things in plain words.",
+   "Short wait, clean office.",
+   "Portal messages answered fast.",
+   "Patient and gentle with my child."
+  ],
+  "community_posts": [],
+  "focus": [
+   "psoriasis",
+   "skin cancer checks",
+   "hair loss"
+  ]
+ },
+ {
+  "id": "p77",
+  "name": "Dr. Quinn Volkov",
+  "gender": "female",
+  "specialty": "Dermatology",
+  "treats_kids": false,
+  "city": "Bellevue",
+  "phone": "(206) 555-0177",
+  "telehealth": true,
+  "languages": [
+   "English"
+  ],
+  "insurance": [
+   "Aetna PPO",
+   "Regence"
+  ],
+  "accepting_new": true,
+  "next_available": [
+   "2026-10-28",
+   "2026-11-10",
+   "2026-11-11"
+  ],
+  "reviews": [
+   "Listened carefully and answered every question.",
+   "Short wait, clean office.",
+   "Portal messages answered fast."
+  ],
+  "community_posts": [],
+  "focus": [
+   "hair loss",
+   "rashes",
+   "eczema"
+  ]
+ },
+ {
+  "id": "p78",
+  "name": "Dr. Aisha Gupta",
+  "gender": "female",
+  "specialty": "Dermatology",
+  "treats_kids": false,
+  "city": "Kent",
+  "phone": "(206) 555-0178",
+  "telehealth": false,
+  "languages": [
+   "English",
+   "Mandarin",
+   "Punjabi"
+  ],
+  "insurance": [
+   "Regence",
+   "Cigna",
+   "Apple Health",
+   "Premera"
+  ],
+  "accepting_new": true,
+  "next_available": [
+   "2026-10-30",
+   "2026-11-12",
+   "2026-11-15"
+  ],
+  "reviews": [
+   "Explained things in plain words.",
+   "Seen right on time.",
+   "Portal messages answered fast."
+  ],
+  "community_posts": [],
+  "focus": [
+   "eczema",
+   "acne",
+   "psoriasis"
+  ]
+ },
+ {
+  "id": "p79",
+  "name": "Dr. Olivia Jensen",
+  "gender": "female",
+  "specialty": "Dermatology",
+  "treats_kids": true,
+  "city": "Seattle",
+  "phone": "(206) 555-0179",
+  "telehealth": true,
+  "languages": [
+   "English",
+   "Korean",
+   "Vietnamese"
+  ],
+  "insurance": [
+   "Regence",
+   "Cigna",
+   "UnitedHealthcare"
+  ],
+  "accepting_new": false,
+  "next_available": [
+   "2027-01-11"
+  ],
+  "reviews": [
+   "Listened carefully and answered every question.",
+   "Short wait, clean office.",
+   "Front desk is helpful and picks up.",
+   "Great with my kids.",
+   "Billing was confusing."
+  ],
+  "community_posts": [],
+  "focus": [
+   "psoriasis",
+   "skin cancer checks",
+   "hair loss"
+  ]
+ },
+ {
+  "id": "p80",
+  "name": "Dr. Nadia Santos",
+  "gender": "female",
+  "specialty": "Cardiology",
+  "treats_kids": false,
+  "city": "Bothell",
+  "phone": "(425) 555-0180",
+  "telehealth": false,
+  "languages": [
+   "English"
+  ],
+  "insurance": [
+   "Apple Health",
+   "Cigna"
+  ],
+  "accepting_new": true,
+  "next_available": [
+   "2026-10-29",
+   "2026-11-03",
+   "2026-11-11"
+  ],
+  "reviews": [
+   "Listened carefully and answered every question.",
+   "Seen right on time.",
+   "Portal messages answered fast.",
+   "Billing was confusing."
+  ],
+  "community_posts": [],
+  "focus": [
+   "chest pain evaluation",
+   "heart rhythm",
+   "high blood pressure"
+  ]
+ },
+ {
+  "id": "p81",
+  "name": "Dr. Olivia Abbott",
+  "gender": "female",
+  "specialty": "Cardiology",
+  "treats_kids": false,
+  "city": "Seattle",
+  "phone": "(425) 555-0181",
+  "telehealth": true,
+  "languages": [
+   "English"
+  ],
+  "insurance": [
+   "Apple Health",
+   "Aetna PPO",
+   "UnitedHealthcare"
+  ],
+  "accepting_new": true,
+  "next_available": [
+   "2026-11-01",
+   "2026-11-03",
+   "2026-11-09"
+  ],
+  "reviews": [
+   "Explained things in plain words.",
+   "Seen right on time.",
+   "Hard to reach the front desk."
+  ],
+  "community_posts": [],
+  "focus": [
+   "high blood pressure",
+   "cholesterol",
+   "heart failure"
+  ]
+ },
+ {
+  "id": "p82",
+  "name": "Dr. Rafael Gomez",
+  "gender": "male",
+  "specialty": "Cardiology",
+  "treats_kids": false,
+  "city": "Bothell",
+  "phone": "(206) 555-0182",
+  "telehealth": false,
+  "languages": [
+   "English"
+  ],
+  "insurance": [
+   "Apple Health",
+   "Cigna",
+   "Aetna PPO"
+  ],
+  "accepting_new": true,
+  "next_available": [
+   "2026-11-27",
+   "2026-12-11",
+   "2026-12-16"
+  ],
+  "reviews": [
+   "Listened carefully and answered every question.",
+   "Short wait, clean office.",
+   "Front desk is helpful and picks up."
+  ],
+  "community_posts": [],
+  "focus": [
+   "heart failure",
+   "chest pain evaluation",
+   "heart rhythm"
+  ]
+ },
+ {
+  "id": "p83",
+  "name": "Dr. Isabel Jackson",
+  "gender": "female",
+  "specialty": "Cardiology",
+  "treats_kids": false,
+  "city": "Renton",
+  "phone": "(425) 555-0183",
+  "telehealth": false,
+  "languages": [
+   "English",
+   "Arabic"
+  ],
+  "insurance": [
+   "Regence",
+   "Apple Health",
+   "UnitedHealthcare",
+   "Cigna"
+  ],
+  "accepting_new": true,
+  "next_available": [
+   "2026-11-08",
+   "2026-11-11",
+   "2026-11-12"
+  ],
+  "reviews": [
+   "Listened carefully and answered every question.",
+   "Seen right on time.",
+   "Phone line is always busy."
+  ],
+  "community_posts": [],
+  "focus": [
+   "heart rhythm",
+   "high blood pressure",
+   "cholesterol"
+  ]
+ },
+ {
+  "id": "p84",
+  "name": "Dr. Brianna Tran",
+  "gender": "female",
+  "specialty": "Cardiology",
+  "treats_kids": false,
+  "city": "Kirkland",
+  "phone": "(425) 555-0184",
+  "telehealth": false,
+  "languages": [
+   "English",
+   "Amharic"
+  ],
+  "insurance": [
+   "Apple Health",
+   "Premera",
+   "Aetna PPO"
+  ],
+  "accepting_new": true,
+  "next_available": [
+   "2026-10-30",
+   "2026-11-09",
+   "2026-11-10"
+  ],
+  "reviews": [
+   "Listened carefully and answered every question.",
+   "Short wait, clean office.",
+   "Portal messages answered fast."
+  ],
+  "community_posts": [],
+  "focus": [
+   "cholesterol",
+   "heart failure",
+   "chest pain evaluation"
+  ]
+ },
+ {
+  "id": "p85",
+  "name": "Dr. Paul Lopez",
+  "gender": "male",
+  "specialty": "Neurology",
+  "treats_kids": false,
+  "city": "Bellevue",
+  "phone": "(206) 555-0185",
+  "telehealth": false,
+  "languages": [
+   "English",
+   "Vietnamese",
+   "Amharic"
+  ],
+  "insurance": [
+   "Aetna PPO",
+   "Cigna",
+   "Apple Health",
+   "Premera"
+  ],
+  "accepting_new": true,
+  "next_available": [
+   "2026-11-24",
+   "2026-11-30",
+   "2026-12-03"
+  ],
+  "reviews": [
+   "Explained things in plain words.",
+   "Seen right on time.",
+   "Front desk is helpful and picks up."
+  ],
+  "community_posts": [],
+  "focus": [
+   "sleep disorders",
+   "migraines",
+   "epilepsy"
+  ]
+ },
+ {
+  "id": "p86",
+  "name": "Dr. Jasmine Gupta",
+  "gender": "female",
+  "specialty": "Neurology",
+  "treats_kids": false,
+  "city": "Redmond",
+  "phone": "(425) 555-0186",
+  "telehealth": true,
+  "languages": [
+   "English",
+   "Spanish"
+  ],
+  "insurance": [
+   "UnitedHealthcare",
+   "Premera",
+   "Aetna PPO"
+  ],
+  "accepting_new": true,
+  "next_available": [
+   "2026-11-02",
+   "2026-11-04",
+   "2026-11-10"
+  ],
+  "reviews": [
+   "Explained things in plain words.",
+   "Short wait, clean office.",
+   "Portal messages answered fast."
+  ],
+  "community_posts": [],
+  "focus": [
+   "epilepsy",
+   "memory",
+   "nerve pain"
+  ]
+ },
+ {
+  "id": "p87",
+  "name": "Dr. Yuki Xu",
+  "gender": "female",
+  "specialty": "Neurology",
+  "treats_kids": false,
+  "city": "Everett",
+  "phone": "(425) 555-0187",
+  "telehealth": false,
+  "languages": [
+   "English"
+  ],
+  "insurance": [
+   "Cigna",
+   "Apple Health",
+   "Premera",
+   "UnitedHealthcare"
+  ],
+  "accepting_new": true,
+  "next_available": [
+   "2026-11-04",
+   "2026-11-11",
+   "2026-11-14"
+  ],
+  "reviews": [
+   "Short visit, hard to ask questions.",
+   "Waited 40 minutes in the lobby.",
+   "Front desk is helpful and picks up.",
+   "Billing was confusing."
+  ],
+  "community_posts": [],
+  "focus": [
+   "nerve pain",
+   "sleep disorders",
+   "migraines"
+  ]
+ },
+ {
+  "id": "p88",
+  "name": "Dr. Chen Park",
+  "gender": "male",
+  "specialty": "Neurology",
+  "treats_kids": false,
+  "city": "Redmond",
+  "phone": "(206) 555-0188",
+  "telehealth": false,
+  "languages": [
+   "English"
+  ],
+  "insurance": [
+   "UnitedHealthcare",
+   "Aetna PPO",
+   "Cigna"
+  ],
+  "accepting_new": false,
+  "next_available": [
+   "2027-02-21"
+  ],
+  "reviews": [
+   "Never made me feel rushed.",
+   "Short wait, clean office.",
+   "Portal messages answered fast."
+  ],
+  "community_posts": [],
+  "focus": [
+   "migraines",
+   "epilepsy",
+   "memory"
+  ]
+ },
+ {
+  "id": "p89",
+  "name": "Dr. Hana Alvarado",
+  "gender": "female",
+  "specialty": "Orthopedics",
+  "treats_kids": false,
+  "city": "Redmond",
+  "phone": "(206) 555-0189",
+  "telehealth": false,
+  "languages": [
+   "English"
+  ],
+  "insurance": [
+   "Aetna PPO",
+   "Regence",
+   "Apple Health",
+   "Cigna"
+  ],
+  "accepting_new": true,
+  "next_available": [
+   "2026-10-28",
+   "2026-10-31",
+   "2026-11-15"
+  ],
+  "reviews": [
+   "Listened carefully and answered every question.",
+   "Seen right on time.",
+   "Portal messages answered fast."
+  ],
+  "community_posts": [],
+  "focus": [
+   "knee",
+   "hip",
+   "shoulder"
+  ]
+ },
+ {
+  "id": "p90",
+  "name": "Dr. Aisha Jackson",
+  "gender": "female",
+  "specialty": "Orthopedics",
+  "treats_kids": true,
+  "city": "Everett",
+  "phone": "(206) 555-0190",
+  "telehealth": false,
+  "languages": [
+   "English",
+   "Vietnamese",
+   "Mandarin"
+  ],
+  "insurance": [
+   "UnitedHealthcare",
+   "Aetna PPO",
+   "Premera"
+  ],
+  "accepting_new": true,
+  "next_available": [
+   "2026-11-18",
+   "2026-11-20",
+   "2026-12-05"
+  ],
+  "reviews": [
+   "Explained things in plain words.",
+   "Short wait, clean office.",
+   "Portal messages answered fast.",
+   "Great with my kids."
+  ],
+  "community_posts": [],
+  "focus": [
+   "shoulder",
+   "spine",
+   "hand and wrist"
+  ]
+ },
+ {
+  "id": "p91",
+  "name": "Dr. Fatima Alvarado",
+  "gender": "female",
+  "specialty": "Orthopedics",
+  "treats_kids": false,
+  "city": "Issaquah",
+  "phone": "(425) 555-0191",
+  "telehealth": false,
+  "languages": [
+   "English"
+  ],
+  "insurance": [
+   "Regence",
+   "Premera",
+   "Aetna PPO",
+   "UnitedHealthcare"
+  ],
+  "accepting_new": true,
+  "next_available": [
+   "2026-10-28",
+   "2026-11-03",
+   "2026-11-13"
+  ],
+  "reviews": [
+   "Listened carefully and answered every question.",
+   "Seen right on time.",
+   "Portal messages answered fast."
+  ],
+  "community_posts": [],
+  "focus": [
+   "hand and wrist",
+   "foot and ankle",
+   "knee"
+  ]
+ },
+ {
+  "id": "p92",
+  "name": "Dr. Mei Hughes",
+  "gender": "female",
+  "specialty": "Orthopedics",
+  "treats_kids": false,
+  "city": "Everett",
+  "phone": "(206) 555-0192",
+  "telehealth": false,
+  "languages": [
+   "English"
+  ],
+  "insurance": [
+   "UnitedHealthcare",
+   "Cigna",
+   "Apple Health"
+  ],
+  "accepting_new": false,
+  "next_available": [
+   "2027-02-13"
+  ],
+  "reviews": [
+   "Explained things in plain words.",
+   "Long wait past my appointment time.",
+   "Portal messages answered fast."
+  ],
+  "community_posts": [],
+  "focus": [
+   "knee",
+   "hip",
+   "shoulder"
+  ]
+ },
+ {
+  "id": "p93",
+  "name": "Dr. Mateo Yadav",
+  "gender": "male",
+  "specialty": "Orthopedics",
+  "treats_kids": false,
+  "city": "Bellevue",
+  "phone": "(425) 555-0193",
+  "telehealth": false,
+  "languages": [
+   "English",
+   "Mandarin"
+  ],
+  "insurance": [
+   "Regence",
+   "Premera",
+   "Cigna"
+  ],
+  "accepting_new": true,
+  "next_available": [
+   "2026-10-30",
+   "2026-11-03",
+   "2026-11-11"
+  ],
+  "reviews": [
+   "Visit felt rushed.",
+   "Short wait, clean office.",
+   "Front desk is helpful and picks up."
+  ],
+  "community_posts": [],
+  "focus": [
+   "shoulder",
+   "spine",
+   "hand and wrist"
+  ]
+ },
+ {
+  "id": "p94",
+  "name": "Dr. Felix Moreno",
+  "gender": "male",
+  "specialty": "Orthopedics",
+  "treats_kids": false,
+  "city": "Renton",
+  "phone": "(425) 555-0194",
+  "telehealth": true,
+  "languages": [
+   "English"
+  ],
+  "insurance": [
+   "Cigna",
+   "Aetna PPO",
+   "Apple Health"
+  ],
+  "accepting_new": true,
+  "next_available": [
+   "2026-10-28",
+   "2026-11-06",
+   "2026-11-15"
+  ],
+  "reviews": [
+   "Explained things in plain words.",
+   "Short wait, clean office.",
+   "Phone line is always busy."
+  ],
+  "community_posts": [],
+  "focus": [
+   "hand and wrist",
+   "foot and ankle",
+   "knee"
+  ]
+ },
+ {
+  "id": "p95",
+  "name": "Dr. Jamal Singh",
+  "gender": "male",
+  "specialty": "Orthopedics",
+  "treats_kids": false,
+  "city": "Mercer Island",
+  "phone": "(425) 555-0195",
+  "telehealth": true,
+  "languages": [
+   "English"
+  ],
+  "insurance": [
+   "Premera",
+   "Apple Health",
+   "Regence"
+  ],
+  "accepting_new": true,
+  "next_available": [
+   "2026-10-28",
+   "2026-11-02",
+   "2026-11-13"
+  ],
+  "reviews": [
+   "Visit felt rushed.",
+   "Seen right on time.",
+   "Phone line is always busy."
+  ],
+  "community_posts": [],
+  "focus": [
+   "knee",
+   "hip",
+   "shoulder"
+  ]
+ },
+ {
+  "id": "p96",
+  "name": "Dr. Dev Park",
+  "gender": "male",
+  "specialty": "Sports Medicine",
+  "treats_kids": true,
+  "city": "Issaquah",
+  "phone": "(425) 555-0196",
+  "telehealth": true,
+  "languages": [
+   "English",
+   "Korean",
+   "Mandarin"
+  ],
+  "insurance": [
+   "Cigna",
+   "Premera",
+   "Aetna PPO",
+   "Apple Health"
+  ],
+  "accepting_new": true,
+  "next_available": [
+   "2026-11-05",
+   "2026-11-06",
+   "2026-11-10"
+  ],
+  "reviews": [
+   "Never made me feel rushed.",
+   "Long wait past my appointment time.",
+   "Portal messages answered fast.",
+   "Great with my kids."
+  ],
+  "community_posts": [],
+  "focus": [
+   "running injuries",
+   "ACL",
+   "concussion"
+  ]
+ },
+ {
+  "id": "p97",
+  "name": "Dr. Sana Nakamura",
+  "gender": "female",
+  "specialty": "Sports Medicine",
+  "treats_kids": true,
+  "city": "Renton",
+  "phone": "(206) 555-0197",
+  "telehealth": false,
+  "languages": [
+   "English"
+  ],
+  "insurance": [
+   "Aetna PPO",
+   "Cigna",
+   "Premera"
+  ],
+  "accepting_new": true,
+  "next_available": [
+   "2026-11-01",
+   "2026-11-05",
+   "2026-11-11"
+  ],
+  "reviews": [
+   "Visit felt rushed.",
+   "Short wait, clean office.",
+   "Portal messages answered fast."
+  ],
+  "community_posts": [],
+  "focus": [
+   "concussion",
+   "tendon injuries",
+   "youth sports"
+  ]
+ },
+ {
+  "id": "p98",
+  "name": "Dr. Carlos Gupta",
+  "gender": "male",
+  "specialty": "Sports Medicine",
+  "treats_kids": false,
+  "city": "Seattle",
+  "phone": "(206) 555-0198",
+  "telehealth": true,
+  "languages": [
+   "English",
+   "Russian",
+   "Mandarin"
+  ],
+  "insurance": [
+   "UnitedHealthcare",
+   "Aetna PPO",
+   "Regence"
+  ],
+  "accepting_new": true,
+  "next_available": [
+   "2026-11-02",
+   "2026-11-06",
+   "2026-11-07"
+  ],
+  "reviews": [
+   "Short visit, hard to ask questions.",
+   "Short wait, clean office.",
+   "Phone line is always busy."
+  ],
+  "community_posts": [],
+  "focus": [
+   "youth sports",
+   "running injuries",
+   "ACL"
+  ]
+ },
+ {
+  "id": "p99",
+  "name": "Dr. Gabriel Nakamura",
+  "gender": "male",
+  "specialty": "Sports Medicine",
+  "treats_kids": true,
+  "city": "Seattle",
+  "phone": "(206) 555-0199",
+  "telehealth": false,
+  "languages": [
+   "English",
+   "Korean"
+  ],
+  "insurance": [
+   "Premera",
+   "Apple Health",
+   "Aetna PPO",
+   "Cigna"
+  ],
+  "accepting_new": true,
+  "next_available": [
+   "2026-11-01",
+   "2026-11-11",
+   "2026-11-15"
+  ],
+  "reviews": [
+   "Short visit, hard to ask questions.",
+   "Short wait, clean office.",
+   "Portal messages answered fast."
+  ],
+  "community_posts": [],
+  "focus": [
+   "ACL",
+   "concussion",
+   "tendon injuries"
+  ]
+ },
+ {
+  "id": "p100",
+  "name": "Dr. Carlos Jensen",
+  "gender": "male",
+  "specialty": "Physical Therapy",
+  "treats_kids": false,
+  "city": "Seattle",
+  "phone": "(425) 555-0100",
+  "telehealth": false,
+  "languages": [
+   "English",
+   "Russian",
+   "Spanish"
+  ],
+  "insurance": [
+   "Premera",
+   "Regence",
+   "Aetna PPO"
+  ],
+  "accepting_new": true,
+  "next_available": [
+   "2026-11-19",
+   "2026-11-22",
+   "2026-12-10"
+  ],
+  "reviews": [
+   "Explained things in plain words.",
+   "Short wait, clean office.",
+   "Front desk is helpful and picks up."
+  ],
+  "community_posts": [],
+  "focus": [
+   "balance",
+   "back pain",
+   "post-surgery rehab"
+  ]
+ },
+ {
+  "id": "p101",
+  "name": "Dr. Aisha Singh",
+  "gender": "female",
+  "specialty": "Physical Therapy",
+  "treats_kids": true,
+  "city": "Issaquah",
+  "phone": "(206) 555-0101",
+  "telehealth": false,
+  "languages": [
+   "English"
+  ],
+  "insurance": [
+   "Cigna",
+   "Apple Health"
+  ],
+  "accepting_new": false,
+  "next_available": [
+   "2027-01-25"
+  ],
+  "reviews": [
+   "Never made me feel rushed.",
+   "Seen right on time.",
+   "Phone line is always busy.",
+   "Great with my kids."
+  ],
+  "community_posts": [],
+  "focus": [
+   "post-surgery rehab",
+   "sports injury",
+   "pelvic floor"
+  ]
+ },
+ {
+  "id": "p102",
+  "name": "Dr. Andre Mehta",
+  "gender": "male",
+  "specialty": "Physical Therapy",
+  "treats_kids": false,
+  "city": "Kent",
+  "phone": "(425) 555-0102",
+  "telehealth": true,
+  "languages": [
+   "English",
+   "Mandarin"
+  ],
+  "insurance": [
+   "UnitedHealthcare",
+   "Aetna PPO"
+  ],
+  "accepting_new": true,
+  "next_available": [
+   "2026-11-01",
+   "2026-11-04",
+   "2026-11-13"
+  ],
+  "reviews": [
+   "Short visit, hard to ask questions.",
+   "Waited 40 minutes in the lobby.",
+   "Phone line is always busy."
+  ],
+  "community_posts": [],
+  "focus": [
+   "pelvic floor",
+   "balance",
+   "back pain"
+  ]
+ },
+ {
+  "id": "p103",
+  "name": "Dr. Parisa Kapoor",
+  "gender": "female",
+  "specialty": "Physical Therapy",
+  "treats_kids": true,
+  "city": "Seattle",
+  "phone": "(425) 555-0103",
+  "telehealth": false,
+  "languages": [
+   "English"
+  ],
+  "insurance": [
+   "Premera",
+   "Regence",
+   "Apple Health",
+   "Cigna"
+  ],
+  "accepting_new": true,
+  "next_available": [
+   "2026-11-26",
+   "2026-11-29",
+   "2026-12-08"
+  ],
+  "reviews": [
+   "Visit felt rushed.",
+   "Seen right on time.",
+   "Hard to reach the front desk."
+  ],
+  "community_posts": [],
+  "focus": [
+   "back pain",
+   "post-surgery rehab",
+   "sports injury"
+  ]
+ },
+ {
+  "id": "p104",
+  "name": "Dr. Aisha Bennett",
+  "gender": "female",
+  "specialty": "Physical Therapy",
+  "treats_kids": false,
+  "city": "Bellevue",
+  "phone": "(206) 555-0104",
+  "telehealth": true,
+  "languages": [
+   "English",
+   "Tagalog"
+  ],
+  "insurance": [
+   "UnitedHealthcare",
+   "Cigna",
+   "Regence"
+  ],
+  "accepting_new": true,
+  "next_available": [
+   "2026-10-31",
+   "2026-11-03",
+   "2026-11-12"
+  ],
+  "reviews": [
+   "Never made me feel rushed.",
+   "Short wait, clean office.",
+   "Hard to reach the front desk."
+  ],
+  "community_posts": [],
+  "focus": [
+   "sports injury",
+   "pelvic floor",
+   "balance"
+  ]
+ },
+ {
+  "id": "p105",
+  "name": "Dr. Amara Bennett",
+  "gender": "female",
+  "specialty": "Physical Therapy",
+  "treats_kids": true,
+  "city": "Seattle",
+  "phone": "(425) 555-0105",
+  "telehealth": true,
+  "languages": [
+   "English"
+  ],
+  "insurance": [
+   "Regence",
+   "Premera",
+   "Cigna"
+  ],
+  "accepting_new": true,
+  "next_available": [
+   "2026-11-26",
+   "2026-12-08",
+   "2026-12-15"
+  ],
+  "reviews": [
+   "Never made me feel rushed.",
+   "Waited 40 minutes in the lobby.",
+   "Portal messages answered fast.",
+   "Great with my kids."
+  ],
+  "community_posts": [],
+  "focus": [
+   "balance",
+   "back pain",
+   "post-surgery rehab"
+  ]
+ },
+ {
+  "id": "p106",
+  "name": "Dr. Jasmine Ramirez",
+  "gender": "female",
+  "specialty": "Gastroenterology",
+  "treats_kids": false,
+  "city": "Everett",
+  "phone": "(425) 555-0106",
+  "telehealth": false,
+  "languages": [
+   "English",
+   "Mandarin"
+  ],
+  "insurance": [
+   "Regence",
+   "Premera",
+   "Apple Health",
+   "Aetna PPO"
+  ],
+  "accepting_new": true,
+  "next_available": [
+   "2026-11-01",
+   "2026-11-02",
+   "2026-11-08"
+  ],
+  "reviews": [
+   "Never made me feel rushed.",
+   "Short wait, clean office.",
+   "Portal messages answered fast."
+  ],
+  "community_posts": [],
+  "focus": [
+   "celiac disease",
+   "colon screening",
+   "liver health"
+  ]
+ },
+ {
+  "id": "p107",
+  "name": "Dr. Yusuf Ellis",
+  "gender": "male",
+  "specialty": "Gastroenterology",
+  "treats_kids": false,
+  "city": "Kirkland",
+  "phone": "(425) 555-0107",
+  "telehealth": true,
+  "languages": [
+   "English",
+   "Arabic"
+  ],
+  "insurance": [
+   "Regence",
+   "Cigna",
+   "Apple Health",
+   "Aetna PPO"
+  ],
+  "accepting_new": true,
+  "next_available": [
+   "2026-12-04",
+   "2026-12-08",
+   "2026-12-15"
+  ],
+  "reviews": [
+   "Short visit, hard to ask questions.",
+   "Seen right on time.",
+   "Portal messages answered fast."
+  ],
+  "community_posts": [],
+  "focus": [
+   "liver health",
+   "acid reflux",
+   "IBS"
+  ]
+ },
+ {
+  "id": "p108",
+  "name": "Dr. Zane Takahashi",
+  "gender": "male",
+  "specialty": "Gastroenterology",
+  "treats_kids": false,
+  "city": "Redmond",
+  "phone": "(206) 555-0108",
+  "telehealth": false,
+  "languages": [
+   "English"
+  ],
+  "insurance": [
+   "UnitedHealthcare",
+   "Premera",
+   "Cigna",
+   "Aetna PPO"
+  ],
+  "accepting_new": false,
+  "next_available": [
+   "2027-02-23"
+  ],
+  "reviews": [
+   "Short visit, hard to ask questions.",
+   "Seen right on time.",
+   "Phone line is always busy."
+  ],
+  "community_posts": [],
+  "focus": [
+   "IBS",
+   "celiac disease",
+   "colon screening"
+  ]
+ },
+ {
+  "id": "p109",
+  "name": "Dr. Valerie Patel",
+  "gender": "female",
+  "specialty": "Endocrinology",
+  "treats_kids": false,
+  "city": "Issaquah",
+  "phone": "(206) 555-0109",
+  "telehealth": true,
+  "languages": [
+   "English",
+   "Russian"
+  ],
+  "insurance": [
+   "Apple Health",
+   "UnitedHealthcare",
+   "Aetna PPO",
+   "Cigna"
+  ],
+  "accepting_new": true,
+  "next_available": [
+   "2026-10-30",
+   "2026-11-01",
+   "2026-11-02"
+  ],
+  "reviews": [
+   "Short visit, hard to ask questions.",
+   "Seen right on time.",
+   "Front desk is helpful and picks up."
+  ],
+  "community_posts": [],
+  "focus": [
+   "diabetes",
+   "osteoporosis",
+   "hormone imbalance"
+  ]
+ },
+ {
+  "id": "p110",
+  "name": "Dr. Ian Underwood",
+  "gender": "male",
+  "specialty": "Endocrinology",
+  "treats_kids": false,
+  "city": "Kirkland",
+  "phone": "(206) 555-0110",
+  "telehealth": false,
+  "languages": [
+   "English"
+  ],
+  "insurance": [
+   "Cigna",
+   "UnitedHealthcare",
+   "Regence"
+  ],
+  "accepting_new": true,
+  "next_available": [
+   "2026-12-03",
+   "2026-12-05",
+   "2026-12-16"
+  ],
+  "reviews": [
+   "Visit felt rushed.",
+   "Seen right on time.",
+   "Front desk is helpful and picks up."
+  ],
+  "community_posts": [],
+  "focus": [
+   "hormone imbalance",
+   "PCOS",
+   "thyroid"
+  ]
+ },
+ {
+  "id": "p111",
+  "name": "Dr. Mateo Banerjee",
+  "gender": "male",
+  "specialty": "Endocrinology",
+  "treats_kids": false,
+  "city": "Lynnwood",
+  "phone": "(206) 555-0111",
+  "telehealth": false,
+  "languages": [
+   "English"
+  ],
+  "insurance": [
+   "Regence",
+   "UnitedHealthcare"
+  ],
+  "accepting_new": true,
+  "next_available": [
+   "2026-11-22",
+   "2026-11-23",
+   "2026-12-05"
+  ],
+  "reviews": [
+   "Explained things in plain words.",
+   "Long wait past my appointment time.",
+   "Portal messages answered fast."
+  ],
+  "community_posts": [],
+  "focus": [
+   "thyroid",
+   "diabetes",
+   "osteoporosis"
+  ]
+ },
+ {
+  "id": "p112",
+  "name": "Dr. Brandon Dubois",
+  "gender": "male",
+  "specialty": "Pulmonology",
+  "treats_kids": false,
+  "city": "Renton",
+  "phone": "(425) 555-0112",
+  "telehealth": true,
+  "languages": [
+   "English",
+   "Mandarin",
+   "Korean"
+  ],
+  "insurance": [
+   "Regence",
+   "UnitedHealthcare"
+  ],
+  "accepting_new": true,
+  "next_available": [
+   "2026-11-02",
+   "2026-11-11",
+   "2026-11-14"
+  ],
+  "reviews": [
+   "Listened carefully and answered every question.",
+   "Seen right on time.",
+   "Phone line is always busy."
+  ],
+  "community_posts": [],
+  "focus": [
+   "sleep apnea",
+   "chronic cough"
+  ]
+ },
+ {
+  "id": "p113",
+  "name": "Dr. Rafael Alvarado",
+  "gender": "male",
+  "specialty": "Pulmonology",
+  "treats_kids": false,
+  "city": "Bellevue",
+  "phone": "(425) 555-0113",
+  "telehealth": false,
+  "languages": [
+   "English"
+  ],
+  "insurance": [
+   "Premera",
+   "Regence",
+   "UnitedHealthcare",
+   "Apple Health"
+  ],
+  "accepting_new": false,
+  "next_available": [
+   "2027-01-18"
+  ],
+  "reviews": [
+   "Short visit, hard to ask questions.",
+   "Long wait past my appointment time.",
+   "Hard to reach the front desk."
+  ],
+  "community_posts": [],
+  "focus": [
+   "asthma",
+   "COPD"
+  ]
+ },
+ {
+  "id": "p114",
+  "name": "Dr. Rafael Fischer",
+  "gender": "male",
+  "specialty": "OB-GYN",
+  "treats_kids": false,
+  "city": "Bellevue",
+  "phone": "(206) 555-0114",
+  "telehealth": true,
+  "languages": [
+   "English"
+  ],
+  "insurance": [
+   "UnitedHealthcare",
+   "Aetna PPO",
+   "Cigna"
+  ],
+  "accepting_new": false,
+  "next_available": [
+   "2027-02-25"
+  ],
+  "reviews": [
+   "Never made me feel rushed.",
+   "Short wait, clean office.",
+   "Phone line is always busy.",
+   "Billing was confusing."
+  ],
+  "community_posts": [],
+  "focus": [
+   "pregnancy care",
+   "PCOS",
+   "menopause"
+  ]
+ },
+ {
+  "id": "p115",
+  "name": "Dr. Divya Wong",
+  "gender": "female",
+  "specialty": "OB-GYN",
+  "treats_kids": false,
+  "city": "Lynnwood",
+  "phone": "(425) 555-0115",
+  "telehealth": true,
+  "languages": [
+   "English"
+  ],
+  "insurance": [
+   "Aetna PPO",
+   "Premera"
+  ],
+  "accepting_new": true,
+  "next_available": [
+   "2026-10-31",
+   "2026-11-02",
+   "2026-11-11"
+  ],
+  "reviews": [
+   "Listened carefully and answered every question.",
+   "Seen right on time.",
+   "Front desk is helpful and picks up.",
+   "Billing was confusing."
+  ],
+  "community_posts": [
+   {
+    "source": "Sample neighborhood group",
+    "text": "We go to Dr. Divya Wong in Lynnwood. Easy to get in and she listens."
+   }
+  ],
+  "focus": [
+   "menopause",
+   "fertility",
+   "endometriosis"
+  ]
+ },
+ {
+  "id": "p116",
+  "name": "Dr. Rafael Xu",
+  "gender": "male",
+  "specialty": "OB-GYN",
+  "treats_kids": false,
+  "city": "Bellevue",
+  "phone": "(206) 555-0116",
+  "telehealth": true,
+  "languages": [
+   "English"
+  ],
+  "insurance": [
+   "Aetna PPO",
+   "Cigna"
+  ],
+  "accepting_new": true,
+  "next_available": [
+   "2026-11-17",
+   "2026-11-18",
+   "2026-11-23"
+  ],
+  "reviews": [
+   "Listened carefully and answered every question.",
+   "Seen right on time.",
+   "Front desk is helpful and picks up."
+  ],
+  "community_posts": [],
+  "focus": [
+   "endometriosis",
+   "birth control",
+   "pregnancy care"
+  ]
+ },
+ {
+  "id": "p117",
+  "name": "Dr. Hiro Moreno",
+  "gender": "male",
+  "specialty": "OB-GYN",
+  "treats_kids": false,
+  "city": "Bellevue",
+  "phone": "(425) 555-0117",
+  "telehealth": false,
+  "languages": [
+   "English",
+   "Punjabi"
+  ],
+  "insurance": [
+   "Regence",
+   "UnitedHealthcare"
+  ],
+  "accepting_new": true,
+  "next_available": [
+   "2026-11-29",
+   "2026-12-15",
+   "2026-12-16"
+  ],
+  "reviews": [
+   "Listened carefully and answered every question.",
+   "Short wait, clean office.",
+   "Front desk is helpful and picks up."
+  ],
+  "community_posts": [
+   {
+    "source": "Sample neighborhood group",
+    "text": "We go to Dr. Hiro Moreno in Bellevue. Easy to get in and he listens."
+   }
+  ],
+  "focus": [
+   "pregnancy care",
+   "PCOS",
+   "menopause"
+  ]
+ },
+ {
+  "id": "p118",
+  "name": "Dr. Jamal Santos",
+  "gender": "male",
+  "specialty": "OB-GYN",
+  "treats_kids": false,
+  "city": "Mercer Island",
+  "phone": "(206) 555-0118",
+  "telehealth": false,
+  "languages": [
+   "English",
+   "Punjabi"
+  ],
+  "insurance": [
+   "Apple Health",
+   "Regence",
+   "Aetna PPO"
+  ],
+  "accepting_new": false,
+  "next_available": [
+   "2027-02-14"
+  ],
+  "reviews": [
+   "Listened carefully and answered every question.",
+   "Long wait past my appointment time.",
+   "Front desk is helpful and picks up."
+  ],
+  "community_posts": [
+   {
+    "source": "Sample moms group",
+    "text": "We go to Dr. Jamal Santos in Mercer Island. Plan on a wait, but he listens. Not taking new patients anymore though."
+   }
+  ],
+  "focus": [
+   "menopause",
+   "fertility",
+   "endometriosis"
+  ]
+ },
+ {
+  "id": "p119",
+  "name": "Dr. Paul Haddad",
+  "gender": "male",
+  "specialty": "OB-GYN",
+  "treats_kids": false,
+  "city": "Redmond",
+  "phone": "(206) 555-0119",
+  "telehealth": false,
+  "languages": [
+   "English"
+  ],
+  "insurance": [
+   "Regence",
+   "Premera",
+   "Cigna",
+   "UnitedHealthcare"
+  ],
+  "accepting_new": true,
+  "next_available": [
+   "2026-11-06",
+   "2026-11-12",
+   "2026-11-13"
+  ],
+  "reviews": [
+   "Never made me feel rushed.",
+   "Waited 40 minutes in the lobby.",
+   "Hard to reach the front desk."
+  ],
+  "community_posts": [],
+  "focus": [
+   "endometriosis",
+   "birth control",
+   "pregnancy care"
+  ]
+ },
+ {
+  "id": "p120",
+  "name": "Dr. Paul Iyer",
+  "gender": "male",
+  "specialty": "OB-GYN",
+  "treats_kids": false,
+  "city": "Everett",
+  "phone": "(206) 555-0120",
+  "telehealth": true,
+  "languages": [
+   "English"
+  ],
+  "insurance": [
+   "Premera",
+   "Cigna",
+   "Regence"
+  ],
+  "accepting_new": true,
+  "next_available": [
+   "2026-11-26",
+   "2026-11-27",
+   "2026-12-12"
+  ],
+  "reviews": [
+   "Never made me feel rushed.",
+   "Short wait, clean office.",
+   "Portal messages answered fast."
+  ],
+  "community_posts": [
+   {
+    "source": "Sample moms group",
+    "text": "We go to Dr. Paul Iyer in Everett. Easy to get in and he listens."
+   }
+  ],
+  "focus": [
+   "pregnancy care",
+   "PCOS",
+   "menopause"
+  ]
+ },
+ {
+  "id": "p121",
+  "name": "Dr. Mateo Moreno",
+  "gender": "male",
+  "specialty": "ENT",
+  "treats_kids": true,
+  "city": "Issaquah",
+  "phone": "(206) 555-0121",
+  "telehealth": false,
+  "languages": [
+   "English",
+   "Punjabi",
+   "Korean"
+  ],
+  "insurance": [
+   "Premera",
+   "Regence"
+  ],
+  "accepting_new": false,
+  "next_available": [
+   "2027-01-25"
+  ],
+  "reviews": [
+   "Never made me feel rushed.",
+   "Short wait, clean office.",
+   "Front desk is helpful and picks up.",
+   "Great with my kids."
+  ],
+  "community_posts": [],
+  "focus": [
+   "adenoids and tonsils",
+   "sinus problems",
+   "ear infections"
+  ]
+ },
+ {
+  "id": "p122",
+  "name": "Dr. Kiran Zhou",
+  "gender": "male",
+  "specialty": "ENT",
+  "treats_kids": false,
+  "city": "Seattle",
+  "phone": "(206) 555-0122",
+  "telehealth": false,
+  "languages": [
+   "English"
+  ],
+  "insurance": [
+   "UnitedHealthcare",
+   "Aetna PPO",
+   "Regence"
+  ],
+  "accepting_new": true,
+  "next_available": [
+   "2026-10-29",
+   "2026-11-03",
+   "2026-11-11"
+  ],
+  "reviews": [
+   "Never made me feel rushed.",
+   "Waited 40 minutes in the lobby.",
+   "Front desk is helpful and picks up.",
+   "Billing was confusing."
+  ],
+  "community_posts": [],
+  "focus": [
+   "ear infections",
+   "hearing loss",
+   "sleep apnea"
+  ]
+ },
+ {
+  "id": "p123",
+  "name": "Dr. Esther Cho",
+  "gender": "female",
+  "specialty": "ENT",
+  "treats_kids": true,
+  "city": "Lynnwood",
+  "phone": "(206) 555-0123",
+  "telehealth": false,
+  "languages": [
+   "English",
+   "Korean"
+  ],
+  "insurance": [
+   "Premera",
+   "Cigna",
+   "Regence",
+   "Aetna PPO"
+  ],
+  "accepting_new": true,
+  "next_available": [
+   "2026-10-29",
+   "2026-11-03",
+   "2026-11-11"
+  ],
+  "reviews": [
+   "Explained things in plain words.",
+   "Short wait, clean office.",
+   "Front desk is helpful and picks up.",
+   "Great with my kids."
+  ],
+  "community_posts": [],
+  "focus": [
+   "sleep apnea",
+   "voice and throat",
+   "allergies"
+  ]
+ },
+ {
+  "id": "p124",
+  "name": "Dr. Jasmine Lopez",
+  "gender": "female",
+  "specialty": "ENT",
+  "treats_kids": true,
+  "city": "Kent",
+  "phone": "(425) 555-0124",
+  "telehealth": false,
+  "languages": [
+   "English",
+   "Vietnamese"
+  ],
+  "insurance": [
+   "Regence",
+   "Cigna",
+   "Premera"
+  ],
+  "accepting_new": true,
+  "next_available": [
+   "2026-11-21",
+   "2026-11-28",
+   "2026-12-10"
+  ],
+  "reviews": [
+   "Never made me feel rushed.",
+   "Long wait past my appointment time.",
+   "Portal messages answered fast.",
+   "Patient and gentle with my child."
+  ],
+  "community_posts": [],
+  "focus": [
+   "allergies",
+   "adenoids and tonsils",
+   "sinus problems"
+  ]
+ },
+ {
+  "id": "p125",
+  "name": "Dr. Andre Dubois",
+  "gender": "male",
+  "specialty": "ENT",
+  "treats_kids": false,
+  "city": "Bellevue",
+  "phone": "(425) 555-0125",
+  "telehealth": false,
+  "languages": [
+   "English"
+  ],
+  "insurance": [
+   "Aetna PPO",
+   "Premera",
+   "Cigna"
+  ],
+  "accepting_new": true,
+  "next_available": [
+   "2026-11-04",
+   "2026-11-06",
+   "2026-11-09"
+  ],
+  "reviews": [
+   "Never made me feel rushed.",
+   "Seen right on time.",
+   "Portal messages answered fast."
+  ],
+  "community_posts": [],
+  "focus": [
+   "sinus problems",
+   "ear infections",
+   "hearing loss"
+  ]
+ },
+ {
+  "id": "p126",
+  "name": "Dr. Nikhil Singh",
+  "gender": "male",
+  "specialty": "ENT",
+  "treats_kids": false,
+  "city": "Kirkland",
+  "phone": "(206) 555-0126",
+  "telehealth": true,
+  "languages": [
+   "English"
+  ],
+  "insurance": [
+   "Regence",
+   "UnitedHealthcare",
+   "Apple Health"
+  ],
+  "accepting_new": true,
+  "next_available": [
+   "2026-11-29",
+   "2026-12-08",
+   "2026-12-09"
+  ],
+  "reviews": [
+   "Explained things in plain words.",
+   "Seen right on time.",
+   "Hard to reach the front desk."
+  ],
+  "community_posts": [],
+  "focus": [
+   "hearing loss",
+   "sleep apnea",
+   "voice and throat"
+  ]
+ },
+ {
+  "id": "p127",
+  "name": "Dr. Adrian Hughes",
+  "gender": "male",
+  "specialty": "ENT",
+  "treats_kids": true,
+  "city": "Redmond",
+  "phone": "(425) 555-0127",
+  "telehealth": true,
+  "languages": [
+   "English",
+   "Tagalog"
+  ],
+  "insurance": [
+   "UnitedHealthcare",
+   "Regence",
+   "Cigna"
+  ],
+  "accepting_new": true,
+  "next_available": [
+   "2026-12-05",
+   "2026-12-13",
+   "2026-12-16"
+  ],
+  "reviews": [
+   "Explained things in plain words.",
+   "Waited 40 minutes in the lobby.",
+   "Phone line is always busy.",
+   "Patient and gentle with my child."
+  ],
+  "community_posts": [],
+  "focus": [
+   "voice and throat",
+   "allergies",
+   "adenoids and tonsils"
+  ]
+ },
+ {
+  "id": "p128",
+  "name": "Dr. Isabel Evans",
+  "gender": "female",
+  "specialty": "ENT",
+  "treats_kids": false,
+  "city": "Bellevue",
+  "phone": "(206) 555-0128",
+  "telehealth": false,
+  "languages": [
+   "English"
+  ],
+  "insurance": [
+   "Regence",
+   "UnitedHealthcare",
+   "Cigna",
+   "Apple Health"
+  ],
+  "accepting_new": true,
+  "next_available": [
+   "2026-12-04",
+   "2026-12-11",
+   "2026-12-16"
+  ],
+  "reviews": [
+   "Explained things in plain words.",
+   "Short wait, clean office.",
+   "Front desk is helpful and picks up."
+  ],
+  "community_posts": [],
+  "focus": [
+   "adenoids and tonsils",
+   "sinus problems",
+   "ear infections"
+  ]
+ },
+ {
+  "id": "p129",
+  "name": "Dr. Kavya Gupta",
+  "gender": "female",
+  "specialty": "ENT",
+  "treats_kids": false,
+  "city": "Seattle",
+  "phone": "(425) 555-0129",
+  "telehealth": true,
+  "languages": [
+   "English"
+  ],
+  "insurance": [
+   "Apple Health",
+   "Aetna PPO",
+   "Premera"
+  ],
+  "accepting_new": false,
+  "next_available": [
+   "2027-02-18"
+  ],
+  "reviews": [
+   "Never made me feel rushed.",
+   "Seen right on time.",
+   "Hard to reach the front desk."
+  ],
+  "community_posts": [],
+  "focus": [
+   "ear infections",
+   "hearing loss",
+   "sleep apnea"
+  ]
+ }
+]
