@@ -525,6 +525,9 @@ $("camfile").onchange = async (e) => {
 /* ---------- Voice ----------
    Best: Muse Voice Transcribe (many languages), through our server. Backup: the browser's own speech. */
 const LANGS = { English: "en-US", Spanish: "es-ES", Hindi: "hi-IN", Telugu: "te-IN", Tamil: "ta-IN", Mandarin: "zh-CN", Korean: "ko-KR", Vietnamese: "vi-VN", Arabic: "ar-SA" };
+// The browser's own speech recognition is a NON-Meta AI model, and the hackathon allows only Meta models at runtime.
+// So it is OFF. Only Muse Voice Transcribe is used. (window.ALLOW_BROWSER_SPEECH exists only so the tests can try the old backup.)
+const USE_BROWSER_STT = window.ALLOW_BROWSER_SPEECH === true;
 const langSel = $("lang");
 Object.keys(LANGS).forEach(n => langSel.add(new Option(n, n)));
 const mic = $("mic");
@@ -536,6 +539,7 @@ const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
 function setListening(on, msg) { listening = on; mic.classList.toggle("on", on); $("status").textContent = msg || ""; }
 
 function startBrowserVoice(prefix = "") {            // backup path; prefix = words already in the box
+  if (!USE_BROWSER_STT) { setListening(false, "Muse voice isn't available right now. Please type your request."); return; }
   if (!SR) { $("status").textContent = "Voice needs Chrome or Edge. You can still type."; return; }
   const rec = new SR(); rec.lang = LANGS[langSel.value] || "en-US"; rec.interimResults = true; rec.continuous = true;
   let timer = null;
@@ -568,7 +572,8 @@ async function startMuseVoice(prefix = "") {          // main path: Muse Voice T
     closed = true; clearTimeout(timer); release();
     const had = box.value.trim();
     if (had) { setListening(false, "Muse voice stopped (" + why + "). Your words are in the box. Press Send, or tap the mic to add more."); return; }
-    museVoice = false; setListening(false); startBrowserVoice(); $("status").textContent = "Muse voice isn't available (" + why + "), using the browser's voice instead."; };
+    museVoice = false; setListening(false); startBrowserVoice();
+    $("status").textContent = "Muse voice isn't available (" + why + ")." + (USE_BROWSER_STT ? " Using the browser's voice instead." : " Please type your request."); };
   try {
     stream = await navigator.mediaDevices.getUserMedia({ audio: { channelCount: 1, echoCancellation: true, noiseSuppression: true } });
   } catch (e) { setListening(false, "Couldn't use the mic. Check browser permission."); return; }

@@ -200,3 +200,14 @@ def test_english_or_no_language_adds_nothing(scripted):
     agent.ask([], "hello", language="English")
     agent.ask([], "hello")
     assert all("The person chose" not in k["messages"][0]["content"] for k in c.seen)
+
+
+def test_every_model_call_is_shown_in_the_steps_and_the_terminal(scripted, capsys):
+    p = T.PROVIDERS[0]["id"]
+    c = scripted([reply(calls=[call(1, "check_availability", {"provider_id": p})]), reply("Done.")])
+    r = run()
+    model_lines = [s for s in r["steps"] if s.startswith("Muse Spark call")]
+    assert len(model_lines) == len(c.seen) == 2
+    assert "chose 1 tool" in model_lines[0] and "wrote the answer" in model_lines[1]
+    out = capsys.readouterr().out
+    assert out.count("[Meta Model API]") == 2 and agent.MODEL in out

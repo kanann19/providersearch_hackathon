@@ -301,6 +301,7 @@ def ask(history, user_text, on_step=None, language=None):
         effort = os.getenv("REASONING_EFFORT", "low")
         if effort:
             kwargs["reasoning_effort"] = effort
+        t0 = time.time()
         try:
             resp = _call_model(client, kwargs)
         except Exception as e:
@@ -310,6 +311,14 @@ def ask(history, user_text, on_step=None, language=None):
                     "steps": steps, "candidates": candidates, "error": str(e)}
         msg = resp.choices[0].message
         calls = getattr(msg, "tool_calls", None) or []
+
+        # Show every real model call: in the live panel and in the terminal (judges asked to see live model calls)
+        tokens = getattr(getattr(resp, "usage", None), "total_tokens", None)
+        what = f"chose {len(calls)} tool{'s' if len(calls) != 1 else ''}" if calls else "wrote the answer"
+        line = f"Muse Spark call {turn + 1}: {what} ({time.time() - t0:.1f}s{f', {tokens} tokens' if tokens else ''})"
+        steps.append(line)
+        emit(line)
+        print(f"[Meta Model API] {MODEL} {line.split(': ', 1)[1]}", flush=True)
 
         if not calls:                            # Muse wrote a final answer
             answer = (msg.content or "").strip()

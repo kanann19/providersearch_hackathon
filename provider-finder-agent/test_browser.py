@@ -152,7 +152,7 @@ def test_voice_failure_falls_back_to_browser_speech(site, monkeypatch):
         b = p.chromium.launch(args=["--use-fake-device-for-media-stream", "--use-fake-ui-for-media-stream"])
         ctx = b.new_context(permissions=["microphone"])
         pg = ctx.new_page()
-        pg.add_init_script("""window.__started = 0;
+        pg.add_init_script("""window.__started = 0; window.ALLOW_BROWSER_SPEECH = true;
           class F { constructor(){} start(){ window.__started++; } stop(){} }
           window.SpeechRecognition = F; window.webkitSpeechRecognition = F;""")
         pg.goto(url)
@@ -275,4 +275,28 @@ def test_if_muse_voice_breaks_mid_sentence_your_words_are_kept(site):
         assert pg.locator(".me").count() == 0                          # and not sent half-finished
         assert pg.evaluate("window.__started") == 0                    # no silent switch to another mic
         assert not pg.locator("#mic").evaluate("e => e.classList.contains('on')")
+        br.close()
+
+
+def test_non_meta_browser_speech_is_never_used_by_default(site):
+    """Hackathon rule: only Meta models at runtime. If Muse voice fails, we ask the person to type."""
+    url, mode = site
+    mode["refuse"] = True
+    with pw.sync_playwright() as p:
+        br = p.chromium.launch(args=["--use-fake-device-for-media-stream", "--use-fake-ui-for-media-stream"])
+        pg = br.new_context(permissions=["microphone"]).new_page()
+        pg.add_init_script("""window.__started = 0;
+          class F { start(){ window.__started++; } stop(){} abort(){} }
+          window.SpeechRecognition = F; window.webkitSpeechRecognition = F;""")
+        pg.goto(url)
+        pg.wait_for_function("fetch('/api/health').then(r => r.json()).then(h => h.voice)")
+        pg.click("#mic")
+        pg.wait_for_function("document.querySelector('#status').textContent.includes('Please type')", timeout=10000)
+        pg.wait_for_timeout(1000)
+        assert pg.evaluate("window.__started") == 0
+        # and with no live voice at all (no key), the mic does not fall back to the browser either
+        pg.evaluate("museVoice = false")
+        pg.click("#mic")
+        pg.wait_for_function("document.querySelector('#status').textContent.includes('Please type')")
+        assert pg.evaluate("window.__started") == 0
         br.close()

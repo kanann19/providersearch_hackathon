@@ -69,6 +69,19 @@ the insurance card privacy rules, the voice relay, and a real-browser click-thro
 - `providers.json` / `providers.csv`: the sample provider data
 - `mock_model.py`: a fake model used only to test the loop offline. It is not used in the demo.
 
+## Models used at runtime (all Meta)
+
+| Job | Model | Where it runs |
+|---|---|---|
+| Understands the request, picks tools, scores reviews, writes the answer | Muse Spark (`muse-spark-1.3`) | Meta Model API |
+| Reads the plan name from an insurance card photo | Muse Spark (image input) | Meta Model API |
+| Turns your voice into text | Muse Voice Transcribe | Meta Model API |
+
+No other AI model is called. The provider search, distance, quote checks and name checks are plain code.
+The optional "Read answers aloud" button uses your browser's built-in text-to-speech voice. That is the only
+text-to-speech, and it is not part of the Meta model calls. `mock_model.py` is a fake used only in tests.
+Every model call is shown on screen ("Muse Spark call 1...") and printed in the terminal.
+
 ## Built during the hackathon (Oct 26 to Nov 4, 2026)
 
 Everything in this repository was built during the event: the sample dataset, the tools,
