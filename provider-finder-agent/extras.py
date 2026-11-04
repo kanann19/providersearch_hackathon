@@ -91,12 +91,28 @@ def voice_ready():
     return bool(os.getenv("MODEL_API_KEY")) and os.getenv("MOCK_MODEL") != "1"
 
 
-def handshake(key, language):
+def keyword_list():
+    """Words Muse Voice should listen for: provider names, cities, plans, focus areas. Helps with names like 'Hiro Quincy'."""
+    words = []
+    for p in T.PROVIDERS:
+        words.append(p["name"].replace("Dr. ", ""))
+    words += [c.title() for c in T.CITIES] + sorted(known_plans())
+    words += sorted({f for p in T.PROVIDERS for f in p["focus"]})
+    seen, out = set(), []
+    for w in words:
+        if w.lower() not in seen:
+            seen.add(w.lower()); out.append(w)
+    return out[:300]
+
+
+def handshake(key, language, keywords=None):
     msg = {"authorization": {"accessToken": f"Bearer {key}"}, "audioEncoding": "PCM_24KHZ",
            "model": ASR_MODEL, "mode": "ENDPOINTING", "partialMode": "CUMULATIVE",
            "emitAudioProgress": False}
     if language in LANGUAGES:
         msg["languageBias"] = [language]
+    if keywords:
+        msg["keywords"] = keywords
     return msg
 
 
@@ -115,15 +131,24 @@ def voice_relay(ws, language="English"):
     key = os.getenv("MODEL_API_KEY")
     if not key:
         return tell({"type": "error", "message": "No API key"})
-    try:
-        up = websocket.create_connection(f"{ASR_URL}?sessionId=stream-{uuid.uuid4()}", timeout=10)
-        up.send(json.dumps(handshake(key, language)))
-        ack = json.loads(up.recv())
-        if "sessionId" not in ack:
+    up = None
+    for kw in (keyword_list(), None):                  # try with name hints first; if the service refuses, try plain
+        try:
+            up = websocket.create_connection(f"{ASR_URL}?sessionId=stream-{uuid.uuid4()}", timeout=10)
+            up.send(json.dumps(handshake(key, language, kw)))
+            ack = json.loads(up.recv())
+        except Exception as e:
+            return tell({"type": "error", "message": f"Voice service not reachable ({type(e).__name__})"})
+        if "sessionId" in ack:
+            break
+        try:
             up.close()
-            return tell({"type": "error", "message": str(ack.get("message", "Voice service refused"))[:120]})
-    except Exception as e:
-        return tell({"type": "error", "message": f"Voice service not reachable ({type(e).__name__})"})
+        except Exception:
+            pass
+        up = None
+        last = ack
+    if up is None:
+        return tell({"type": "error", "message": str(last.get("message", "Voice service refused"))[:120]})
 
     tell({"type": "ready"})
     up.settimeout(0.3)

@@ -260,7 +260,9 @@ async function showDraft(root, id, channel) {
     }
     text.value = body; edited = false;
   }
+  text.disabled = true;                                      // can't type until the draft has loaded (it would be overwritten)
   await fill();
+  text.disabled = false;
   text.oninput = () => { edited = true; };
   reason.oninput = () => { clearTimeout(timer); timer = setTimeout(() => { if (!edited) fill(); }, 350); };
   out.querySelectorAll("[data-add]").forEach(b => b.onclick = () => {
@@ -533,12 +535,12 @@ fetch("/api/health").then(x => x.json()).then(h => { museVoice = !!h.voice; }).c
 const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
 function setListening(on, msg) { listening = on; mic.classList.toggle("on", on); $("status").textContent = msg || ""; }
 
-function startBrowserVoice() {                    // backup path
+function startBrowserVoice(prefix = "") {            // backup path; prefix = words already in the box
   if (!SR) { $("status").textContent = "Voice needs Chrome or Edge. You can still type."; return; }
   const rec = new SR(); rec.lang = LANGS[langSel.value] || "en-US"; rec.interimResults = true; rec.continuous = true;
   let timer = null;
   const arm = (ms) => { clearTimeout(timer); timer = setTimeout(() => { try { rec.stop(); } catch (e) {} }, ms); };
-  rec.onresult = (e) => { box.value = Array.from(e.results).map(r => r[0].transcript).join(" ").trim(); autosize(); arm(PAUSE_WAIT); };
+  rec.onresult = (e) => { box.value = (prefix + " " + Array.from(e.results).map(r => r[0].transcript).join(" ")).trim(); autosize(); arm(PAUSE_WAIT); };
   rec.onend = () => { clearTimeout(timer); setListening(false); if (box.value.trim()) send(); };
   rec.onerror = (e) => { clearTimeout(timer); setListening(false, e.error === "no-speech" ? "Didn't hear anything. Tap the mic and try again." : "Couldn't use the mic. Check browser permission."); };
   stopListening = () => rec.stop();
@@ -547,8 +549,8 @@ function startBrowserVoice() {                    // backup path
   try { rec.start(); arm(FIRST_WAIT); } catch (e) { setListening(false); }
 }
 
-async function startMuseVoice() {                 // main path: Muse Voice Transcribe
-  let stream, ctx, ws, node, closed = false, done = "", partial = "", timer = null;
+async function startMuseVoice(prefix = "") {          // main path: Muse Voice Transcribe
+  let stream, ctx, ws, node, closed = false, done = prefix, partial = "", timer = null;
   const release = () => {
     try { node && node.disconnect(); } catch (e) {} try { ctx && ctx.close(); } catch (e) {}
     try { stream && stream.getTracks().forEach(t => t.stop()); } catch (e) {} try { ws && ws.close(); } catch (e) {}
@@ -558,22 +560,27 @@ async function startMuseVoice() {                 // main path: Muse Voice Trans
     setListening(false); if (box.value.trim()) send();
   };
   voiceAbort = () => { if (closed) return; closed = true; clearTimeout(timer); release(); setListening(false); };
-  const finish = () => { try { ws.send("end"); } catch (e) {} setTimeout(cleanup, 700); };
+  let ending = false;                                       // true once we asked Muse to wrap up: a closing connection is then normal
+  const finish = () => { ending = true; try { ws.send("end"); } catch (e) {} setTimeout(cleanup, 700); };
   const arm = (ms) => { clearTimeout(timer); timer = setTimeout(finish, ms); };
-  const fallback = (why) => { if (closed) return; closed = true; clearTimeout(timer); try { stream && stream.getTracks().forEach(t => t.stop()); } catch (e) {} try { ctx && ctx.close(); } catch (e) {}
-    museVoice = false; setListening(false); $("status").textContent = why; startBrowserVoice(); };
+  // If Muse voice fails: keep any words we already have (never lose them). Only switch to the browser mic if we have nothing yet.
+  const fallback = (why) => { if (closed) return; if (ending) { cleanup(); return; }       // wrapping up: not a failure
+    closed = true; clearTimeout(timer); release();
+    const had = box.value.trim();
+    if (had) { setListening(false, "Muse voice stopped (" + why + "). Your words are in the box. Press Send, or tap the mic to add more."); return; }
+    museVoice = false; setListening(false); startBrowserVoice(); $("status").textContent = "Muse voice isn't available (" + why + "), using the browser's voice instead."; };
   try {
     stream = await navigator.mediaDevices.getUserMedia({ audio: { channelCount: 1, echoCancellation: true, noiseSuppression: true } });
   } catch (e) { setListening(false, "Couldn't use the mic. Check browser permission."); return; }
   const proto = location.protocol === "https:" ? "wss" : "ws";
   ws = new WebSocket(`${proto}://${location.host}/ws/voice?lang=${encodeURIComponent(langSel.value)}`);
   ws.binaryType = "arraybuffer";
-  ws.onerror = () => fallback("Muse voice isn't available, using the browser's voice instead.");
+  ws.onerror = () => fallback("connection problem");
   ws.onclose = () => { if (!closed) cleanup(); };
   ws.onmessage = (ev) => {
     if (closed) return;                                    // late words after we stopped are ignored
     let m; try { m = JSON.parse(ev.data); } catch (e) { return; }
-    if (m.type === "error") return fallback("Muse voice isn't available, using the browser's voice instead.");
+    if (m.type === "error") return fallback(String(m.message || "error").slice(0, 60));
     if (m.type === "ready") { setListening(true, "Listening… speak, then pause. Tap the mic when you're done."); arm(FIRST_WAIT); }
     else if (m.type === "speechStart") clearTimeout(timer);
     else if (m.type === "transcript") { partial = m.transcript || ""; box.value = (done + " " + partial).trim(); autosize(); }
@@ -597,15 +604,15 @@ async function startMuseVoice() {                 // main path: Muse Voice Trans
       ws.send(out.buffer);
     };
     ctx.createMediaStreamSource(stream).connect(node);
-  } catch (e) { if (!closed) fallback("Muse voice isn't available, using the browser's voice instead."); }
+  } catch (e) { if (!closed) fallback("audio setup failed"); }
 }
 
 mic.onclick = () => {
   if (listening) { stopListening(); return; }              // tap again = done, send now
   if ("speechSynthesis" in window) speechSynthesis.cancel();
-  box.value = ""; setListening(true, "Starting the mic…");
-  if (museVoice && navigator.mediaDevices && window.AudioWorkletNode) startMuseVoice().catch(() => { setListening(false); startBrowserVoice(); });
-  else startBrowserVoice();
+  const keep = box.value.trim(); setListening(true, "Starting the mic…");
+  if (museVoice && navigator.mediaDevices && window.AudioWorkletNode) startMuseVoice(keep).catch(() => { setListening(false); startBrowserVoice(keep); });
+  else startBrowserVoice(keep);
 };
 </script>
 </body>

@@ -27,7 +27,7 @@ def serve(app):
 @pytest.fixture
 def site(monkeypatch):
     # fake Muse Voice: after about one second of sound it "hears" SPOKEN
-    asr, mode = Flask("asr"), {"refuse": False}
+    asr, mode = Flask("asr"), {"refuse": False, "err_mid": False}
     sock = Sock(asr)
 
     @sock.route("/asr")
@@ -48,6 +48,9 @@ def site(monkeypatch):
                     said = True
                     ws.send(json.dumps({"type": "speechStart", "turnId": 1}))
                     ws.send(json.dumps({"type": "transcript", "transcript": "female pedi", "final": False}))
+                    if mode["err_mid"]:
+                        ws.send(json.dumps({"type": "error", "message": "boom"}))
+                        return
                     ws.send(json.dumps({"type": "speechComplete", "turnId": 1, "transcript": SPOKEN}))
             elif json.loads(d).get("type") == "endStream":
                 return
@@ -183,6 +186,12 @@ def test_same_words_twice_in_a_row_are_sent_once(page):
     assert page.locator(".me").count() == 1
 
 
+def _ready(card, go_text):
+    """Wait until the editor for this channel has loaded (button label matches and the text box is usable)."""
+    card.locator(f".go:has-text('{go_text}')").wait_for()
+    card.locator(".dtext:not([disabled])").wait_for()
+
+
 def _first_card(page):
     page.fill("#box", "Female pediatrician near Issaquah, Premera"); page.click("#send")
     page.wait_for_selector(".pcard")
@@ -193,19 +202,19 @@ def test_draft_send_opens_your_own_app_with_the_edited_text(page):
     page.evaluate("window.__open = (u) => { window.__opened = u; }")
     card = _first_card(page)
     card.locator('[data-ch="email"]').click()
-    card.locator(".dtext").wait_for()
+    _ready(card, "Send as email")
     card.locator(".subj").fill("Hello there")
     card.locator(".dtext").fill("My own words here.")
     card.locator(".go").click()
     url = page.evaluate("window.__opened")
     assert url.startswith("mailto:?subject=Hello%20there&body=My%20own%20words%20here.")
     card.locator('[data-ch="text"]').click()
-    card.locator(".go").wait_for()
+    _ready(card, "Send as text")
     card.locator(".dtext").fill("Text me back")
     card.locator(".go").click()
     assert page.evaluate("window.__opened") == "sms:?&body=Text%20me%20back"
     card.locator('[data-ch="call"]').click()
-    card.locator(".go").wait_for()
+    _ready(card, "Call this number")
     card.locator(".go").click()
     assert page.evaluate("window.__opened").startswith("tel:") and "555" in page.evaluate("window.__opened")
 
@@ -213,7 +222,7 @@ def test_draft_send_opens_your_own_app_with_the_edited_text(page):
 def test_open_channel_button_is_highlighted_and_cancel_closes_the_editor(page):
     card = _first_card(page)
     card.locator('[data-ch="email"]').click()
-    card.locator(".dtext").wait_for()
+    _ready(card, "Send as email")
     assert "solid" in card.locator('[data-ch="email"]').get_attribute("class")
     assert "solid" not in card.locator('[data-ch="call"]').get_attribute("class")
     card.locator(".cn").click()
@@ -226,7 +235,7 @@ def test_save_keeps_drafts_and_the_saved_list_can_copy_send_and_delete(page):
     card = _first_card(page)
     name = card.locator("h3").inner_text()
     card.locator('[data-ch="text"]').click()
-    card.locator(".dtext").wait_for()
+    _ready(card, "Send as text")
     card.locator(".dtext").fill("Please save this")
     card.locator(".sv").click()
     assert page.inner_text("#savedbtn") == "Saved drafts (1)"
@@ -246,3 +255,24 @@ def test_save_keeps_drafts_and_the_saved_list_can_copy_send_and_delete(page):
     page.locator('.sv-item [data-a="del"]').click()
     assert page.inner_text("#savedbtn") == "Saved drafts (0)" and "Nothing saved yet" in page.inner_text("#detail")
     assert page.errors == []
+
+
+def test_if_muse_voice_breaks_mid_sentence_your_words_are_kept(site):
+    """The bug from your video: the first sentence vanished when voice switched over."""
+    url, mode = site
+    mode["err_mid"] = True
+    with pw.sync_playwright() as p:
+        br = p.chromium.launch(args=["--use-fake-device-for-media-stream", "--use-fake-ui-for-media-stream"])
+        pg = br.new_context(permissions=["microphone"]).new_page()
+        pg.add_init_script("""window.__started = 0;
+          class F { start(){ window.__started++; } stop(){} abort(){} }
+          window.SpeechRecognition = F; window.webkitSpeechRecognition = F;""")
+        pg.goto(url)
+        pg.wait_for_function("fetch('/api/health').then(r => r.json()).then(h => h.voice)")
+        pg.click("#mic")
+        pg.wait_for_function("document.querySelector('#status').textContent.includes('boom')", timeout=15000)
+        assert pg.input_value("#box") == "female pedi"                 # words kept, not wiped
+        assert pg.locator(".me").count() == 0                          # and not sent half-finished
+        assert pg.evaluate("window.__started") == 0                    # no silent switch to another mic
+        assert not pg.locator("#mic").evaluate("e => e.classList.contains('on')")
+        br.close()

@@ -82,6 +82,7 @@ Rules:
 - If the person writes in another language, answer in that language. Keep doctor names, plan
   names and review quotes exactly as the tools gave them.
 - If the message says "My insurance plan is X", use X as the insurance filter unless they name another.
+- Write dates like "Nov 5", never "2026-11-05".
 - Dates and reviews are sample data. Mention that once, briefly, if relevant."""
 
 TOOL_DEFS = [

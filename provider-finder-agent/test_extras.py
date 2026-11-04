@@ -77,6 +77,7 @@ def test_voice_handshake_matches_the_api_format():
     assert h["audioEncoding"] == "PCM_24KHZ" and h["model"] == "muse-voice-transcribe-1.0"
     assert h["languageBias"] == ["Spanish"] and h["mode"] == "ENDPOINTING"
     assert "languageBias" not in extras.handshake("KEY", "Klingon")
+    assert extras.handshake("KEY", "English", ["A"])["keywords"] == ["A"] and "keywords" not in h
 
 
 def test_voice_only_ready_with_a_real_key(monkeypatch):

@@ -22,8 +22,8 @@ def serve(app):
 @pytest.fixture
 def fake_muse(monkeypatch):
     """Pretends to be wss://api.meta.ai/v1/asr/realtime."""
-    log = {"handshake": None, "audio": 0, "ended": False, "url": None}
-    mode = {"refuse": False}
+    log = {"handshake": None, "handshakes": [], "audio": 0, "ended": False, "url": None}
+    mode = {"refuse": False, "no_keywords": False}
     app = Flask(__name__)
     sock = Sock(app)
 
@@ -32,6 +32,10 @@ def fake_muse(monkeypatch):
         from flask import request
         log["url"] = request.full_path
         log["handshake"] = json.loads(ws.receive())
+        log["handshakes"].append(log["handshake"])
+        if mode["no_keywords"] and "keywords" in log["handshake"]:
+            ws.send(json.dumps({"message": "keywords not allowed"}))
+            return
         if mode["refuse"]:
             ws.send(json.dumps({"message": "bad key"}))
             return
@@ -153,3 +157,20 @@ def test_browser_closing_early_cleans_up(fake_muse, our_server):
     b.close()                                                          # must not hang or crash the server
     b2 = websocket.create_connection(our_server)
     assert listen(b2, "ready")[-1]["type"] == "ready"
+
+
+def test_name_hints_are_sent_to_muse_voice(fake_muse, our_server):
+    log, _ = fake_muse
+    b = websocket.create_connection(our_server)
+    listen(b, "ready")
+    kw = log["handshake"]["keywords"]
+    assert "Sofia Marino" in kw and "Issaquah" in kw and "Premera" in kw and "Hiro Quincy" in kw
+    assert len(kw) <= 300 and len({k.lower() for k in kw}) == len(kw)
+
+
+def test_if_the_service_refuses_name_hints_we_retry_without_them(fake_muse, our_server):
+    log, mode = fake_muse
+    mode["no_keywords"] = True
+    b = websocket.create_connection(our_server)
+    assert listen(b, "ready")[-1]["type"] == "ready"
+    assert len(log["handshakes"]) == 2 and "keywords" in log["handshakes"][0] and "keywords" not in log["handshakes"][1]
