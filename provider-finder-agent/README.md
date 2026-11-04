@@ -51,7 +51,7 @@ If nothing matches, Muse widens the distance or drops a filter and says what cha
 
 `pip install -r requirements-dev.txt` then `python -m pytest -q`
 
-About 100 tests cover: the tools, the sample data, the quote and name checks, the agent loop when
+About 117 tests cover: the tools, the sample data, the quote and name checks, the agent loop when
 the model misbehaves (fake quotes, made-up doctors, empty replies, errors), the web routes,
 the insurance card privacy rules, the voice relay, and a real-browser click-through
 (`test_browser.py` is skipped unless Playwright is installed).
@@ -74,10 +74,22 @@ the insurance card privacy rules, the voice relay, and a real-browser click-thro
 Everything in this repository was built during the event: the sample dataset, the tools,
 the agent loop and safety checks, the web page, voice input, and the insurance card reader.
 
-Team: Keerthi Ananthula
+**What I built vs. what I used**
+- Built during the event: the 129 made-up providers, all the tools, the agent loop, the quote and
+  name checks, the web page, the insurance card reader, the voice relay, the draft editor
+  (edit, save, send through your own app), and about 117 tests.
+- Used, not built by me: Meta's Muse Spark and Muse Voice Transcribe (through the Meta Model API),
+  and open-source libraries (Flask, the OpenAI Python SDK, flask-sock, websocket-client, pytest,
+  Playwright). The Inter font comes from Google Fonts.
+- Idea credit: checking claims in code, and the tool-calling loop pattern, were inspired by Meta's
+  public `legal-agent-workshop`. No code was copied from it.
+- All provider data, reviews, posts and the sample insurance card are made up. No real people,
+  no real Facebook data, and no logos.
+
+Team: Keerthi Ananthula (solo)
 
 Built with Meta's Muse Spark through the Meta Model API. An AI coding assistant helped
-with code, and the team designed the idea, tested, and made the decisions.
+with code. I designed the idea, tested it, and made the decisions.
 
 ## Next steps
 
