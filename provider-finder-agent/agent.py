@@ -64,7 +64,10 @@ Rules:
 - Match what the person needs to a doctor's "focus" list. Use the focus filter for
   specifics like adenoids, sinus, PCOS, asthma, ADHD.
 - If nothing matches, widen the distance or drop one filter, and say what you changed.
-- If a doctor is not accepting new patients, use find_alternatives and say so.
+- If a doctor is full, use find_alternatives and pass the person's city so distances are from
+  them. If the person SAYS a doctor is full but the tools show that doctor IS accepting new
+  patients, say so in one short line. Never call a doctor full unless a tool or the person said so.
+- Whenever you change a filter (for example a larger distance), say so in one short line.
 - For your top 2-3 picks: check_availability, then get_reviews (and get_community_mentions).
 - Then call compare_providers ONCE to score those picks side by side. Scores are 1-5
   (5 is best) for: short wait, easy to reach by phone, listens well. Base scores only on
@@ -76,6 +79,9 @@ Rules:
   Any quote in your answer must also be word for word from a review.
 - Only draft a call script / text / email if asked. You never send anything.
 - Keep answers short and plain. No long paragraphs. Use the exact doctor names from tools.
+- If the person writes in another language, answer in that language. Keep doctor names, plan
+  names and review quotes exactly as the tools gave them.
+- If the message says "My insurance plan is X", use X as the insurance filter unless they name another.
 - Dates and reviews are sample data. Mention that once, briefly, if relevant."""
 
 TOOL_DEFS = [
@@ -115,6 +121,7 @@ TOOL_DEFS = [
         "description": "Similar providers who ARE accepting new patients, for a provider who is full.",
         "parameters": {"type": "object", "properties": {
             "provider_id": {"type": "string"},
+            "city": {"type": "string", "description": "The person's own city, so distances are from them"},
             "insurance": {"type": "string"},
             "max_miles": {"type": "number"}},
             "required": ["provider_id"]}}},
@@ -261,7 +268,7 @@ def _call_model(client, kwargs):
         raise
 
 
-def ask(history, user_text, on_step=None):
+def ask(history, user_text, on_step=None, language=None):
     """Run the agent for one user message. `history` is a list kept per visitor.
     on_step(text) is called as each step happens, for the live panel."""
     def emit(text):
@@ -269,13 +276,17 @@ def ask(history, user_text, on_step=None):
             on_step(text)
 
     client = get_client()
-    messages = [{"role": "developer", "content": SYSTEM.format(today=date.today().isoformat())}]
+    system = SYSTEM.format(today=date.today().isoformat())
+    if language and language != "English":       # the person picked a language: always answer in it
+        system += (f"\n- The person chose {language}. Write your whole reply in {language}. Keep doctor names, "
+                   "plan names, phone numbers and review quotes exactly as the tools gave them.")
+    messages = [{"role": "developer", "content": system}]
     messages += history
     messages.append({"role": "user", "content": user_text})
     steps, candidates, comparison = [], [], None
     seen_names, seen_ids = set(), set()              # what the tools really returned
     seen_texts, texts_by_id = [], {}
-    retried = False
+    retried, empty_retries = False, 0
     verified, quotes_checked = None, 0
     log = {"time": time.strftime("%Y-%m-%d %H:%M:%S"), "user": user_text, "turns": []}
     answer = ""
@@ -285,7 +296,7 @@ def ask(history, user_text, on_step=None):
     for turn in range(MAX_TURNS):
         if turn == MAX_TURNS - 1:
             messages.append({"role": "developer", "content": "Last step. Give your final answer now, using what you have."})
-        kwargs = dict(model=MODEL, messages=messages, tools=TOOL_DEFS, max_completion_tokens=1500)
+        kwargs = dict(model=MODEL, messages=messages, tools=TOOL_DEFS, max_completion_tokens=3000)
         effort = os.getenv("REASONING_EFFORT", "low")
         if effort:
             kwargs["reasoning_effort"] = effort
@@ -301,6 +312,12 @@ def ask(history, user_text, on_step=None):
 
         if not calls:                            # Muse wrote a final answer
             answer = (msg.content or "").strip()
+            if not answer and empty_retries < 2:     # empty reply: ask again
+                empty_retries += 1
+                emit("Muse sent an empty reply, asking again")
+                messages.append({"role": "developer", "content":
+                                 "Your last reply was empty. Write your final answer now, in plain text."})
+                continue
             bad_names = checks.unknown_names(answer, seen_names)
             quotes = checks.extract_quotes(answer)
             bad_quotes = [q for q in quotes if not checks.quote_in_sources(q, seen_texts)]
@@ -375,6 +392,10 @@ def ask(history, user_text, on_step=None):
         have = {c["id"] for c in candidates}
         candidates += [card({"id": pid}) for pid in order if pid not in have]
         candidates.sort(key=lambda c: order.get(c["id"], 99))
+        for c in candidates:                                  # "why this doctor": only checked text
+            row = next((r for r in comparison["rows"] if r["id"] == c["id"]), None)
+            if row:
+                c["why"], c["quote"] = row["why"], row["quote"]
         candidates = candidates[:5]
 
     # Remember only the plain conversation so follow-up questions work

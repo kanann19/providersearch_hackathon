@@ -1,2 +1,4 @@
 openai
 flask
+flask-sock
+websocket-client

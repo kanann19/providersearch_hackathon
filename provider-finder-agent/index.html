@@ -4,30 +4,29 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>CareScout</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
+  /* White page, carbon (near-black charcoal) text. One light theme on every computer. */
   :root {
-    --bg: #f4f7f6; --card: #ffffff; --ink: #14201e; --muted: #5b6b68; --line: #dce5e2;
-    --brand: #0f766e; --brand-ink: #ffffff; --brand-soft: #dff3ef;
-    --good: #166534; --good-bg: #dcfce7; --warn: #92400e; --warn-bg: #fef3c7;
-    --bad: #991b1b; --bad-bg: #fee2e2; --shadow: 0 1px 2px rgba(20,32,30,.06), 0 4px 14px rgba(20,32,30,.06);
-  }
-  @media (prefers-color-scheme: dark) {
-    :root:not([data-theme="light"]) {
-      --bg: #0e1615; --card: #16211f; --ink: #e8f0ee; --muted: #9db0ac; --line: #263633;
-      --brand: #2dd4bf; --brand-ink: #06201c; --brand-soft: #123530;
-      --good: #86efac; --good-bg: #123a22; --warn: #fcd34d; --warn-bg: #3b2f0b;
-      --bad: #fca5a5; --bad-bg: #431818; --shadow: none;
-    }
+    color-scheme: light;
+    --bg: #ffffff; --card: #ffffff; --ink: #1b1f24; --muted: #59616b; --line: #e2e5ea; --soft: #f5f6f8;
+    --brand: #0f6b63; --brand-ink: #ffffff; --brand-soft: #e7f3f1;
+    --good: #166534; --good-bg: #e3f5e9; --warn: #8a4b0f; --warn-bg: #fdf3dc;
+    --bad: #a12626; --bad-bg: #fbe9e9; --shadow: 0 1px 2px rgba(27,31,36,.05), 0 4px 14px rgba(27,31,36,.05);
   }
   * { box-sizing: border-box; }
   html, body { margin: 0; }
-  body { background: var(--bg); color: var(--ink); font: 16px/1.5 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; }
-  .wrap { max-width: 880px; margin: 0 auto; padding: 0 16px 120px; }
+  body { background: var(--bg); color: var(--ink); font: 16px/1.55 "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+         -webkit-font-smoothing: antialiased; letter-spacing: -0.005em; }
+  .wrap { max-width: 880px; margin: 0 auto; padding: 0 16px 150px; }
   header { padding: 22px 0 10px; display: flex; align-items: center; gap: 12px; }
   .logo { width: 38px; height: 38px; border-radius: 11px; background: var(--brand); color: var(--brand-ink);
-          display: grid; place-items: center; font-weight: 800; font-size: 20px; }
+          display: grid; place-items: center; font-weight: 800; font-size: 20px; flex: none; }
   h1 { font-size: 22px; margin: 0; letter-spacing: -.01em; }
   .tag { color: var(--muted); font-size: 14px; margin: 0; }
+  .spacer { flex: 1; }
   .notice { background: var(--warn-bg); color: var(--warn); border-radius: 10px; padding: 9px 12px; font-size: 13.5px; margin: 6px 0 18px; }
   .hero { margin: 22px 0 18px; }
   .hero h2 { font-size: 26px; line-height: 1.2; margin: 0 0 6px; letter-spacing: -.02em; }
@@ -36,19 +35,23 @@
   .chip { border: 1px solid var(--line); background: var(--card); color: var(--ink); border-radius: 999px;
           padding: 7px 13px; font-size: 14px; cursor: pointer; font-family: inherit; }
   .chip:hover { border-color: var(--brand); color: var(--brand); }
+  .follow { margin-top: -4px; }
+  .follow .chip { font-size: 13px; padding: 5px 11px; }
   #feed { display: flex; flex-direction: column; gap: 16px; margin-top: 8px; }
-  .me { align-self: flex-end; background: var(--brand); color: var(--brand-ink); padding: 10px 14px; border-radius: 16px 16px 4px 16px; max-width: 85%; }
+  .me { align-self: flex-end; background: var(--ink); color: #fff; padding: 10px 14px; border-radius: 16px 16px 4px 16px; max-width: 85%; }
   .bot { background: var(--card); border: 1px solid var(--line); border-radius: 16px 16px 16px 4px; padding: 14px 16px; box-shadow: var(--shadow); }
   .bot p { margin: 0 0 8px; } .bot p:last-child { margin: 0; }
   .bot ul { margin: 4px 0 8px; padding-left: 20px; }
-  .verified { margin-top: 10px; font-size: 13px; color: var(--good); background: var(--good-bg); border-radius: 8px; padding: 6px 10px; display: inline-block; }
-  .verified.warn { color: var(--warn); background: var(--warn-bg); }
   .steps { margin-top: 10px; font-size: 13px; color: var(--muted); }
   .steps summary { cursor: pointer; }
   .steps ol { margin: 6px 0 0; padding-left: 20px; }
   .steps code { font: 12px ui-monospace, Menlo, Consolas, monospace; word-break: break-word; }
   .cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 12px; margin-top: 12px; }
-  .pcard { border: 1px solid var(--line); border-radius: 14px; padding: 13px; background: var(--card); display: flex; flex-direction: column; gap: 7px; }
+  .pcard { border: 1px solid var(--line); border-radius: 14px; padding: 13px; background: var(--card); display: flex; flex-direction: column; gap: 7px; cursor: pointer; }
+  .cards { align-items: start; }
+  .pcard:hover { border-color: var(--brand); }
+  .pcard.editing { grid-column: 1 / -1; cursor: default; border-color: var(--brand); }
+  .pcard.editing .editor textarea { min-height: 110px; }
   .pcard h3 { margin: 0; font-size: 16px; }
   .row { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
   .meta { color: var(--muted); font-size: 13.5px; }
@@ -57,21 +60,24 @@
   .pill.bad { background: var(--bad-bg); color: var(--bad); }
   .pill.plain { background: transparent; border: 1px solid var(--line); color: var(--muted); }
   .dates b { font-weight: 600; }
-  .actions { display: flex; gap: 6px; margin-top: auto; padding-top: 4px; }
+  .actions { display: flex; flex-wrap: wrap; gap: 6px; margin-top: auto; padding-top: 4px; }
   .btn { border: 1px solid var(--line); background: transparent; color: var(--ink); border-radius: 9px; padding: 6px 10px; font-size: 13px; cursor: pointer; font-family: inherit; }
   .btn:hover { border-color: var(--brand); color: var(--brand); }
+  .btn.solid { background: var(--brand); color: var(--brand-ink); border-color: var(--brand); }
+  .btn.solid:hover { color: var(--brand-ink); opacity: .9; }
   .draft { margin-top: 8px; background: var(--brand-soft); border-radius: 10px; padding: 10px 12px; font-size: 14px; white-space: pre-wrap; }
   .draft small { display: block; color: var(--muted); margin-top: 6px; }
   .draft a { color: var(--brand); }
-  .typing { color: var(--muted); font-size: 14px; }
-  .dots::after { content: ""; animation: dots 1.2s steps(4) infinite; }
-  @keyframes dots { 0% { content: ""; } 25% { content: "."; } 50% { content: ".."; } 75% { content: "..."; } }
+  .verified { margin-top: 10px; font-size: 13px; color: var(--good); background: var(--good-bg); border-radius: 8px; padding: 6px 10px; display: inline-block; }
+  .verified.warn { color: var(--warn); background: var(--warn-bg); }
   .live { border-style: dashed; }
   .live-h { font-weight: 600; margin-bottom: 6px; }
   .live-l { list-style: none; margin: 0; padding: 0; font-size: 14px; color: var(--muted); }
   .live-l li { padding: 3px 0; animation: fade .3s ease; }
   .live-l li::before { content: "✓ "; color: var(--good); font-weight: 700; }
   @keyframes fade { from { opacity: 0; transform: translateY(3px); } to { opacity: 1; transform: none; } }
+  .dots::after { content: ""; animation: dots 1.2s steps(4) infinite; }
+  @keyframes dots { 0% { content: ""; } 25% { content: "."; } 50% { content: ".."; } 75% { content: "..."; } }
   .cmp { margin-top: 12px; }
   .cmp-h { font-size: 14px; margin-bottom: 6px; }
   .cmp-s { overflow-x: auto; border: 1px solid var(--line); border-radius: 12px; }
@@ -79,10 +85,12 @@
   .cmp th { text-align: left; font-weight: 600; color: var(--muted); font-size: 12px; padding: 8px 10px; border-bottom: 1px solid var(--line); white-space: nowrap; }
   .cmp td { padding: 9px 10px; border-bottom: 1px solid var(--line); vertical-align: top; }
   .cmp tr:last-child td { border-bottom: 0; }
+  .cmp tr.rowlink { cursor: pointer; }
+  .cmp tr.rowlink:hover td { background: var(--brand-soft); }
   .cmp tr.top td { background: var(--brand-soft); }
   .cmp .sc { color: var(--brand); letter-spacing: 1px; white-space: nowrap; }
   .cmp .q { font-style: italic; min-width: 180px; }
-  .dock { position: fixed; left: 0; right: 0; bottom: 0; background: linear-gradient(transparent, var(--bg) 28%); padding: 22px 16px 14px; }
+  .dock { position: fixed; left: 0; right: 0; bottom: 0; background: linear-gradient(transparent, var(--bg) 28%); padding: 22px 16px 14px; z-index: 5; }
   .dock-in { max-width: 880px; margin: 0 auto; background: var(--card); border: 1px solid var(--line); border-radius: 18px; box-shadow: var(--shadow);
              display: flex; align-items: flex-end; gap: 8px; padding: 8px; }
   textarea { flex: 1; border: 0; outline: 0; resize: none; background: transparent; color: var(--ink); font: inherit; padding: 8px 8px; max-height: 120px; }
@@ -93,7 +101,38 @@
   .send { background: var(--brand); color: var(--brand-ink); }
   .opts { max-width: 880px; margin: 8px auto 0; display: flex; justify-content: space-between; font-size: 12.5px; color: var(--muted); padding: 0 6px; gap: 10px; flex-wrap: wrap; }
   label { cursor: pointer; }
+  /* editable message drafts */
+  .editor { margin-top: 8px; background: var(--soft); border: 1px solid var(--line); border-radius: 12px; padding: 12px; cursor: default; }
+  .editor .lbl { display: block; font-size: 12px; font-weight: 600; color: var(--muted); margin: 8px 0 4px; }
+  .editor .lbl:first-child { margin-top: 0; }
+  .editor input, .editor textarea { width: 100%; border: 1px solid var(--line); border-radius: 8px; background: #fff; color: var(--ink);
+                                    font: inherit; font-size: 14px; padding: 8px 10px; }
+  .editor textarea { min-height: 130px; resize: vertical; line-height: 1.5; max-height: none; flex: none; }
+  .editor .row { margin-top: 8px; }
+  .editor .note { margin-top: 8px; font-size: 12px; }
+  /* details panel */
+  #scrim { position: fixed; inset: 0; background: rgba(0,0,0,.45); z-index: 20; }
+  #detail { position: fixed; top: 0; right: 0; bottom: 0; width: min(500px, 100%); background: var(--card); border-left: 1px solid var(--line);
+            z-index: 21; overflow-y: auto; padding: 16px 18px 40px; box-shadow: -8px 0 30px rgba(0,0,0,.25); }
+  #detail[hidden], #scrim[hidden] { display: none; }
+  #detail h2 { margin: 12px 0 4px; font-size: 22px; letter-spacing: -.01em; }
+  #detail h4 { margin: 18px 0 6px; font-size: 13px; text-transform: uppercase; letter-spacing: .05em; color: var(--muted); }
+  .rev { border-left: 3px solid var(--brand); padding: 4px 10px; margin: 6px 0; font-style: italic; }
+  .src { font-size: 12px; color: var(--muted); font-style: normal; }
+  .big-scores { display: grid; grid-template-columns: auto 1fr; gap: 4px 12px; font-size: 14px; }
+  .big-scores .sc { color: var(--brand); letter-spacing: 2px; }
   :focus-visible { outline: 2px solid var(--brand); outline-offset: 2px; }
+  .why { margin: 4px 0 2px; font-size: 13.5px; background: var(--brand-soft); border-radius: 8px; padding: 7px 10px; }
+  .why .qt { font-style: italic; color: var(--muted); display: block; margin-top: 2px; }
+  .why .ck { color: var(--good); font-size: 12px; font-style: normal; }
+  .planbar { max-width: 880px; margin: 0 auto 8px; padding: 0 6px; display: flex; gap: 8px; align-items: center; font-size: 13px; }
+  .planbar[hidden] { display: none; }
+  .planpill { background: var(--brand-soft); color: var(--brand); border-radius: 999px; padding: 3px 4px 3px 12px; display: inline-flex; gap: 6px; align-items: center; font-weight: 600; }
+  .planpill button { border: 0; background: transparent; color: inherit; cursor: pointer; font-size: 15px; line-height: 1; padding: 0 6px; }
+  .opts select { font: inherit; font-size: 12.5px; color: var(--ink); border: 1px solid var(--line); border-radius: 6px; background: var(--card); padding: 2px 4px; }
+  .editor .row.btns { margin-top: 10px; }
+  .sv-item { border: 1px solid var(--line); border-radius: 12px; padding: 10px 12px; margin: 10px 0; }
+  .sv-item pre { white-space: pre-wrap; font: inherit; font-size: 13.5px; margin: 6px 0; color: var(--ink); }
 </style>
 </head>
 <body>
@@ -101,6 +140,9 @@
   <header>
     <div class="logo">C</div>
     <div><h1>CareScout</h1><p class="tag">Find the right provider by voice or text</p></div>
+    <div class="spacer"></div>
+    <button class="btn" id="savedbtn" title="Drafts you saved on this computer">Saved drafts (0)</button>
+    <button class="btn" id="newsearch" title="Start over">↺ New search</button>
   </header>
   <div class="notice"><b>Sample data. Not medical advice.</b> This tool only finds providers. For an emergency, call 911. We never ask for your member ID.</div>
 
@@ -114,23 +156,32 @@
 </div>
 
 <div class="dock">
+  <div class="planbar" id="planbar" hidden><span>Insurance:</span><span class="planpill"><span id="plantext"></span><button id="planx" title="Remove" aria-label="Remove insurance plan">×</button></span></div>
   <div class="dock-in">
     <button class="icon mic" id="mic" title="Speak" aria-label="Speak your request">🎤</button>
     <textarea id="box" rows="1" placeholder="Example: Female pediatrician near Issaquah, Premera, this week"></textarea>
+    <button class="icon mic" id="cam" title="Snap or upload your insurance card (only the plan name is kept)" aria-label="Insurance card photo">📷</button>
+    <input type="file" id="camfile" accept="image/*" hidden>
     <button class="icon send" id="send" title="Send" aria-label="Send">➤</button>
   </div>
   <div class="opts">
     <label><input type="checkbox" id="speak"> Read answers aloud</label>
+    <label>Language (voice and answers) <select id="lang"></select></label>
     <span id="status"></span>
   </div>
 </div>
+
+<div id="scrim" hidden></div>
+<aside id="detail" role="dialog" aria-modal="true" aria-label="Provider details" hidden></aside>
 
 <script>
 const $ = (id) => document.getElementById(id);
 const feed = $("feed"), box = $("box");
 let session = null;
-try { session = sessionStorage.getItem("cs") } catch (e) {}
-if (!session) { session = (crypto.randomUUID ? crypto.randomUUID() : String(Math.random()).slice(2)); try { sessionStorage.setItem("cs", session) } catch (e) {} }
+const newId = () => (crypto.randomUUID ? crypto.randomUUID() : String(Math.random()).slice(2));
+try { session = sessionStorage.getItem("cs"); } catch (e) {}
+if (!session) { session = newId(); try { sessionStorage.setItem("cs", session); } catch (e) {} }
+let scores = {};            // provider id -> side-by-side scores from the latest comparison
 
 const EXAMPLES = [
   "Female pediatrician near Issaquah, Premera, this week",
@@ -139,10 +190,13 @@ const EXAMPLES = [
   "PCOS specialist near Seattle, Regence",
   "My pediatrician is full. Who else near Bellevue takes Premera?"
 ];
-EXAMPLES.forEach(t => {
-  const b = document.createElement("button"); b.className = "chip"; b.textContent = t;
-  b.onclick = () => { box.value = t; send(); }; $("chips").appendChild(b);
-});
+const FOLLOWUPS = ["Only female doctors", "Soonest appointment first", "Only telehealth", "Draft a call script for the top pick"];
+function chipRow(list, cls) {
+  const wrap = document.createElement("div"); wrap.className = cls;
+  list.forEach(t => { const b = document.createElement("button"); b.className = "chip"; b.textContent = t; b.onclick = () => { box.value = t; send(); }; wrap.appendChild(b); });
+  return wrap;
+}
+$("chips").replaceWith(Object.assign(chipRow(EXAMPLES, "chips"), { id: "chips" }));
 
 function esc(s) { return String(s).replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c])); }
 function md(text) {                       // tiny, safe formatter: escape first, then add bold/lists
@@ -155,9 +209,127 @@ function md(text) {                       // tiny, safe formatter: escape first,
   return html + (inList ? "</ul>" : "");
 }
 const fmtDate = (d) => new Date(d + "T00:00:00").toLocaleDateString(undefined, { month: "short", day: "numeric" });
+const dots = (n) => "●".repeat(n) + "○".repeat(5 - n);
 
 function addMe(text) { const d = document.createElement("div"); d.className = "me"; d.textContent = text; feed.appendChild(d); d.scrollIntoView({ block: "end" }); }
 
+/* ---------- contact drafts (call / text / email), used on cards and in the details panel ---------- */
+const ADD_LINES = [
+  ["Telehealth?", "Do you offer telehealth visits?"],
+  ["Waitlist?", "Can I join a waitlist for an earlier opening?"],
+  ["Forms?", "Which forms should I fill out before the visit?"],
+  ["My plan?", "Can you confirm you take my insurance plan?"]
+];
+const CH_LABEL = { call: "Call script", text: "Text message", email: "Email" };
+
+function wireDrafts(root, id) {
+  root.querySelectorAll("button[data-ch]").forEach(b => b.onclick = (ev) => { ev.stopPropagation(); showDraft(root, id, b.dataset.ch); });
+}
+
+async function getDraft(id, channel, reason) {
+  return fetch("/api/draft", { method: "POST", headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ id, channel, reason }) }).then(x => x.json());
+}
+
+/* An editable draft: change the words, add your own lines, then copy it or open it in your own app. */
+async function showDraft(root, id, channel) {
+  const out = root.querySelector(".out");
+  if (root.classList.contains("pcard")) root.classList.add("editing");   // card widens while you edit
+  root.querySelectorAll("button[data-ch]").forEach(b => b.classList.toggle("solid", b.dataset.ch === channel));   // show which one is open
+  out.onclick = (e) => e.stopPropagation();                  // clicking inside must not open the details panel
+  const SEND = { call: "Call this number", text: "Send as text", email: "Send as email" };
+  out.innerHTML = `<div class="editor">
+    <label class="lbl">${esc(CH_LABEL[channel])}: what is the visit for? (optional)</label>
+    <input class="reason" placeholder="e.g. a visit for my 5-year-old">
+    ${channel === "email" ? '<label class="lbl">Subject</label><input class="subj">' : ""}
+    <label class="lbl">Message (you can edit anything)</label>
+    <textarea class="dtext"></textarea>
+    <div class="row"><span class="meta">Add:</span>${ADD_LINES.map((a, i) => `<button class="chip" data-add="${i}">${esc(a[0])}</button>`).join("")}</div>
+    <div class="row btns"><button class="btn solid go">${SEND[channel]}</button><button class="btn sv">Save</button>
+      <button class="btn cp">Copy</button><button class="btn rs">Reset</button><button class="btn cn">Cancel</button></div>
+    <div class="meta note">Nothing is sent from CareScout. "${esc(SEND[channel])}" opens your own ${channel === "call" ? "phone app" : channel === "email" ? "email app" : "messages app"} with this text, and you press send there. Save keeps it on this computer only.</div></div>`;
+  const reason = out.querySelector(".reason"), subj = out.querySelector(".subj"), text = out.querySelector(".dtext");
+  let edited = false, timer = null, who = { name: "", phone: "" };
+
+  async function fill() {                                    // build the draft from the server (plain code, no AI)
+    const res = await getDraft(id, channel, reason.value.trim());
+    who = { name: res.to || "", phone: res.phone || "" };
+    let body = res.draft || res.error || "";
+    if (channel === "email" && body.startsWith("Subject:")) {
+      const cut = body.indexOf("\n\n"); subj.value = body.slice(8, cut).trim(); body = body.slice(cut + 2);
+    }
+    text.value = body; edited = false;
+  }
+  await fill();
+  text.oninput = () => { edited = true; };
+  reason.oninput = () => { clearTimeout(timer); timer = setTimeout(() => { if (!edited) fill(); }, 350); };
+  out.querySelectorAll("[data-add]").forEach(b => b.onclick = () => {
+    text.value = text.value.replace(/\s+$/, "") + (channel === "call" ? "\n- " : " ") + ADD_LINES[b.dataset.add][1]; edited = true; text.focus();
+  });
+  out.querySelector(".rs").onclick = () => { reason.value = ""; fill(); };
+  const flash = (btn, msg, back) => { btn.textContent = msg; setTimeout(() => btn.textContent = back, 1800); };
+  out.querySelector(".cp").onclick = async (e) => {
+    const btn = e.target; let ok = false;
+    const full = (subj ? subj.value + "\n\n" : "") + text.value;
+    try { await navigator.clipboard.writeText(full); ok = true; }
+    catch (err) { text.focus(); text.select(); try { ok = document.execCommand("copy"); } catch (e2) {} }   // fallback
+    flash(btn, ok ? "Copied" : "Press Ctrl+C", "Copy");
+  };
+  out.querySelector(".go").onclick = () => openInApp({ channel, phone: who.phone, subject: subj ? subj.value : "", text: text.value });
+  out.querySelector(".sv").onclick = (e) => {
+    saveDraft({ id, name: who.name, phone: who.phone, channel, subject: subj ? subj.value : "", text: text.value });
+    flash(e.target, "Saved ✓", "Save");
+  };
+  out.querySelector(".cn").onclick = () => {                 // close without keeping changes
+    out.innerHTML = ""; root.classList.remove("editing");
+    root.querySelectorAll("button[data-ch]").forEach(b => b.classList.remove("solid"));
+  };
+}
+
+/* Send = open the person's OWN phone / email / messages app. Nothing is sent from here. */
+function openInApp(d) {
+  const url = d.channel === "call" ? "tel:" + String(d.phone).replace(/[^\d+]/g, "")
+    : d.channel === "email" ? "mailto:?subject=" + encodeURIComponent(d.subject || "") + "&body=" + encodeURIComponent(d.text)
+    : "sms:?&body=" + encodeURIComponent(d.text);
+  (window.__open || ((u) => { location.href = u; }))(url);          // window.__open is only for tests
+}
+
+/* ---------- saved drafts: kept in this browser only ---------- */
+let memSaved = [];
+function loadSaved() { try { return JSON.parse(localStorage.getItem("cs_saved") || "[]"); } catch (e) { return memSaved; } }
+function storeSaved(list) {
+  memSaved = list; try { localStorage.setItem("cs_saved", JSON.stringify(list)); } catch (e) {}
+  $("savedbtn").textContent = `Saved drafts (${list.length})`;
+}
+function saveDraft(d) {                                    // same doctor + same way of contacting = update, not duplicate
+  d.at = new Date().toISOString();
+  storeSaved([d, ...loadSaved().filter(x => !(x.id === d.id && x.channel === d.channel))]);
+}
+function openSaved() {
+  lastFocus = document.activeElement;
+  const el = $("detail"), list = loadSaved(); el.hidden = false; $("scrim").hidden = false;
+  el.innerHTML = `<button class="btn" id="back">← Back</button><h2>Saved drafts</h2>
+    <div class="meta">Kept on this computer only. Nothing is sent from CareScout.</div>
+    ${list.length ? list.map((d, i) => `<div class="sv-item" data-i="${i}">
+      <b>${esc(d.name || "Provider")}</b> <span class="meta">· ${esc(CH_LABEL[d.channel] || d.channel)} · ${esc(new Date(d.at).toLocaleString())}</span>
+      ${d.subject ? `<div class="meta">Subject: ${esc(d.subject)}</div>` : ""}<pre>${esc(d.text)}</pre>
+      <div class="row"><button class="btn solid" data-a="go">${d.channel === "call" ? "Call this number" : "Send"}</button>
+        <button class="btn" data-a="cp">Copy</button><button class="btn" data-a="del">Delete</button></div></div>`).join("")
+      : '<p class="meta">Nothing saved yet. Open a draft and press Save.</p>'}`;
+  $("back").onclick = closeDetail; $("back").focus();
+  el.querySelectorAll(".sv-item").forEach(item => {
+    const d = list[item.dataset.i];
+    item.querySelector('[data-a="go"]').onclick = () => openInApp(d);
+    item.querySelector('[data-a="cp"]').onclick = async (e) => {
+      try { await navigator.clipboard.writeText((d.subject ? d.subject + "\n\n" : "") + d.text); e.target.textContent = "Copied"; } catch (err) { e.target.textContent = "Select and copy"; }
+    };
+    item.querySelector('[data-a="del"]').onclick = () => { storeSaved(loadSaved().filter(x => !(x.id === d.id && x.channel === d.channel))); openSaved(); };
+  });
+}
+$("savedbtn").onclick = openSaved;
+storeSaved(loadSaved());
+
+/* ---------- result cards and the side-by-side table ---------- */
 function cardHtml(c) {
   const dist = c.miles_away != null ? ` · ${c.miles_away} mi` : "";
   const dates = c.next_available.slice(0, 3).map(fmtDate).join(", ");
@@ -167,10 +339,12 @@ function cardHtml(c) {
     <div class="meta">${esc(c.specialty)} · ${esc(c.city)}${dist}</div>
     <div class="row">${c.focus.map(f => `<span class="pill">${esc(f)}</span>`).join("")}</div>
     <div class="dates meta">Next openings: <b>${esc(dates)}</b></div>
+    ${c.why ? `<div class="why"><b>Why this doctor:</b> ${esc(c.why)}${c.quote ? `<span class="qt">“${esc(c.quote)}” <span class="ck">✓ matches a real review</span></span>` : ""}</div>` : ""}
     <div class="row">${c.insurance.map(i => `<span class="pill plain">${esc(i)}</span>`).join("")}</div>
     <div class="meta">${c.telehealth ? "Telehealth · " : ""}${c.treats_kids ? "Sees children · " : ""}${esc(c.languages.join(", "))}</div>
     <div class="meta">📞 ${esc(c.phone)}</div>
     <div class="actions">
+      <button class="btn solid" data-open="1">View details</button>
       <button class="btn" data-ch="call">Call script</button>
       <button class="btn" data-ch="text">Text</button>
       <button class="btn" data-ch="email">Email</button>
@@ -178,9 +352,8 @@ function cardHtml(c) {
     <div class="out"></div></div>`;
 }
 
-const dots = (n) => "●".repeat(n) + "○".repeat(5 - n);
 function compareHtml(c) {
-  const rows = c.rows.map(r => `<tr class="${r.rank === 1 ? "top" : ""}">
+  const rows = c.rows.map(r => `<tr class="rowlink ${r.rank === 1 ? "top" : ""}" data-id="${esc(r.id)}" tabindex="0" title="Click for details">
     <td>${r.rank}</td>
     <td><b>${esc(r.name)}</b><div class="meta">${esc(r.city)}${r.next ? " · next " + esc(fmtDate(r.next)) : ""}</div></td>
     <td class="sc" title="${r.wait} of 5">${dots(r.wait)}</td>
@@ -188,15 +361,19 @@ function compareHtml(c) {
     <td class="sc" title="${r.listening} of 5">${dots(r.listening)}</td>
     <td class="q">“${esc(r.quote)}”</td>
     <td>${esc(r.why)}</td></tr>`).join("");
-  return `<div class="cmp"><div class="cmp-h">Side by side · ranked for: <b>${esc(c.priority)}</b></div>
+  return `<div class="cmp"><div class="cmp-h">Side by side · ranked for: <b>${esc(c.priority)}</b> · <span class="meta">click a row for details</span></div>
     <div class="cmp-s"><table><thead><tr><th>#</th><th>Doctor</th><th>Short wait</th><th>Easy to reach</th><th>Listens well</th><th>Patients say</th><th>Why</th></tr></thead><tbody>${rows}</tbody></table></div>
     <div class="meta" style="margin-top:6px">Scores 1 to 5 from sample reviews (5 is best, 3 means the reviews don't say). Every quote was checked against the real review text.</div></div>`;
 }
 
+let followEl = null;
 function addBot(r) {
   const d = document.createElement("div"); d.className = "bot";
   let html = md(r.answer || "");
-  if (r.comparison && r.comparison.rows && r.comparison.rows.length) html += compareHtml(r.comparison);
+  if (r.comparison && r.comparison.rows && r.comparison.rows.length) {
+    scores = {}; r.comparison.rows.forEach(x => scores[x.id] = x);
+    html += compareHtml(r.comparison);
+  }
   if (r.candidates && r.candidates.length) html += `<div class="cards">${r.candidates.map(cardHtml).join("")}</div>`;
   if (r.checks && r.checks.verified === true) {
     const q = r.checks.quotes_matched;
@@ -207,23 +384,75 @@ function addBot(r) {
   if (r.steps && r.steps.length) html += `<details class="steps"><summary>How I found this (${r.steps.length} steps)</summary><ol>${r.steps.map(s => `<li><code>${esc(s)}</code></li>`).join("")}</ol></details>`;
   d.innerHTML = html;
   d.querySelectorAll(".pcard").forEach(card => {
-    card.querySelectorAll("button[data-ch]").forEach(b => b.onclick = async () => {
-      const res = await fetch("/api/draft", { method: "POST", headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ id: card.dataset.id, channel: b.dataset.ch }) }).then(x => x.json());
-      const out = card.querySelector(".out");
-      out.innerHTML = `<div class="draft">${esc(res.draft || res.error || "")}<small>${esc(res.note || "")} <a href="#" class="cp">Copy</a></small></div>`;
-      out.querySelector(".cp").onclick = (e) => { e.preventDefault(); navigator.clipboard && navigator.clipboard.writeText(res.draft); e.target.textContent = "Copied"; };
-    });
+    wireDrafts(card, card.dataset.id);
+    card.onclick = () => openDetail(card.dataset.id);
+    card.querySelector("[data-open]").onclick = (ev) => { ev.stopPropagation(); openDetail(card.dataset.id); };
   });
-  feed.appendChild(d); d.scrollIntoView({ block: "end" });
+  d.querySelectorAll("tr.rowlink").forEach(tr => {
+    tr.onclick = () => openDetail(tr.dataset.id);
+    tr.onkeydown = (e) => { if (e.key === "Enter") openDetail(tr.dataset.id); };
+  });
+  if (followEl) followEl.remove();
+  feed.appendChild(d);
+  if (r.candidates && r.candidates.length) { followEl = chipRow(FOLLOWUPS, "chips follow"); feed.appendChild(followEl); }
+  (followEl || d).scrollIntoView({ block: "end" });
   if ($("speak").checked && "speechSynthesis" in window && r.answer) {
-    speechSynthesis.cancel(); speechSynthesis.speak(new SpeechSynthesisUtterance(r.answer.replace(/[*#]/g, "")));
+    speechSynthesis.cancel(); const code = LANGS[langSel.value] || "en-US", u = new SpeechSynthesisUtterance(r.answer.replace(/[*#]/g, "")); u.lang = code;
+    const has = speechSynthesis.getVoices().some(v => v.lang.toLowerCase().startsWith(code.slice(0, 2).toLowerCase()));
+    if (!has && speechSynthesis.getVoices().length) $("status").textContent = "Your computer has no " + langSel.value + " voice for reading aloud. Add one in your system settings.";
+    speechSynthesis.speak(u);
   }
 }
 
+/* ---------- details panel ---------- */
+let lastFocus = null;
+function closeDetail() { $("detail").hidden = true; $("scrim").hidden = true; if (lastFocus) lastFocus.focus(); }
+$("scrim").onclick = closeDetail;
+document.addEventListener("keydown", e => { if (e.key === "Escape" && !$("detail").hidden) closeDetail(); });
+
+async function openDetail(id) {
+  lastFocus = document.activeElement;
+  const el = $("detail"); el.hidden = false; $("scrim").hidden = false;
+  el.innerHTML = '<div class="meta">Loading…</div>';
+  let p;
+  try { p = await fetch("/api/provider/" + encodeURIComponent(id)).then(x => x.json()); } catch (e) { el.innerHTML = "<p>Could not load details.</p>"; return; }
+  if (p.error) { el.innerHTML = `<button class="btn" id="back">← Back to results</button><p>Could not load details.</p>`; $("back").onclick = closeDetail; return; }
+  const s = scores[p.id];
+  el.innerHTML = `
+    <button class="btn" id="back">← Back to results</button>
+    <h2>${esc(p.name)}</h2>
+    <div class="row"><span class="pill ${p.accepting_new ? "good" : "bad"}">${p.accepting_new ? "Accepting new patients" : "Not accepting new patients"}</span>
+      <span class="meta">${esc(p.specialty)} · ${esc(p.city)}</span></div>
+    <h4>Focus areas</h4><div class="row">${p.focus.map(f => `<span class="pill">${esc(f)}</span>`).join("")}</div>
+    <h4>Next openings (sample dates)</h4><div class="row">${p.next_available.map(d => `<span class="pill plain">${esc(fmtDate(d))}</span>`).join("")}</div>
+    <h4>Insurance accepted</h4><div class="row">${p.insurance.map(i => `<span class="pill plain">${esc(i)}</span>`).join("")}</div>
+    <h4>Good to know</h4>
+    <div class="meta">${p.telehealth ? "Offers telehealth<br>" : ""}${p.treats_kids ? "Sees children<br>" : ""}Languages: ${esc(p.languages.join(", "))}<br>📞 ${esc(p.phone)}</div>
+    ${s ? `<h4>How patients rate them (from the comparison)</h4><div class="big-scores">
+      <span>Short wait</span><span class="sc">${dots(s.wait)}</span>
+      <span>Easy to reach</span><span class="sc">${dots(s.phone)}</span>
+      <span>Listens well</span><span class="sc">${dots(s.listening)}</span></div>` : ""}
+    <h4>Patient reviews (sample)</h4>
+    ${p.reviews.map(r => `<div class="rev">“${esc(r)}”</div>`).join("") || '<div class="meta">No reviews yet.</div>'}
+    <h4>Community mentions (sample)</h4>
+    ${p.community_posts.map(c => `<div class="rev">“${esc(c.text)}”<div class="src">${esc(c.source)}</div></div>`).join("") || '<div class="meta">No community posts found.</div>'}
+    <h4>Contact</h4>
+    <div class="actions"><button class="btn" data-ch="call">Call script</button><button class="btn" data-ch="text">Text</button><button class="btn" data-ch="email">Email</button></div>
+    <div class="out"></div>
+    <div class="meta" style="margin-top:16px">Sample data. Nothing here is real, and nothing is sent.</div>`;
+  $("back").onclick = closeDetail; $("back").focus();
+  wireDrafts(el, p.id);
+}
+
+/* ---------- sending a message (steps stream in live) ---------- */
+let lastText = "", lastAt = 0;
 async function send() {
   const text = box.value.trim(); if (!text) return;
+  if (listening) voiceAbort();                             // sending by hand stops the mic, so it can't send again
+  if (text === lastText && Date.now() - lastAt < 3000) { box.value = ""; autosize(); return; }   // same words twice in a row
+  lastText = text; lastAt = Date.now();
   box.value = ""; autosize(); $("hero").style.display = "none";
+  if (followEl) { followEl.remove(); followEl = null; }
   addMe(text);
   const t = document.createElement("div"); t.className = "bot live";
   t.innerHTML = '<div class="live-h">Agent is working<span class="dots"></span></div><ul class="live-l"></ul>';
@@ -233,7 +462,7 @@ async function send() {
   $("send").disabled = true;
   try {
     // The server sends one JSON line per step, then a final line with the answer.
-    const resp = await fetch("/api/chat_stream", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ session, message: text }) });
+    const resp = await fetch("/api/chat_stream", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ session, message: myPlan ? text + "\n(My insurance plan is " + myPlan + ".)" : text, language: langSel.value }) });
     const reader = resp.body.getReader(), dec = new TextDecoder(); let buf = "", final = null;
     while (true) {
       const { value, done } = await reader.read(); if (done) break;
@@ -254,22 +483,130 @@ box.addEventListener("keydown", e => { if (e.key === "Enter" && !e.shiftKey) { e
 function autosize() { box.style.height = "auto"; box.style.height = Math.min(box.scrollHeight, 120) + "px"; }
 box.addEventListener("input", autosize);
 
-// Voice input (browser speech recognition; works in Chrome and Edge)
-const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
-const mic = $("mic");
-if (!SR) { mic.style.display = "none"; $("status").textContent = "Voice needs Chrome or Edge. You can still type."; }
-else {
-  const rec = new SR(); rec.lang = "en-US"; rec.interimResults = true; rec.continuous = false;
-  let listening = false;
-  rec.onresult = (e) => { box.value = Array.from(e.results).map(r => r[0].transcript).join(" "); autosize(); };
-  rec.onend = () => { listening = false; mic.classList.remove("on"); $("status").textContent = ""; if (box.value.trim()) send(); };
-  rec.onerror = () => { listening = false; mic.classList.remove("on"); $("status").textContent = "Couldn't hear you. Check mic permission."; };
-  mic.onclick = () => {
-    if (listening) { rec.stop(); return; }
-    speechSynthesis && speechSynthesis.cancel(); box.value = ""; listening = true;
-    mic.classList.add("on"); $("status").textContent = "Listening…"; try { rec.start(); } catch (e) {}
-  };
+/* ---------- New search: back to the start screen ---------- */
+$("newsearch").onclick = () => {
+  closeDetail(); feed.innerHTML = ""; followEl = null; scores = {};
+  $("hero").style.display = ""; box.value = ""; autosize();
+  session = newId(); try { sessionStorage.setItem("cs", session); } catch (e) {}
+  if ("speechSynthesis" in window) speechSynthesis.cancel();
+  window.scrollTo({ top: 0, behavior: "smooth" });
+};
+
+/* ---------- Insurance card photo: Muse reads the plan name; the photo is never saved ---------- */
+let myPlan = null;
+function setPlan(p) { myPlan = p; $("planbar").hidden = !p; $("plantext").textContent = p || ""; }
+$("planx").onclick = () => setPlan(null);
+$("cam").onclick = () => $("camfile").click();
+function shrink(file) {                                  // make the photo small before sending
+  return new Promise((ok, no) => {
+    const img = new Image(), url = URL.createObjectURL(file);
+    img.onload = () => {
+      const k = Math.min(1, 1100 / Math.max(img.width, img.height));
+      const c = document.createElement("canvas"); c.width = Math.round(img.width * k); c.height = Math.round(img.height * k);
+      c.getContext("2d").drawImage(img, 0, 0, c.width, c.height); URL.revokeObjectURL(url); ok(c.toDataURL("image/jpeg", 0.82));
+    };
+    img.onerror = () => { URL.revokeObjectURL(url); no(new Error("bad image")); };
+    img.src = url;
+  });
 }
+$("camfile").onchange = async (e) => {
+  const f = e.target.files[0]; e.target.value = ""; if (!f) return;
+  $("status").textContent = "Reading your card…";
+  try {
+    const image = await shrink(f);
+    const r = await fetch("/api/insurance_card", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ image }) }).then(x => x.json());
+    if (r.plan) setPlan(r.plan);
+    $("status").textContent = r.message || "";
+  } catch (err) { $("status").textContent = "Couldn't read that photo. Please type your plan."; }
+};
+
+/* ---------- Voice ----------
+   Best: Muse Voice Transcribe (many languages), through our server. Backup: the browser's own speech. */
+const LANGS = { English: "en-US", Spanish: "es-ES", Hindi: "hi-IN", Telugu: "te-IN", Tamil: "ta-IN", Mandarin: "zh-CN", Korean: "ko-KR", Vietnamese: "vi-VN", Arabic: "ar-SA" };
+const langSel = $("lang");
+Object.keys(LANGS).forEach(n => langSel.add(new Option(n, n)));
+const mic = $("mic");
+const FIRST_WAIT = 8000, PAUSE_WAIT = 2500;       // wait for you to start / wait after you stop talking
+let museVoice = false, listening = false, stopListening = () => {}, voiceAbort = () => {};   // voiceAbort = stop the mic WITHOUT sending
+fetch("/api/health").then(x => x.json()).then(h => { museVoice = !!h.voice; }).catch(() => {});
+
+const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
+function setListening(on, msg) { listening = on; mic.classList.toggle("on", on); $("status").textContent = msg || ""; }
+
+function startBrowserVoice() {                    // backup path
+  if (!SR) { $("status").textContent = "Voice needs Chrome or Edge. You can still type."; return; }
+  const rec = new SR(); rec.lang = LANGS[langSel.value] || "en-US"; rec.interimResults = true; rec.continuous = true;
+  let timer = null;
+  const arm = (ms) => { clearTimeout(timer); timer = setTimeout(() => { try { rec.stop(); } catch (e) {} }, ms); };
+  rec.onresult = (e) => { box.value = Array.from(e.results).map(r => r[0].transcript).join(" ").trim(); autosize(); arm(PAUSE_WAIT); };
+  rec.onend = () => { clearTimeout(timer); setListening(false); if (box.value.trim()) send(); };
+  rec.onerror = (e) => { clearTimeout(timer); setListening(false, e.error === "no-speech" ? "Didn't hear anything. Tap the mic and try again." : "Couldn't use the mic. Check browser permission."); };
+  stopListening = () => rec.stop();
+  voiceAbort = () => { clearTimeout(timer); rec.onend = rec.onresult = rec.onerror = null; try { rec.abort(); } catch (e) {} setListening(false); };
+  setListening(true, "Listening… I'll send after a short pause, or tap the mic when you're done.");
+  try { rec.start(); arm(FIRST_WAIT); } catch (e) { setListening(false); }
+}
+
+async function startMuseVoice() {                 // main path: Muse Voice Transcribe
+  let stream, ctx, ws, node, closed = false, done = "", partial = "", timer = null;
+  const release = () => {
+    try { node && node.disconnect(); } catch (e) {} try { ctx && ctx.close(); } catch (e) {}
+    try { stream && stream.getTracks().forEach(t => t.stop()); } catch (e) {} try { ws && ws.close(); } catch (e) {}
+  };
+  const cleanup = () => {
+    if (closed) return; closed = true; clearTimeout(timer); release();
+    setListening(false); if (box.value.trim()) send();
+  };
+  voiceAbort = () => { if (closed) return; closed = true; clearTimeout(timer); release(); setListening(false); };
+  const finish = () => { try { ws.send("end"); } catch (e) {} setTimeout(cleanup, 700); };
+  const arm = (ms) => { clearTimeout(timer); timer = setTimeout(finish, ms); };
+  const fallback = (why) => { if (closed) return; closed = true; clearTimeout(timer); try { stream && stream.getTracks().forEach(t => t.stop()); } catch (e) {} try { ctx && ctx.close(); } catch (e) {}
+    museVoice = false; setListening(false); $("status").textContent = why; startBrowserVoice(); };
+  try {
+    stream = await navigator.mediaDevices.getUserMedia({ audio: { channelCount: 1, echoCancellation: true, noiseSuppression: true } });
+  } catch (e) { setListening(false, "Couldn't use the mic. Check browser permission."); return; }
+  const proto = location.protocol === "https:" ? "wss" : "ws";
+  ws = new WebSocket(`${proto}://${location.host}/ws/voice?lang=${encodeURIComponent(langSel.value)}`);
+  ws.binaryType = "arraybuffer";
+  ws.onerror = () => fallback("Muse voice isn't available, using the browser's voice instead.");
+  ws.onclose = () => { if (!closed) cleanup(); };
+  ws.onmessage = (ev) => {
+    if (closed) return;                                    // late words after we stopped are ignored
+    let m; try { m = JSON.parse(ev.data); } catch (e) { return; }
+    if (m.type === "error") return fallback("Muse voice isn't available, using the browser's voice instead.");
+    if (m.type === "ready") { setListening(true, "Listening… speak, then pause. Tap the mic when you're done."); arm(FIRST_WAIT); }
+    else if (m.type === "speechStart") clearTimeout(timer);
+    else if (m.type === "transcript") { partial = m.transcript || ""; box.value = (done + " " + partial).trim(); autosize(); }
+    else if (m.type === "speechComplete") { done = (done + " " + (m.transcript || partial)).trim(); partial = ""; box.value = done; autosize(); arm(1500); }
+  };
+  stopListening = finish;
+  // Send 16-bit sound at 24,000 samples a second, which is what Muse Voice Transcribe wants.
+  try {
+    if (closed) return;                                      // Muse voice already said no: the backup is running
+    ctx = new (window.AudioContext || window.webkitAudioContext)({ sampleRate: 24000 });
+    const code = "class P extends AudioWorkletProcessor{process(i){if(i[0][0])this.port.postMessage(i[0][0].slice(0));return true}}registerProcessor('p',P)";
+    const url = URL.createObjectURL(new Blob([code], { type: "application/javascript" }));
+    try { await ctx.audioWorklet.addModule(url); } finally { URL.revokeObjectURL(url); }
+    if (closed) { try { ctx.close(); } catch (e) {} return; }   // stopped or fell back while we were loading
+    node = new AudioWorkletNode(ctx, "p");
+    const ratio = ctx.sampleRate / 24000;
+    node.port.onmessage = (e) => {
+      if (!ws || ws.readyState !== 1) return;
+      const f = e.data, n = Math.floor(f.length / ratio), out = new Int16Array(n);
+      for (let i = 0; i < n; i++) { const v = Math.max(-1, Math.min(1, f[Math.floor(i * ratio)])); out[i] = v < 0 ? v * 0x8000 : v * 0x7fff; }
+      ws.send(out.buffer);
+    };
+    ctx.createMediaStreamSource(stream).connect(node);
+  } catch (e) { if (!closed) fallback("Muse voice isn't available, using the browser's voice instead."); }
+}
+
+mic.onclick = () => {
+  if (listening) { stopListening(); return; }              // tap again = done, send now
+  if ("speechSynthesis" in window) speechSynthesis.cancel();
+  box.value = ""; setListening(true, "Starting the mic…");
+  if (museVoice && navigator.mediaDevices && window.AudioWorkletNode) startMuseVoice().catch(() => { setListening(false); startBrowserVoice(); });
+  else startBrowserVoice();
+};
 </script>
 </body>
 </html>

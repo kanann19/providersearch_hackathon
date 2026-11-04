@@ -42,8 +42,18 @@ CITIES = {
 }
 
 
+def _city(name):
+    """Find a city in our list, forgiving small typos (Lynwood -> lynnwood). None if no close match."""
+    import difflib
+    name = (name or "").strip().lower()
+    if name in CITIES:
+        return name
+    close = difflib.get_close_matches(name, list(CITIES), n=1, cutoff=0.8)
+    return close[0] if close else None
+
+
 def _miles(city_a, city_b):
-    a, b = CITIES.get(city_a.lower()), CITIES.get(city_b.lower())
+    a, b = CITIES.get(_city(city_a) or ""), CITIES.get(_city(city_b) or "")
     if not a or not b:
         return None
     lat1, lon1, lat2, lon2 = map(math.radians, (*a, *b))
@@ -127,13 +137,15 @@ def get_community_mentions(provider_id):
             "note": "Sample posts, not real Facebook data."}
 
 
-def find_alternatives(provider_id, insurance=None, max_miles=25):
-    """If a provider is not taking new patients, suggest similar ones who are."""
+def find_alternatives(provider_id, insurance=None, max_miles=25, city=None):
+    """If a provider is not taking new patients, suggest similar ones who are.
+    Distances are measured from `city` (the person's city), or from the provider's city."""
     p = _get(provider_id)
     if not p:
         return {"error": "not found"}
-    return search_providers(specialty=p["specialty"], city=p["city"], insurance=insurance,
-                            max_miles=max_miles, kids=p["treats_kids"] or None)
+    found = search_providers(specialty=p["specialty"], city=city or p["city"], insurance=insurance,
+                             max_miles=max_miles, kids=p["treats_kids"] or None)
+    return [r for r in found if r["id"] != provider_id]      # never list the same doctor
 
 
 def draft_contact(provider_id, channel="call", reason="a new patient appointment"):

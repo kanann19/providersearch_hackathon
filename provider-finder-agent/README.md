@@ -43,16 +43,27 @@ If nothing matches, Muse widens the distance or drops a filter and says what cha
 3. Copy `.env.example` to `.env` and paste your Meta Model API key (get one at dev.meta.ai).
 4. `python check_key.py` to test your key on its own.
 5. `python app.py`, then open http://localhost:5000
-6. Voice input works in Chrome and Edge.
+6. Voice: with a key, the mic uses **Muse Voice Transcribe** (pick a language next to "Read answers aloud").
+   If that is not available it falls back to the browser's own speech (Chrome or Edge).
+7. Tap the camera button to read your insurance plan from a card photo. Only the plan name is kept.
 
-Test the tools without any API key: `python test_tools.py`
+## Tests (no API key needed)
+
+`pip install -r requirements-dev.txt` then `python -m pytest -q`
+
+About 100 tests cover: the tools, the sample data, the quote and name checks, the agent loop when
+the model misbehaves (fake quotes, made-up doctors, empty replies, errors), the web routes,
+the insurance card privacy rules, the voice relay, and a real-browser click-through
+(`test_browser.py` is skipped unless Playwright is installed).
 
 ## Files
 
 - `app.py`: small web server
 - `index.html`: the page (text box, mic, result cards)
 - `agent.py`: the Muse agent loop, system prompt, and safety checks
-- `tools.py`: the six tools the agent can call
+- `tools.py`: the tools the agent can call
+- `extras.py`: insurance card photo reader (Muse Spark vision) and the voice relay (Muse Voice Transcribe)
+- `test_*.py`, `conftest.py`: the tests
 - `checks.py`: plain-code checks on the answer (doctor names and quotes)
 - `check_key.py`: tests your API key and tool calling before you run the app
 - `providers.json` / `providers.csv`: the sample provider data
@@ -61,15 +72,14 @@ Test the tools without any API key: `python test_tools.py`
 ## Built during the hackathon (Oct 26 to Nov 4, 2026)
 
 Everything in this repository was built during the event: the sample dataset, the tools,
-the agent loop and safety checks, the web page, and voice input.
+the agent loop and safety checks, the web page, voice input, and the insurance card reader.
 
-Team: _(add your names here)_
+Team: Keerthi Ananthula
 
 Built with Meta's Muse Spark through the Meta Model API. An AI coding assistant helped
 with code, and the team designed the idea, tested, and made the decisions.
-_(Check the Official Rules on AI assistance and edit this line if needed.)_
 
 ## Next steps
 
 Connect the tools to a real provider directory and real booking systems, add secure
-messaging, and use Muse Voice for transcription.
+messaging.

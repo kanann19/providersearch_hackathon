@@ -22,9 +22,16 @@ def normalize(text):
 
 
 def extract_quotes(answer):
-    """Quoted phrases of 3+ words (so plan names like "Aetna PPO" are not checked)."""
-    found = re.findall(r'["“]([^"”]{12,240})["”]', answer)
-    return [q for q in found if len(q.split()) >= 3]
+    """Quoted phrases of 3+ words (so plan names like "Aetna PPO" are not checked).
+    Quote marks are paired in order: open, close, open, close."""
+    found, start = [], None
+    for i, ch in enumerate(answer or ""):
+        if ch == "\u201c" or (ch == '"' and start is None):
+            start = i + 1
+        elif ch in ('"', "\u201d") and start is not None:
+            found.append(answer[start:i])
+            start = None
+    return [q for q in found if 12 <= len(q) <= 240 and len(q.split()) >= 3]
 
 
 def quote_in_sources(quote, sources):
