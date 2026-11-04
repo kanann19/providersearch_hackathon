@@ -87,3 +87,11 @@ def test_voice_only_ready_with_a_real_key(monkeypatch):
     assert extras.voice_ready() is True
     monkeypatch.delenv("MODEL_API_KEY")
     assert extras.voice_ready() is False
+
+
+def test_misheard_plan_names_snap_to_the_real_name_and_other_words_stay():
+    assert extras.snap_plan_names("Premara this week") == "Premera this week"
+    assert extras.snap_plan_names("my insurance is Cigna.") == "my insurance is Cigna."
+    assert extras.snap_plan_names("Regance near Issaquah") == "Regence near Issaquah"
+    assert extras.snap_plan_names("Female pediatrician near Bellevue") == "Female pediatrician near Bellevue"
+    assert extras.snap_plan_names("") == ""

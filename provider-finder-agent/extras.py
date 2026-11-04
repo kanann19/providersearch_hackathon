@@ -41,6 +41,21 @@ def known_plans():
     return {i for p in T.PROVIDERS for i in p["insurance"]}
 
 
+PLAN_NAMES = {"premera": "Premera", "regence": "Regence", "cigna": "Cigna", "aetna": "Aetna",
+              "unitedhealthcare": "UnitedHealthcare"}
+
+
+def snap_plan_names(text):
+    """Voice often mishears plan names ("Premara"). Plain code: a word that is very close to ONE plan name
+    (and is not that exact word) becomes the real name. Other words are never touched."""
+    import difflib
+    out = []
+    for w in re.split(r"(\W+)", text or ""):
+        hit = difflib.get_close_matches(w.lower(), PLAN_NAMES, n=1, cutoff=0.78) if len(w) >= 5 else []
+        out.append(PLAN_NAMES[hit[0]] if hit else w)
+    return "".join(out)
+
+
 def match_plan(text):
     """Turn what Muse said into one plan from our list, or None. Plain code, so it is exact.
     If the text matches two different plans, it is unclear, so we answer None."""
@@ -110,7 +125,7 @@ def handshake(key, language, keywords=None):
            "model": ASR_MODEL, "mode": "ENDPOINTING", "partialMode": "CUMULATIVE",
            "emitAudioProgress": False}
     if language in LANGUAGES:
-        msg["languageBias"] = [language]
+        msg["languageBias"] = ["Mandarin Chinese" if language == "Mandarin" else language]
     if keywords:
         msg["keywords"] = keywords
     return msg
@@ -123,18 +138,25 @@ def voice_relay(ws, language="English"):
     from simple_websocket import ConnectionClosed
 
     def tell(obj):
+        if obj.get("type") == "error":
+            print(f"[voice] problem: {obj.get('message')}", flush=True)
         try:
             ws.send(json.dumps(obj))
-        except Exception:
-            pass
+        except Exception as e:
+            print(f"[voice] could not tell the browser ({type(e).__name__})", flush=True)
+        if obj.get("type") == "error":
+            time.sleep(0.5)                       # let the message reach the browser before the connection closes
 
     key = os.getenv("MODEL_API_KEY")
     if not key:
         return tell({"type": "error", "message": "No API key"})
     up = None
-    for kw in (keyword_list(), None):                  # try with name hints first; if the service refuses, try plain
+    # Name hints (provider names, cities) are OFF by default: they are an extra that can make the service
+    # hang up. Turn on with VOICE_KEYWORDS=1. If the service refuses them we retry plain.
+    for kw in ((keyword_list(), None) if os.getenv("VOICE_KEYWORDS") == "1" else (None,)):
         try:
-            up = websocket.create_connection(f"{ASR_URL}?sessionId=stream-{uuid.uuid4()}", timeout=10)
+            up = websocket.create_connection(f"{ASR_URL}?sessionId=stream-{uuid.uuid4()}", timeout=10,
+                                           header=["User-Agent: CareScout/1.0 (Meta hackathon)"])
             up.send(json.dumps(handshake(key, language, kw)))
             ack = json.loads(up.recv())
         except Exception as e:
@@ -150,24 +172,32 @@ def voice_relay(ws, language="English"):
     if up is None:
         return tell({"type": "error", "message": str(last.get("message", "Voice service refused"))[:120]})
 
+    print("[voice] Muse Voice Transcribe connected", flush=True)
     tell({"type": "ready"})
-    up.settimeout(0.3)
+    up.settimeout(None)                 # the reader thread simply waits; closing the connection wakes it up
     done = threading.Event()
 
     def pump():                                                   # Muse -> browser
         while not done.is_set():
             try:
-                raw = up.recv()
-            except websocket.WebSocketTimeoutException:
-                continue
-            except Exception:
+                frame = up.recv_data_frame(True)
+                if frame[0] == websocket.ABNF.OPCODE_CLOSE:      # Muse hung up: say why
+                    code = int.from_bytes(frame[1].data[:2], "big") if len(frame[1].data) >= 2 else None
+                    print(f"[voice] Muse closed the connection. code={code} reason={frame[1].data[2:].decode('utf-8', 'replace')[:150]!r}", flush=True)
+                    break
+                raw = frame[1].data.decode("utf-8", "replace") if frame[0] == websocket.ABNF.OPCODE_TEXT else b""
+            except Exception as e:
+                if not done.is_set():
+                    print(f"[voice] Muse connection ended: {type(e).__name__} {str(e)[:100]}", flush=True)
                 break
-            if not raw or isinstance(raw, bytes):
+            if not raw:                                            # binary frame or empty: nothing for us
                 continue
             try:
                 m = json.loads(raw)
             except ValueError:
                 continue
+            if m.get("type") == "error":
+                print(f"[voice] Muse error: {str(m)[:200]}", flush=True)
             if m.get("type") in FORWARD:
                 tell({k: m[k] for k in ("type", "transcript", "final", "message", "turnId") if k in m})
         done.set()
@@ -182,6 +212,7 @@ def voice_relay(ws, language="English"):
             try:
                 data = ws.receive(timeout=0.3)
             except ConnectionClosed:
+                print("[voice] browser closed the connection", flush=True)
                 break
             if data is None:
                 continue
@@ -190,9 +221,11 @@ def voice_relay(ws, language="English"):
             elif data == "end" and not ended_at:
                 up.send(json.dumps({"type": "endStream"}))
                 ended_at = time.time()
-    except Exception:
-        pass
+    except Exception as e:
+        print(f"[voice] relay stopped: {type(e).__name__} {str(e)[:120]}", flush=True)
     finally:
+        if ended_at is None and not (time.time() - started >= MAX_SECONDS):
+            tell({"type": "error", "message": "Muse voice stopped. Please try again"})
         done.set()
         try:
             up.close()

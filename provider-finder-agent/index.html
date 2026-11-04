@@ -580,7 +580,7 @@ async function startMuseVoice(prefix = "") {          // main path: Muse Voice T
   const proto = location.protocol === "https:" ? "wss" : "ws";
   ws = new WebSocket(`${proto}://${location.host}/ws/voice?lang=${encodeURIComponent(langSel.value)}`);
   ws.binaryType = "arraybuffer";
-  ws.onerror = () => fallback("connection problem");
+  ws.onerror = () => setTimeout(() => fallback("connection problem"), 800);   // wait: the server may be about to say the real reason
   ws.onclose = () => { if (!closed) cleanup(); };
   ws.onmessage = (ev) => {
     if (closed) return;                                    // late words after we stopped are ignored

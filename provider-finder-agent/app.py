@@ -38,7 +38,7 @@ def health():
 
 def _read_message():
     data = request.get_json(force=True, silent=True) or {}
-    text = (data.get("message") or "").strip()[:1000]
+    text = extras.snap_plan_names((data.get("message") or "").strip()[:1000])
     sid = data.get("session") or str(uuid.uuid4())
     lang = data.get("language") if data.get("language") in extras.LANGUAGES else None
     return text, SESSIONS.setdefault(sid, []), lang
