@@ -159,7 +159,8 @@ def test_browser_closing_early_cleans_up(fake_muse, our_server):
     assert listen(b2, "ready")[-1]["type"] == "ready"
 
 
-def test_name_hints_are_sent_to_muse_voice(fake_muse, our_server):
+def test_name_hints_are_sent_to_muse_voice_when_turned_on(fake_muse, our_server, monkeypatch):
+    monkeypatch.setenv("VOICE_KEYWORDS", "1")
     log, _ = fake_muse
     b = websocket.create_connection(our_server)
     listen(b, "ready")
@@ -168,9 +169,17 @@ def test_name_hints_are_sent_to_muse_voice(fake_muse, our_server):
     assert len(kw) <= 300 and len({k.lower() for k in kw}) == len(kw)
 
 
-def test_if_the_service_refuses_name_hints_we_retry_without_them(fake_muse, our_server):
+def test_if_the_service_refuses_name_hints_we_retry_without_them(fake_muse, our_server, monkeypatch):
+    monkeypatch.setenv("VOICE_KEYWORDS", "1")
     log, mode = fake_muse
     mode["no_keywords"] = True
     b = websocket.create_connection(our_server)
     assert listen(b, "ready")[-1]["type"] == "ready"
     assert len(log["handshakes"]) == 2 and "keywords" in log["handshakes"][0] and "keywords" not in log["handshakes"][1]
+
+
+def test_name_hints_are_off_by_default(fake_muse, our_server):
+    log, _ = fake_muse
+    b = websocket.create_connection(our_server)
+    listen(b, "ready")
+    assert "keywords" not in log["handshake"]
